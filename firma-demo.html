@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Endpoint demo para simular la firma digital de un contrato de crédito y mostrar la evidencia registrada por el sistema." />
+  <title>Firma demo · Gestión de Créditos — Adema Sistemas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .sign-page { padding: clamp(3rem, 7vw, 5rem) 0; }
+    .sign-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, .9fr);
+      gap: 1.4rem;
+      align-items: start;
+    }
+    @media (max-width: 940px) { .sign-grid { grid-template-columns: 1fr; } }
+    .sign-panel {
+      padding: clamp(1.2rem, 3vw, 2rem);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(80% 100% at 100% 0%, rgba(43,212,230,.10), transparent 70%),
+        var(--bg-card-strong);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow), 0 0 60px -28px rgba(43,212,230,.45);
+    }
+    .contract-data {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .7rem;
+      margin: 1.2rem 0;
+    }
+    @media (max-width: 560px) { .contract-data { grid-template-columns: 1fr; } }
+    .contract-data div {
+      padding: .85rem;
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      background: rgba(43,212,230,.04);
+    }
+    .contract-data span {
+      display: block;
+      color: var(--text-mute);
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: .25rem;
+    }
+    .contract-data strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      line-height: 1.08;
+    }
+    .sign-canvas-wrap {
+      border: 1px dashed rgba(43,212,230,.38);
+      border-radius: 14px;
+      background: rgba(0,0,0,.24);
+      padding: .7rem;
+      margin: 1rem 0;
+    }
+    .sign-canvas {
+      width: 100%;
+      height: 190px;
+      display: block;
+      border-radius: 10px;
+      background: rgba(234,246,250,.96);
+      touch-action: none;
+    }
+    .sign-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+      margin-top: 1rem;
+    }
+    .evidence-list {
+      display: grid;
+      gap: .65rem;
+      margin-top: 1rem;
+    }
+    .evidence-item {
+      padding: .75rem .85rem;
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      background: rgba(43,212,230,.04);
+    }
+    .evidence-item span {
+      display: block;
+      color: var(--text-mute);
+      font-size: .68rem;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      margin-bottom: .2rem;
+    }
+    .evidence-item strong,
+    .evidence-item code {
+      color: var(--text);
+      font-size: .84rem;
+      overflow-wrap: anywhere;
+    }
+    .sign-status {
+      min-height: 1.3em;
+      color: var(--cyan);
+      font-size: .9rem;
+      margin: .8rem 0 0;
+    }
+    .sign-status.error { color: #FF7A8A; }
+    .endpoint-preview {
+      margin-top: 1rem;
+      padding: .85rem;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(43,212,230,.06);
+      color: var(--cyan);
+      font-size: .82rem;
+      overflow-wrap: anywhere;
+    }
+    @media print {
+      .site-header, .site-footer, .sign-actions, .endpoint-preview { display: none; }
+      body { background: #fff; color: #111827; }
+      .sign-panel { box-shadow: none; border-color: #cbd5e1; background: #fff; }
+      .muted, .lead, .evidence-item span { color: #475569; }
+      .text-cyan, .evidence-item code { color: #0f766e; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-deco" aria-hidden="true">
+    <div class="bg-glow bg-glow--1"></div>
+    <div class="bg-glow bg-glow--2"></div>
+    <div class="bg-dots bg-dots--right"></div>
+    <div class="bg-dots bg-dots--left"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="logo.png" class="brand__logo" alt="Logo Gestión de Créditos">
+        <span class="brand__text">
+          <span class="brand__title">GESTIÓN DE CRÉDITOS</span>
+          <span class="brand__sub">Adema Sistemas</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html#inicio">Inicio</a>
+        <a href="funcionalidades.html" style="color: var(--cyan)">Funcionalidades</a>
+        <a href="tutoriales.html">Tutoriales</a>
+        <a href="articulos.html">Artículos</a>
+        <a href="index.html#demo">Demo</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">Menú</button>
+    </div>
+  </header>
+
+  <main class="sign-page">
+    <div class="container">
+      <div class="sign-grid">
+        <section class="sign-panel reveal">
+          <span class="eyebrow"><span class="eyebrow__dot"></span> Endpoint público demo</span>
+          <h1 class="h2" style="margin-top:1rem">Firma digital del <span class="text-cyan">contrato</span></h1>
+          <p class="lead">
+            Este enlace simula la URL que recibe el cliente para revisar los datos del crédito y firmar desde el celular.
+          </p>
+
+          <div class="contract-data" aria-label="Resumen del contrato">
+            <div><span>Contrato</span><strong id="contractId">GC-DEMO</strong></div>
+            <div><span>Cliente</span><strong id="contractClient">Cliente demo</strong></div>
+            <div><span>Monto</span><strong id="contractAmount">$0</strong></div>
+            <div><span>Cuota</span><strong id="contractInstallment">$0</strong></div>
+            <div><span>Cuotas</span><strong id="contractInstallments">0</strong></div>
+            <div><span>Total</span><strong id="contractTotal">$0</strong></div>
+          </div>
+
+          <label class="field">
+            <span>DNI / CUIT del firmante</span>
+            <input type="text" id="signerDoc" value="28491023" inputmode="numeric" />
+          </label>
+
+          <div class="sign-canvas-wrap">
+            <canvas class="sign-canvas" id="signatureCanvas" width="900" height="260" aria-label="Área de firma"></canvas>
+          </div>
+
+          <div class="sign-actions">
+            <button type="button" class="btn btn--primary" id="confirmSignature">Confirmar firma</button>
+            <button type="button" class="btn btn--ghost" id="clearSignature">Borrar firma</button>
+            <button type="button" class="btn btn--ghost" id="printEvidence">Imprimir constancia</button>
+          </div>
+          <p class="sign-status" id="signStatus" role="status" aria-live="polite"></p>
+        </section>
+
+        <aside class="sign-panel reveal">
+          <span class="stage">
+            <span class="stage__icon"></span>
+            <span class="stage__txt">Evidencia registrada</span>
+          </span>
+          <p class="muted" style="margin-top:1rem">
+            Al confirmar, se genera una constancia con token, fecha, dispositivo y hash SHA-256 del contrato firmado.
+          </p>
+          <div class="endpoint-preview" id="endpointPreview"></div>
+          <div class="evidence-list" id="evidenceList">
+            <div class="evidence-item"><span>Estado</span><strong>Pendiente de firma</strong></div>
+            <div class="evidence-item"><span>Token</span><code id="evidenceToken">-</code></div>
+            <div class="evidence-item"><span>Fecha y hora</span><strong id="evidenceTime">-</strong></div>
+            <div class="evidence-item"><span>Dispositivo</span><code id="evidenceDevice">-</code></div>
+            <div class="evidence-item"><span>IP</span><strong id="evidenceIp">Demo: se captura desde backend en producción</strong></div>
+            <div class="evidence-item"><span>Hash SHA-256</span><code id="evidenceHash">-</code></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <div class="footer-brand">
+        <span>© <span id="year"></span> Adema Sistemas</span>
+        <span class="sep">·</span>
+        <span class="text-cyan">Gestión de Créditos</span>
+      </div>
+      <small>Endpoint demo de firma digital y evidencia.</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="firma-demo.js"></script>
+</body>
+</html>

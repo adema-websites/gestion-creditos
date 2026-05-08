@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Todas las funcionalidades de Gestión de Créditos · Adema Sistemas. Clientes, solicitudes, cobros, mora, firma digital, WhatsApp, multi-sucursal y más." />
+  <title>Funcionalidades · Gestión de Créditos — Adema Sistemas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ── Extras exclusivos de esta página ── */
+
+    /* Hero interno */
+    .page-hero {
+      padding: clamp(3rem, 7vw, 5rem) 0 clamp(2rem, 5vw, 3.5rem);
+      text-align: center;
+    }
+    .page-hero .h2 { margin: 1rem auto .8rem; max-width: 820px; }
+    .page-hero .lead { margin-inline: auto; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex; align-items: center; gap: .5rem; justify-content: center;
+      font-size: .8rem; color: var(--text-mute); margin-bottom: 1.6rem;
+    }
+    .breadcrumb a { color: var(--cyan); }
+    .breadcrumb span { opacity: .5; }
+
+    /* Índice de módulos */
+    .modules-nav {
+      display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;
+      margin: 2rem 0 0;
+    }
+    .modules-nav a {
+      font-size: .8rem; font-weight: 600; letter-spacing: .5px;
+      padding: .4rem .85rem; border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(43,212,230,.04);
+      color: var(--text-dim);
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .modules-nav a:hover {
+      border-color: var(--cyan); color: var(--cyan);
+      background: rgba(43,212,230,.1);
+    }
+
+    /* Módulo con número de etapa */
+    .mod-stage {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-weight: 700; font-size: .75rem; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: .6rem;
+    }
+    .mod-stage__num {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: rgba(43,212,230,.14); border: 1px solid var(--line);
+      font-size: .82rem; font-family: var(--font-display);
+    }
+
+    /* Card de funcionalidad "grande" (layout con visual lateral) */
+    .feat {
+      display: grid; gap: 2.4rem; align-items: start;
+      grid-template-columns: 1fr 1fr;
+      padding: 2.2rem 2.4rem;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1px solid var(--line-soft);
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .feat:hover {
+      border-color: var(--line);
+      box-shadow: 0 24px 56px -24px rgba(43,212,230,.3);
+    }
+    .feat--reverse { direction: rtl; }
+    .feat--reverse > * { direction: ltr; }
+
+    @media (max-width: 900px) {
+      .feat, .feat--reverse { grid-template-columns: 1fr; direction: ltr; }
+    }
+
+    .feat__copy { display: flex; flex-direction: column; gap: .65rem; }
+    .feat__title {
+      font-family: var(--font-display); font-size: 1.55rem;
+      font-weight: 700; text-transform: uppercase; line-height: 1.1;
+      margin: 0;
+    }
+    .feat__desc { color: var(--text-dim); font-size: .97rem; line-height: 1.65; margin: 0; }
+
+    .feat__pills {
+      display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .2rem;
+    }
+    .feat__pill {
+      font-size: .75rem; font-weight: 600; letter-spacing: .5px;
+      padding: .3rem .7rem; border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(43,212,230,.06); color: var(--cyan);
+    }
+
+    /* Visual lateral (mock screenshot / diagrama) */
+    .feat__visual {
+      border-radius: var(--radius);
+      background: var(--bg-card-strong);
+      border: 1px solid var(--line);
+      padding: 1.4rem;
+      min-height: 220px;
+      display: flex; flex-direction: column; gap: .7rem;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .feat__visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(120% 80% at 100% 0%, rgba(43,212,230,.09), transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Rows dentro del visual */
+    .vis-row {
+      display: flex; align-items: center; gap: .8rem;
+      padding: .65rem .9rem; border-radius: 10px;
+      background: rgba(43,212,230,.04); border: 1px solid var(--line-soft);
+    }
+    .vis-row__icon {
+      width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+      display: grid; place-items: center;
+      background: radial-gradient(circle, rgba(43,212,230,.22), transparent 70%);
+      border: 1px solid var(--line); color: var(--cyan);
+    }
+    .vis-row__icon .i { width: 16px; height: 16px; }
+    .vis-row__body { flex: 1; }
+    .vis-row__body strong { display: block; font-size: .88rem; }
+    .vis-row__body span { font-size: .76rem; color: var(--text-mute); }
+
+    .vis-stat {
+      display: flex; align-items: baseline; gap: .5rem;
+    }
+    .vis-stat__val {
+      font-family: var(--font-display); font-size: 2rem; color: var(--cyan);
+      line-height: 1;
+    }
+    .vis-stat__label { font-size: .78rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 1.5px; }
+
+    .vis-bar {
+      background: rgba(43,212,230,.1); border-radius: 999px;
+      height: 8px; overflow: hidden; border: 1px solid var(--line-soft);
+    }
+    .vis-bar span {
+      display: block; height: 100%;
+      background: linear-gradient(90deg, #6BEBF7, #2BD4E6);
+      border-radius: 999px;
+      box-shadow: 0 0 10px rgba(43,212,230,.5);
+    }
+
+    .vis-label {
+      font-size: .75rem; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--text-mute); margin-bottom: -.2rem;
+    }
+    .vis-divider {
+      border: none; border-top: 1px solid var(--line-soft); margin: .2rem 0;
+    }
+
+    .vis-badge {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .4rem .8rem; border-radius: 8px;
+      font-size: .8rem; font-weight: 600;
+      border: 1px solid var(--line);
+      background: rgba(43,212,230,.07); color: var(--cyan);
+    }
+    .vis-badge .i { width: 14px; height: 14px; }
+
+    .vis-canvas {
+      border-radius: 10px; overflow: hidden;
+      border: 2px dashed rgba(43,212,230,.3);
+      background: rgba(0,0,0,.2);
+      height: 80px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-mute); font-size: .82rem;
+    }
+
+    /* Secciones de la página */
+    .feat-section { margin-bottom: clamp(2rem, 4vw, 3rem); }
+    .feat-section + .feat-section { padding-top: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--line-soft); }
+
+    /* Grid de mini-cards (para funcionalidades secundarias) */
+    .mini-grid {
+      display: grid; gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+    .mini-card {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.3rem 1.4rem;
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--line-soft);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .mini-card:hover {
+      border-color: var(--line);
+      box-shadow: 0 12px 30px -15px rgba(43,212,230,.25);
+    }
+    .mini-card__icon {
+      width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%;
+      display: grid; place-items: center;
+      background: radial-gradient(circle, rgba(43,212,230,.25), transparent 70%);
+      border: 1px solid var(--line); color: var(--cyan);
+      box-shadow: var(--cyan-glow);
+    }
+    .mini-card__icon .i { width: 20px; height: 20px; }
+    .mini-card__body { flex: 1; }
+    .mini-card__body h3 { font-size: .95rem; margin: 0 0 .3rem; }
+    .mini-card__body p { font-size: .85rem; color: var(--text-dim); margin: 0; line-height: 1.5; }
+
+    /* CTA final */
+    .page-cta {
+      text-align: center;
+      padding: clamp(3rem, 7vw, 5rem) 0;
+    }
+    .page-cta .h2 { max-width: 640px; margin-inline: auto; }
+    .page-cta .lead { margin: .8rem auto 2rem; }
+    .page-cta__btns { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
+
+    /* WhatsApp button */
+    .btn--wa {
+      color: #fff;
+      background: linear-gradient(180deg, #25D366, #1aad55);
+      box-shadow: 0 10px 28px -10px rgba(37,211,102,.5);
+    }
+    .btn--wa:hover { transform: translateY(-1px); box-shadow: 0 14px 36px -10px rgba(37,211,102,.6); }
+
+    /* WAB flotante (ya definido en styles.css pero lo duplicamos por si acaso) */
+    .wa-fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .wa-fab__bubble {
+      background: var(--bg-card-strong); border: 1px solid var(--line);
+      padding: .45rem .85rem; border-radius: 999px;
+      font-size: .82rem; font-weight: 600; color: var(--text);
+      opacity: 0; transform: translateX(6px);
+      transition: opacity .25s, transform .25s;
+      pointer-events: none; white-space: nowrap;
+    }
+    .wa-fab:hover .wa-fab__bubble { opacity: 1; transform: translateX(0); }
+    .wa-fab__btn {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: linear-gradient(180deg, #25D366, #1aad55);
+      color: #fff;
+      box-shadow: 0 8px 28px -8px rgba(37,211,102,.6);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wa-fab__btn .i { width: 24px; height: 24px; }
+    .wa-fab:hover .wa-fab__btn { transform: scale(1.08); }
+
+    /* Laboratorio interactivo */
+    .feature-lab {
+      padding-top: 0;
+    }
+    .lab-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, .9fr);
+      gap: 1.4rem;
+      padding: clamp(1.2rem, 3vw, 2rem);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(80% 100% at 100% 0%, rgba(43,212,230,.11), transparent 70%),
+        var(--bg-card-strong);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow), 0 0 60px -28px rgba(43,212,230,.45);
+    }
+    @media (max-width: 980px) { .lab-card { grid-template-columns: 1fr; } }
+
+    .lab-card__head { margin-bottom: 1.2rem; }
+    .lab-card__head .lead { margin: .7rem 0 0; }
+    .lab-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .9rem;
+    }
+    @media (max-width: 620px) { .lab-form { grid-template-columns: 1fr; } }
+    .lab-form .field--wide { grid-column: 1 / -1; }
+    .lab-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+      margin-top: 1rem;
+    }
+    .lab-note {
+      margin: .9rem 0 0;
+      color: var(--text-mute);
+      font-size: .82rem;
+      line-height: 1.55;
+    }
+
+    .field.is-hidden { display: none; }
+    .sim-check {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .85rem 1rem;
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      background: rgba(43,212,230,.04);
+      color: var(--text-dim);
+      font-size: .88rem;
+      font-weight: 600;
+    }
+    .sim-check input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--cyan);
+      flex: 0 0 auto;
+    }
+
+    .sim-summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .7rem;
+      margin-bottom: .9rem;
+    }
+    .sim-stat {
+      padding: .85rem;
+      border-radius: 10px;
+      border: 1px solid var(--line-soft);
+      background: rgba(43,212,230,.04);
+    }
+    .sim-stat span {
+      display: block;
+      color: var(--text-mute);
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: .25rem;
+    }
+    .sim-stat strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      color: var(--text);
+      line-height: 1.05;
+    }
+    .sim-stat--accent strong { color: var(--cyan); }
+
+    .sim-table-wrap {
+      overflow: auto;
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      background: rgba(0,0,0,.18);
+    }
+    .sim-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 520px;
+      font-size: .84rem;
+    }
+    .sim-table th,
+    .sim-table td {
+      padding: .65rem .75rem;
+      border-bottom: 1px solid var(--line-soft);
+      text-align: left;
+      white-space: nowrap;
+    }
+    .sim-table th {
+      color: var(--cyan);
+      font-size: .7rem;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      background: rgba(43,212,230,.06);
+    }
+    .sim-table tr:last-child td { border-bottom: 0; }
+    .sim-table td:last-child,
+    .sim-table th:last-child { text-align: right; }
+
+    .endpoint-box {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(43,212,230,.06);
+    }
+    .endpoint-box__label {
+      display: block;
+      color: var(--text-mute);
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: .35rem;
+    }
+    .endpoint-box code {
+      display: block;
+      overflow-wrap: anywhere;
+      color: var(--cyan);
+      font-size: .82rem;
+      line-height: 1.55;
+    }
+    .endpoint-box__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: .8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= SVG SPRITE ================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-logo" viewBox="0 0 64 64">
+        <defs>
+          <linearGradient id="lgShield" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0a2236"/>
+            <stop offset="1" stop-color="#031322"/>
+          </linearGradient>
+        </defs>
+        <path d="M32 3 L57 12 V32 C57 47 46 56 32 61 C18 56 7 47 7 32 V12 Z" fill="url(#lgShield)" stroke="#2BD4E6" stroke-width="2"/>
+        <rect x="20" y="34" width="5" height="10" rx="1" fill="#2BD4E6"/>
+        <rect x="28" y="28" width="5" height="16" rx="1" fill="#2BD4E6"/>
+        <rect x="36" y="22" width="5" height="22" rx="1" fill="#2BD4E6"/>
+        <path d="M19 22 L26 29 L44 14" fill="none" stroke="#2BD4E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><path d="M12 12 L20 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17 4h3v3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-shop" viewBox="0 0 24 24"><path d="M4 9 L5 5 H19 L20 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 9V20H19V9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 20V14H14V20" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M3 6V3H6 M18 3H21V6 M21 18V21H18 M6 21H3V18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 12C7 8 9.5 7 12 7s5 1 7 5c-2 4-4.5 5-7 5s-5-1-7-5Z" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+      <symbol id="i-toolbox" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8V5h6v3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 13h18" stroke="currentColor" stroke-width="1.6"/><rect x="10.5" y="11.5" width="3" height="3" fill="currentColor" opacity=".7"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.5l3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 L4 14h6l-1 8 9-12h-6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 L20 5v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 20h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="6" y="12" width="3" height="6" fill="currentColor"/><rect x="11" y="8" width="3" height="10" fill="currentColor"/><rect x="16" y="4" width="3" height="14" fill="currentColor"/></symbol>
+      <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-1.4 3.2A8 8 0 0 1 20 12Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 9.5c.2 1.5 1 3 2.2 4.2C12.4 14.9 14 15.7 15.5 16l1-1.5-2-1-1 .8c-.8-.4-1.5-1-2-1.8l.8-1-1-2-1.5 1Z" fill="currentColor"/></symbol>
+      <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="11" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 16.5c.6-1.6 2-2.5 3.5-2.5s2.9.9 3.5 2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14.5 9.5h4M14.5 12h4M14.5 14.5h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v4h4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 12h6M9 15h6M9 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="7" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><path d="M14 14h3v3M20 14v3M14 20h3M20 17v4h-3" stroke="currentColor" stroke-width="1.4"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="5" cy="5" r="1.4"/><circle cx="12" cy="5" r="1.4"/><circle cx="19" cy="5" r="1.4"/><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/><circle cx="5" cy="19" r="1.4"/><circle cx="12" cy="19" r="1.4"/><circle cx="19" cy="19" r="1.4"/></g></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3 L22 20 H2 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 10v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17.5" r="1" fill="currentColor"/></symbol>
+      <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="12" r=".9" fill="currentColor"/><circle cx="18" cy="12" r=".9" fill="currentColor"/></symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24"><path d="M14 4l6 6-12 12H2v-6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 5l6 6" stroke="currentColor" stroke-width="1.6"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2H4.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 21h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10 L12 4 L21 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8" stroke="currentColor" stroke-width="1.6"/><path d="M3 20h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="19" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V14M12 14l-5 3M12 14l5 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M18 3v4h-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M20 12a8 8 0 0 1-14 5.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6 21v-4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- ================= FONDO DECORATIVO ================= -->
+  <div class="bg-deco" aria-hidden="true">
+    <div class="bg-glow bg-glow--1"></div>
+    <div class="bg-glow bg-glow--2"></div>
+    <div class="bg-dots bg-dots--right"></div>
+    <div class="bg-dots bg-dots--left"></div>
+  </div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="logo.png" class="brand__logo" alt="Logo Gestión de Créditos">
+        <span class="brand__text">
+          <span class="brand__title">GESTIÓN DE CRÉDITOS</span>
+          <span class="brand__sub">Adema Sistemas</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html#inicio">Inicio</a>
+        <a href="index.html#como-funciona">Cómo funciona</a>
+        <a href="funcionalidades.html" style="color: var(--cyan)">Funcionalidades</a>
+        <a href="tutoriales.html">Tutoriales</a>
+        <a href="articulos.html">Artículos</a>
+        <a href="https://ademasistemas.com/gestion-creditos/">Demo</a>
+        <a href="index.html#contacto">Contacto</a>
+        <a style="color: white;" href="https://ademasistemas.com/gestion-creditos/"
+           target="_blank" rel="noopener" class="btn btn--wa btn--sm">
+          <svg class="i"><use href="#i-wa"/></svg>
+          WhatsApp
+        </a>
+        <a style="color: white;" href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary btn--sm">
+          Solicitar demo
+          <svg class="i"><use href="#i-arrow"/></svg>
+        </a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="i"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= HERO INTERNO ================= -->
+    <section class="page-hero section">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Migas de pan">
+          <a href="index.html">Inicio</a>
+          <span>›</span>
+          <span>Funcionalidades</span>
+        </nav>
+
+        <span class="eyebrow">
+          <span class="eyebrow__dot"></span>
+          Todo lo que podés hacer
+        </span>
+
+        <h1 class="h2" style="margin-top:1rem; max-width:780px; margin-inline:auto;">
+          Cada herramienta en el orden<br/>en que la vas a <span class="text-cyan">necesitar</span>
+        </h1>
+        <p class="lead" style="text-align:center; margin-inline:auto; max-width:58ch">
+          Desde el primer cliente hasta el cobro automático con mora calculada.
+          Acá está todo lo que el sistema puede hacer por vos.
+        </p>
+
+        <!-- Índice rápido -->
+        <nav class="modules-nav" aria-label="Ir al módulo">
+          <a href="#simulador-credito">Probar simulador</a>
+          <a href="#firma-demo">Endpoint de firma</a>
+          <a href="#clientes">Clientes</a>
+          <a href="#solicitudes">Solicitudes y simulador</a>
+          <a href="#firma-digital">Firma digital</a>
+          <a href="#portal-cliente">Portal del cliente</a>
+          <a href="#cobros">Cobro de cuotas</a>
+          <a href="#mora">Mora configurable</a>
+          <a href="#adelantos">Adelantos múltiples</a>
+          <a href="#alertas">Alertas de vencimiento</a>
+          <a href="#deudores">Deudores y WhatsApp</a>
+          <a href="#documentos">Documentos y PDF</a>
+          <a href="#multi-sucursal">Multi-sucursal</a>
+          <a href="#bcra">Consulta BCRA</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ================= SIMULADOR INTERACTIVO ================= -->
+    <section class="section feature-lab" id="simulador-credito">
+      <div class="container">
+        <div class="lab-card reveal">
+          <div>
+            <header class="lab-card__head">
+              <span class="stage">
+                <span class="stage__icon"><svg class="i"><use href="#i-cal"/></svg></span>
+                <span class="stage__txt">Simulador público</span>
+              </span>
+              <h2 class="h2">Probá un crédito y generá el <span class="text-cyan">PDF demo</span></h2>
+              <p class="lead">
+                Cargá monto, cuotas, periodicidad e interés. La página calcula igual que GDC, arma el cronograma y descarga el PDF de simulación desde el navegador.
+              </p>
+            </header>
+
+            <form class="lab-form" id="creditSimulator" novalidate>
+              <label class="field field--wide">
+                <span>Cliente de ejemplo</span>
+                <input type="text" name="cliente" value="Carlos Martinez" autocomplete="name" />
+              </label>
+              <label class="field">
+                <span>Monto solicitado</span>
+                <input type="number" name="monto" min="1000" step="500" value="120000" inputmode="decimal" />
+              </label>
+              <label class="field">
+                <span>Cantidad de cuotas</span>
+                <input type="number" name="cuotas" min="1" max="60" step="1" value="6" inputmode="numeric" />
+              </label>
+              <label class="field">
+                <span>Periodicidad</span>
+                <select name="periodicidad">
+                  <option value="Diario">Diario</option>
+                  <option value="Semanal">Semanal</option>
+                  <option value="Quincenal">Quincenal</option>
+                  <option value="Mensual" selected>Mensual</option>
+                  <option value="Mensual Dia Fijo">Mensual con Día Fijo</option>
+                </select>
+              </label>
+              <label class="field is-hidden" id="fixedDayField">
+                <span>Día fijo vencimiento</span>
+                <input type="number" name="diaVencimientoFijo" min="1" max="31" step="1" value="10" inputmode="numeric" />
+              </label>
+              <label class="field">
+                <span>Interés (%)</span>
+                <input type="number" name="interes" min="0" max="300" step="0.1" value="10" inputmode="decimal" />
+              </label>
+              <label class="field">
+                <span>Moneda</span>
+                <select name="moneda">
+                  <option value="$" selected>Pesos ($)</option>
+                  <option value="US$">Dólares (US$)</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Primer vencimiento</span>
+                <input type="date" name="primerVencimiento" />
+              </label>
+              <label class="field">
+                <span>Medio pago 1ra cuota</span>
+                <select name="medioPagoPrimeraCuota">
+                  <option value="Efectivo" selected>Efectivo</option>
+                  <option value="Transferencia">Transferencia</option>
+                  <option value="Débito">Débito</option>
+                  <option value="Crédito">Crédito</option>
+                  <option value="Mercado Pago">Mercado Pago</option>
+                </select>
+              </label>
+              <label class="sim-check">
+                <input type="checkbox" name="cobrarPrimeraCuotaHoy" />
+                Cobrar 1ra cuota hoy
+              </label>
+            </form>
+
+            <div class="lab-actions">
+              <button class="btn btn--primary" type="button" id="simPdfBtn">
+                Descargar PDF de simulación
+                <svg class="i"><use href="#i-doc"/></svg>
+              </button>
+              <button class="btn btn--ghost" type="button" id="simSignatureBtn">
+                Crear link de firma demo
+                <svg class="i"><use href="#i-pen"/></svg>
+              </button>
+            </div>
+            <p class="lab-note">
+              Demo comercial: los importes, fechas y periodicidades siguen la lógica de GDC. El link de firma usa una página estática que simula el endpoint público del contrato.
+            </p>
+          </div>
+
+          <aside class="feat__visual" id="simOutput" aria-live="polite">
+            <p class="vis-label">Resultado de simulación</p>
+            <div class="sim-summary">
+              <div class="sim-stat sim-stat--accent">
+                <span>Importe solicitado</span>
+                <strong id="simImporte">$0</strong>
+              </div>
+              <div class="sim-stat">
+                <span>Interés total</span>
+                <strong id="simInteres">$0</strong>
+              </div>
+              <div class="sim-stat">
+                <span>Total a pagar</span>
+                <strong id="simTotal">$0</strong>
+              </div>
+              <div class="sim-stat">
+                <span>Valor por cuota</span>
+                <strong id="simCuota">$0</strong>
+              </div>
+            </div>
+            <div class="sim-table-wrap">
+              <table class="sim-table">
+                <thead>
+                  <tr>
+                    <th>Cuota</th>
+                    <th>Vencimiento</th>
+                    <th>Monto</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="simSchedule"></tbody>
+              </table>
+            </div>
+            <div class="endpoint-box" id="firma-demo">
+              <span class="endpoint-box__label">Endpoint simulado de firma</span>
+              <code id="simEndpoint">Completá el simulador para generar el link.</code>
+              <div class="endpoint-box__actions">
+                <a class="btn btn--ghost btn--sm" id="openSignatureLink" href="firma-demo.html" target="_blank" rel="noopener">
+                  Abrir firma
+                  <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTENIDO FUNCIONALIDADES ================= -->
+    <div class="section" style="padding-top:0">
+      <div class="container">
+
+        <!-- ─── 01 CLIENTES ─── -->
+        <div class="feat-section" id="clientes">
+          <div class="mod-stage">
+            <span class="mod-stage__num">01</span>
+            Punto de partida
+          </div>
+
+          <div class="feat">
+            <div class="feat__copy">
+              <h2 class="feat__title">Gestión de <span class="text-cyan">clientes</span></h2>
+              <p class="feat__desc">
+                Cargás cada cliente una sola vez y tenés su ficha completa: datos personales, documento,
+                dirección, teléfono y todo el historial de créditos asociados. Sin duplicar información
+                en planillas ni cuadernos.
+              </p>
+              <p class="feat__desc">
+                Cada cliente tiene su sucursal asignada y solo los empleados de esa sucursal pueden verlo.
+                El dueño, como siempre, ve todo.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Ficha única por cliente con historial completo</li>
+                <li>Filtrado automático por sucursal</li>
+                <li>Búsqueda por nombre, DNI o CUIT</li>
+                <li>Integración directa con solicitudes y créditos</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">Base de datos</span>
+                <span class="feat__pill">Historial</span>
+                <span class="feat__pill">Multi-sucursal</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Ficha del cliente</p>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-id"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Martínez, Carlos</strong>
+                  <span>DNI 28.491.023 · Cel: 3514 882 001</span>
+                </div>
+                <span class="chip chip--ok">Activo</span>
+              </div>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-id"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>López, Mariana</strong>
+                  <span>DNI 31.720.456 · Cel: 3512 441 900</span>
+                </div>
+                <span class="chip chip--warn">En mora</span>
+              </div>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-id"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Romero, Hugo</strong>
+                  <span>DNI 26.003.811 · Cel: 3516 233 770</span>
+                </div>
+                <span class="chip chip--info">Al día</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 02 SOLICITUDES Y SIMULADOR ─── -->
+        <div class="feat-section" id="solicitudes">
+          <div class="mod-stage">
+            <span class="mod-stage__num">02</span>
+            Creación del crédito
+          </div>
+
+          <div class="feat feat--reverse">
+            <div class="feat__copy">
+              <h2 class="feat__title">Solicitudes y <span class="text-cyan">simulador en vivo</span></h2>
+              <p class="feat__desc">
+                Antes de crear un crédito podés simular: ingresás importe, cantidad de cuotas, periodicidad
+                e interés, y el sistema calcula en tiempo real el valor de cada cuota, el total con interés y
+                el cronograma completo de vencimientos.
+              </p>
+              <p class="feat__desc">
+                Desde el mismo formulario podés generar un <strong>PDF de simulación</strong> para mostrarle
+                al cliente antes de firmar, y marcar si cobró la primera cuota en el acto.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Cálculo automático en tiempo real (sin recargar)</li>
+                <li>Cronograma de vencimientos generado al instante</li>
+                <li>PDF de simulación antes de crear la solicitud</li>
+                <li>Opción de cobrar la primera cuota al momento del alta</li>
+                <li>Crédito queda en "Pendiente de aprobación" hasta autorizar</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">Simulador</span>
+                <span class="feat__pill">PDF instantáneo</span>
+                <span class="feat__pill">1ra cuota hoy</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Simulador de crédito</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-bottom:.3rem">
+                <div class="vis-stat">
+                  <span class="vis-stat__val">$48.500</span>
+                </div>
+                <div style="text-align:right">
+                  <span class="chip chip--info">6 cuotas</span>
+                </div>
+              </div>
+              <hr class="vis-divider"/>
+              <div class="vis-row" style="background:rgba(43,212,230,.08)">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-cash"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Cuota mensual</strong>
+                  <span>$9.083 × 6</span>
+                </div>
+                <span class="chip chip--ok">TNA 18%</span>
+              </div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:.5rem; margin-top:.5rem">
+                <div style="padding:.6rem; border:1px solid var(--line-soft); border-radius:8px; font-size:.8rem">
+                  <span style="color:var(--text-mute)">Total interés</span>
+                  <br/><strong>$6.000</strong>
+                </div>
+                <div style="padding:.6rem; border:1px solid var(--line-soft); border-radius:8px; font-size:.8rem">
+                  <span style="color:var(--text-mute)">Total a pagar</span>
+                  <br/><strong>$54.500</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 03 FIRMA DIGITAL ─── -->
+        <div class="feat-section" id="firma-digital">
+          <div class="mod-stage">
+            <span class="mod-stage__num">03</span>
+            Formalización
+          </div>
+
+          <div class="feat">
+            <div class="feat__copy">
+              <h2 class="feat__title">Firma digital <span class="text-cyan">del contrato</span></h2>
+              <p class="feat__desc">
+                Cada crédito genera un link único que podés compartir por WhatsApp, email o QR.
+                El cliente abre el link desde su celular o computadora, revisa el contrato con el
+                plan de cuotas completo y firma con el dedo.
+              </p>
+              <p class="feat__desc">
+                La firma queda registrada con fecha, hora, IP y tipo de dispositivo. El contrato
+                PDF incluye la imagen de la firma y todos los metadatos de seguridad.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Link único e irrepetible por contrato</li>
+                <li>Canvas táctil: firma con el dedo en cualquier celular</li>
+                <li>Registro de IP, dispositivo y geolocalización (opcional)</li>
+                <li>El PDF del contrato incluye la firma y metadatos</li>
+                <li>No se puede firmar dos veces el mismo contrato</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">Link único</span>
+                <span class="feat__pill">QR</span>
+                <span class="feat__pill">Auditable</span>
+                <span class="feat__pill">Sin instalaciones</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Estado del contrato</p>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-qr"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Contrato #1048</strong>
+                  <span>Link generado · Pendiente de firma</span>
+                </div>
+                <span class="chip chip--warn">Pendiente</span>
+              </div>
+              <div class="vis-canvas">
+                ✍️ &nbsp; El cliente firma aquí desde el celular
+              </div>
+              <div class="vis-row" style="background:rgba(43,230,164,.05); border-color:rgba(43,230,164,.3)">
+                <div class="vis-row__icon" style="color:var(--ok); background:radial-gradient(circle,rgba(43,230,164,.22),transparent 70%); border-color:rgba(43,230,164,.3)"><svg class="i"><use href="#i-check"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Contrato #1045</strong>
+                  <span>Firmado 24/04 · 15:32 · iPhone · Cba</span>
+                </div>
+                <span class="chip chip--ok">Firmado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 04 PORTAL DEL CLIENTE ─── -->
+        <div class="feat-section" id="portal-cliente">
+          <div class="mod-stage">
+            <span class="mod-stage__num">04</span>
+            Transparencia con el cliente
+          </div>
+
+          <div class="feat feat--reverse">
+            <div class="feat__copy">
+              <h2 class="feat__title">Portal online <span class="text-cyan">del cliente</span></h2>
+              <p class="feat__desc">
+                Compartís un link y una clave con el cliente. Él puede ver el estado de su crédito
+                en cualquier momento desde su celular: cuotas pagadas, cuotas pendientes, intereses
+                acumulados y próximos vencimientos.
+              </p>
+              <p class="feat__desc">
+                También puede agregar las cuotas a su Google Calendar con un click, o descargar
+                el calendario en formato .ics para cualquier app compatible.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Acceso protegido con clave de acceso</li>
+                <li>Estado en tiempo real: pagado, vencido, pendiente</li>
+                <li>Intereses por mora calculados y proyectados</li>
+                <li>Botón "Agendar próximo pago" en Google Calendar</li>
+                <li>Descarga del plan de pagos en .ics</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">Sin login de cliente</span>
+                <span class="feat__pill">Google Calendar</span>
+                <span class="feat__pill">Responsive</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Vista del cliente · Contrato #1045</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:.5rem; margin-bottom:.4rem">
+                <div style="padding:.6rem; border:1px solid var(--line-soft); border-radius:8px; text-align:center; font-size:.8rem">
+                  <div style="font-family:var(--font-display); font-size:1.3rem; color:var(--ok)">3</div>
+                  <span style="color:var(--text-mute)">Pagadas</span>
+                </div>
+                <div style="padding:.6rem; border:1px solid var(--line-soft); border-radius:8px; text-align:center; font-size:.8rem">
+                  <div style="font-family:var(--font-display); font-size:1.3rem; color:var(--cyan)">3</div>
+                  <span style="color:var(--text-mute)">Pendientes</span>
+                </div>
+                <div style="padding:.6rem; border:1px solid var(--line-soft); border-radius:8px; text-align:center; font-size:.8rem">
+                  <div style="font-family:var(--font-display); font-size:1.3rem; color:var(--warn)">0</div>
+                  <span style="color:var(--text-mute)">Vencidas</span>
+                </div>
+              </div>
+              <p class="vis-label">Progreso del crédito</p>
+              <div class="vis-bar"><span style="width:50%"></span></div>
+              <div class="vis-row" style="margin-top:.5rem">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-cal"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Próximo vencimiento</strong>
+                  <span>15/05/2026 · $9.083</span>
+                </div>
+                <span class="vis-badge"><svg class="i"><use href="#i-cal"/></svg> Agendar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 05 COBRO DE CUOTAS ─── -->
+        <div class="feat-section" id="cobros">
+          <div class="mod-stage">
+            <span class="mod-stage__num">05</span>
+            Operación diaria
+          </div>
+
+          <div class="feat">
+            <div class="feat__copy">
+              <h2 class="feat__title">Cobro de cuotas <span class="text-cyan">con un click</span></h2>
+              <p class="feat__desc">
+                La vista de cobro muestra los clientes del día, cuánto deben y el estado de cada cuota.
+                Cobrás, elegís el medio de pago y al confirmar se abre un modal con el resumen del pago
+                y un botón para enviar el comprobante por WhatsApp directamente.
+              </p>
+              <p class="feat__desc">
+                Los medios de pago son configurables: efectivo, transferencia, tarjeta, o cualquiera
+                que crees desde el panel. Sin opciones hardcodeadas.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Cobro en un click con selector de medio de pago</li>
+                <li>Comprobante por WhatsApp inmediato al confirmar</li>
+                <li>Medios de pago dinámicos configurables por el usuario</li>
+                <li>Opción de cobrar con o sin interés por mora</li>
+                <li>Anulación de cobros con permiso especial</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">WhatsApp</span>
+                <span class="feat__pill">Medios dinámicos</span>
+                <span class="feat__pill">Anulación</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Panel · Cobranzas de hoy</p>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-check"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Mueblería San José</strong>
+                  <span>Cuota 3 / 12 — $48.500</span>
+                </div>
+                <span class="chip chip--ok">Cobrado</span>
+              </div>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-bolt"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Electro Norte</strong>
+                  <span>Cuota 5 / 10 — $32.000</span>
+                </div>
+                <span class="chip chip--warn">Vence hoy</span>
+              </div>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-wa"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Comprobante enviado</strong>
+                  <span>WhatsApp · 5491155443322</span>
+                </div>
+                <span class="chip chip--ok">✓ Enviado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 06 MORA ─── -->
+        <div class="feat-section" id="mora">
+          <div class="mod-stage">
+            <span class="mod-stage__num">06</span>
+            Control financiero
+          </div>
+
+          <div class="feat feat--reverse">
+            <div class="feat__copy">
+              <h2 class="feat__title">Mora <span class="text-cyan">configurable</span></h2>
+              <p class="feat__desc">
+                Definís el porcentaje de interés diario por mora, los días de gracia antes de
+                que empiece a correr, y si querés interés simple o compuesto. El sistema lo
+                calcula automáticamente en cada cuota vencida.
+              </p>
+              <p class="feat__desc">
+                Con el modo <strong>mora retroactiva</strong> podés configurar que, al superar
+                los días de gracia, el interés se calcule desde el día 1 del vencimiento
+                (no solo desde el umbral), para mayor control sobre la cartera morosa.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Porcentaje diario configurable (simple o compuesto)</li>
+                <li>Días de gracia: el interés empieza X días después del vencimiento</li>
+                <li>Mora retroactiva: al superar gracia, cobra desde el día 1</li>
+                <li>Al cobrar elegís: cobrar con mora o perdonarla</li>
+                <li>El cliente ve el interés acumulado en su portal</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">Simple o compuesto</span>
+                <span class="feat__pill">Días de gracia</span>
+                <span class="feat__pill">Mora retroactiva</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Configuración de mora</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-bottom:.5rem">
+                <div style="padding:.7rem; border:1px solid var(--line-soft); border-radius:8px; font-size:.82rem">
+                  <span style="color:var(--text-mute)">Interés diario</span>
+                  <div style="font-family:var(--font-display); font-size:1.4rem; color:var(--warn)">1.0%</div>
+                </div>
+                <div style="padding:.7rem; border:1px solid var(--line-soft); border-radius:8px; font-size:.82rem">
+                  <span style="color:var(--text-mute)">Días de gracia</span>
+                  <div style="font-family:var(--font-display); font-size:1.4rem; color:var(--cyan)">5</div>
+                </div>
+              </div>
+              <div class="vis-row" style="background:rgba(255,200,87,.05); border-color:rgba(255,200,87,.3)">
+                <div class="vis-row__icon" style="color:var(--warn)"><svg class="i"><use href="#i-warn"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Cuota vencida hace 18 días</strong>
+                  <span>Capital $12.000 + mora $2.160</span>
+                </div>
+                <span class="chip chip--warn">$14.160</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 07 ADELANTOS ─── -->
+        <div class="feat-section" id="adelantos">
+          <div class="mod-stage">
+            <span class="mod-stage__num">07</span>
+            Pagos parciales
+          </div>
+
+          <div class="feat">
+            <div class="feat__copy">
+              <h2 class="feat__title">Adelantos <span class="text-cyan">múltiples</span></h2>
+              <p class="feat__desc">
+                Un cliente puede hacer varios pagos parciales sobre la misma cuota antes del vencimiento.
+                Cada adelanto queda confirmado de forma independiente, genera su propio comprobante
+                PDF y puede enviarse por WhatsApp en el momento.
+              </p>
+              <p class="feat__desc">
+                El sistema valida que la suma de adelantos no supere el monto adeudado (capital + mora)
+                y muestra el saldo restante actualizado en cada operación.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Múltiples adelantos parciales por cuota</li>
+                <li>Cada adelanto: comprobante PDF propio</li>
+                <li>Envío por WhatsApp de cada comprobante</li>
+                <li>Validación automática: no puede superar el total adeudado</li>
+                <li>Los adelantos confirmados son inmutables (no se modifican)</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">Pagos parciales</span>
+                <span class="feat__pill">PDF por adelanto</span>
+                <span class="feat__pill">WhatsApp</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Adelantos · Cuota 4 de 12</p>
+              <div class="vis-row">
+                <div class="vis-row__icon" style="color:var(--ok)"><svg class="i"><use href="#i-check"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Adelanto #1 — $5.000</strong>
+                  <span>15/04 · Efectivo · Confirmado</span>
+                </div>
+                <span class="chip chip--ok">✓</span>
+              </div>
+              <div class="vis-row">
+                <div class="vis-row__icon" style="color:var(--ok)"><svg class="i"><use href="#i-check"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Adelanto #2 — $3.000</strong>
+                  <span>20/04 · Transferencia · Confirmado</span>
+                </div>
+                <span class="chip chip--ok">✓</span>
+              </div>
+              <hr class="vis-divider"/>
+              <div style="display:flex; justify-content:space-between; font-size:.82rem; padding:.2rem 0">
+                <span style="color:var(--text-mute)">Total pagado</span>
+                <strong style="color:var(--ok)">$8.000</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:.82rem; padding:.2rem 0">
+                <span style="color:var(--text-mute)">Saldo restante</span>
+                <strong style="color:var(--warn)">$4.083</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 08 ALERTAS DE VENCIMIENTO ─── -->
+        <div class="feat-section" id="alertas">
+          <div class="mod-stage">
+            <span class="mod-stage__num">08</span>
+            Seguimiento proactivo
+          </div>
+
+          <div class="feat feat--reverse">
+            <div class="feat__copy">
+              <h2 class="feat__title">Alertas de <span class="text-cyan">vencimiento</span></h2>
+              <p class="feat__desc">
+                El sistema genera automáticamente una lista de cuotas próximas a vencer, con indicadores
+                visuales de urgencia (hoy, mañana, en X días). Desde ahí mandás un recordatorio
+                amable por WhatsApp con un click.
+              </p>
+              <p class="feat__desc">
+                Configurás con cuántos días de anticipación querés ver las alertas.
+                Podés actualizar la lista manualmente o dejar que el sistema lo haga solo
+                cada día mediante una tarea programada.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Lista de alertas por urgencia: hoy, mañana, próximos días</li>
+                <li>Días de anticipación configurables por empresa</li>
+                <li>Recordatorio por WhatsApp con un click desde la alerta</li>
+                <li>Control de "ya avisado" para evitar duplicados</li>
+                <li>Actualización automática o manual desde el dashboard</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">Configurable</span>
+                <span class="feat__pill">WhatsApp</span>
+                <span class="feat__pill">Anti-duplicados</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Alertas de vencimiento</p>
+              <div class="vis-row" style="border-color:rgba(255,200,87,.4); background:rgba(255,200,87,.06)">
+                <div class="vis-row__icon" style="color:var(--warn)"><svg class="i"><use href="#i-bell"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>García, Pablo</strong>
+                  <span>Cuota 5/10 · Vence HOY · $14.000</span>
+                </div>
+                <span class="chip chip--warn">Hoy</span>
+              </div>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-bell"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Torres, Silvia</strong>
+                  <span>Cuota 2/6 · Vence en 1 día · $8.500</span>
+                </div>
+                <span class="chip chip--info">Mañana</span>
+              </div>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-bell"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Vera, Diego</strong>
+                  <span>Cuota 7/12 · Vence en 3 días · $21.200</span>
+                </div>
+                <span class="chip chip--info">En 3 días</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 09 DEUDORES Y WHATSAPP ─── -->
+        <div class="feat-section" id="deudores">
+          <div class="mod-stage">
+            <span class="mod-stage__num">09</span>
+            Gestión de mora
+          </div>
+
+          <div class="feat">
+            <div class="feat__copy">
+              <h2 class="feat__title">Deudores y <span class="text-cyan">notificación WhatsApp</span></h2>
+              <p class="feat__desc">
+                La lista de deudores agrupa todos los clientes con cuotas vencidas. Cada deudor tiene
+                el detalle de cuánto debe, cuántos días de atraso acumula y cuánto interés por mora
+                ya se le está aplicando.
+              </p>
+              <p class="feat__desc">
+                Podés enviar un mensaje de cobro personalizado por WhatsApp con el estado de cuenta
+                completo. El sistema registra si ya se notificó, cuándo, y te avisa si necesita
+                reenvío.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Lista de deudores actualizada en tiempo real</li>
+                <li>Mensaje de WhatsApp con estado de cuenta detallado</li>
+                <li>Aviso de interés punitorio incluido en el mensaje</li>
+                <li>Control de envíos: fecha y hora del último mensaje</li>
+                <li>Alerta de "ya notificado" para no molestar dos veces</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">Mensaje personalizado</span>
+                <span class="feat__pill">Estado de cuenta</span>
+                <span class="feat__pill">Control de envíos</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Lista de deudores</p>
+              <div class="vis-row" style="border-color:rgba(255,200,87,.4)">
+                <div class="vis-row__icon" style="color:var(--warn)"><svg class="i"><use href="#i-warn"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Juárez, Roberto</strong>
+                  <span>2 cuotas vencidas · 23 días atraso</span>
+                </div>
+                <span class="chip chip--warn">$28.400</span>
+              </div>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-wa"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Notificación enviada</strong>
+                  <span>Hoy 10:14 · WhatsApp</span>
+                </div>
+                <span class="chip chip--ok">✓ Enviado</span>
+              </div>
+              <div class="vis-row" style="border-color:rgba(255,200,87,.4)">
+                <div class="vis-row__icon" style="color:var(--warn)"><svg class="i"><use href="#i-warn"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Benítez, Ana</strong>
+                  <span>1 cuota vencida · 8 días atraso</span>
+                </div>
+                <span class="chip chip--info">Notificar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 10 DOCUMENTOS Y PDF ─── -->
+        <div class="feat-section" id="documentos">
+          <div class="mod-stage">
+            <span class="mod-stage__num">10</span>
+            Documentación
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <div class="mini-card__icon"><svg class="i"><use href="#i-doc"/></svg></div>
+              <div class="mini-card__body">
+                <h3>Contrato PDF</h3>
+                <p>El contrato del crédito se genera automáticamente en PDF, con la firma digital incluida si el cliente ya firmó. Disponible en orientación vertical u horizontal según lo configure la empresa.</p>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-card__icon"><svg class="i"><use href="#i-cal"/></svg></div>
+              <div class="mini-card__body">
+                <h3>PDF de calendario</h3>
+                <p>Descargá solo la tabla de cuotas en un PDF limpio, sin el encabezado del contrato. Ideal para entregar al cliente como resumen de su plan de pagos en una sola hoja.</p>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-card__icon"><svg class="i"><use href="#i-cash"/></svg></div>
+              <div class="mini-card__body">
+                <h3>Pagaré sin protesto</h3>
+                <p>Generá el pagaré del crédito en PDF con el monto en letras y todas las formalidades legales. Configurable con tribunales y datos de la empresa.</p>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-card__icon"><svg class="i"><use href="#i-doc"/></svg></div>
+              <div class="mini-card__body">
+                <h3>PDF de simulación</h3>
+                <p>Antes de crear la solicitud podés descargar el PDF de la simulación para mostrarle al cliente cuánto va a pagar, cuándo y con qué interés. Sin compromiso.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 11 MULTI-SUCURSAL Y PERMISOS ─── -->
+        <div class="feat-section" id="multi-sucursal">
+          <div class="mod-stage">
+            <span class="mod-stage__num">11</span>
+            Escala y control
+          </div>
+
+          <div class="feat feat--reverse">
+            <div class="feat__copy">
+              <h2 class="feat__title">Multi-sucursal y <span class="text-cyan">permisos granulares</span></h2>
+              <p class="feat__desc">
+                Podés tener varias sucursales en el mismo sistema. Cada empleado solo ve los clientes
+                y créditos de su sucursal. El gerente ve sus sucursales. El dueño ve todo.
+              </p>
+              <p class="feat__desc">
+                Los permisos son granulares: podés dar acceso solo para cobrar, solo para ver, o
+                habilitar la autorización de solicitudes a quienes corresponda. Sin dar acceso
+                a lo que no necesitan.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Cajero: solo ve y cobra en su sucursal</li>
+                <li>Gerente: ve y opera en sus sucursales asignadas</li>
+                <li>Dueño/superusuario: acceso total sin restricciones</li>
+                <li>Permiso especial para autorizar solicitudes</li>
+                <li>Permiso especial para anular cobros</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">Multi-sucursal</span>
+                <span class="feat__pill">Roles</span>
+                <span class="feat__pill">Auditable</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Estructura de usuarios</p>
+              <div class="vis-row" style="background:rgba(43,212,230,.08)">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-shield"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Dueño / Superusuario</strong>
+                  <span>Ve y opera TODO · Sin restricciones</span>
+                </div>
+                <span class="chip chip--ok">Full</span>
+              </div>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-branch"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Gerente de sucursal</strong>
+                  <span>Autoriza solicitudes · Ve sus sucursales</span>
+                </div>
+                <span class="chip chip--info">Gerente</span>
+              </div>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-cash"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Cajero / Operador</strong>
+                  <span>Cobra y registra · Solo su sucursal</span>
+                </div>
+                <span class="chip chip--warn">Operador</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 12 CONSULTA BCRA ─── -->
+        <div class="feat-section" id="bcra">
+          <div class="mod-stage">
+            <span class="mod-stage__num">12</span>
+            Evaluación crediticia
+          </div>
+
+          <div class="feat">
+            <div class="feat__copy">
+              <h2 class="feat__title">Consulta <span class="text-cyan">BCRA</span></h2>
+              <p class="feat__desc">
+                Al crear una solicitud, el sistema consulta automáticamente la Central de Deudores del
+                Banco Central en segundo plano. No bloquea el flujo ni requiere que el operador
+                haga nada extra.
+              </p>
+              <p class="feat__desc">
+                También podés lanzar la consulta manualmente desde el listado de solicitudes para
+                obtener el estado crediticio actualizado de cualquier cliente.
+              </p>
+              <ul class="bullets" style="display:grid; gap:.45rem; margin-top:.4rem">
+                <li>Consulta automática al crear cada solicitud</li>
+                <li>Ejecución asíncrona: no interrumpe el trabajo</li>
+                <li>Acepta DNI/CUIT con o sin guiones (se limpian solos)</li>
+                <li>Consulta manual masiva desde el panel de solicitudes</li>
+                <li>Resultado almacenado y visible en la ficha del cliente</li>
+              </ul>
+              <div class="feat__pills">
+                <span class="feat__pill">Automático</span>
+                <span class="feat__pill">Asíncrono</span>
+                <span class="feat__pill">Central de deudores</span>
+              </div>
+            </div>
+
+            <div class="feat__visual">
+              <p class="vis-label">Resultado BCRA</p>
+              <div class="vis-row">
+                <div class="vis-row__icon"><svg class="i"><use href="#i-bank"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Consulta automática</strong>
+                  <span>Al crear la solicitud · En segundo plano</span>
+                </div>
+                <span class="chip chip--ok">Auto</span>
+              </div>
+              <div class="vis-row" style="background:rgba(43,230,164,.05); border-color:rgba(43,230,164,.3)">
+                <div class="vis-row__icon" style="color:var(--ok)"><svg class="i"><use href="#i-shield"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>Martínez, Carlos</strong>
+                  <span>Sin deuda registrada · BCRA 2026</span>
+                </div>
+                <span class="chip chip--ok">Sin deuda</span>
+              </div>
+              <div class="vis-row" style="border-color:rgba(255,200,87,.4)">
+                <div class="vis-row__icon" style="color:var(--warn)"><svg class="i"><use href="#i-warn"/></svg></div>
+                <div class="vis-row__body">
+                  <strong>López, Mariana</strong>
+                  <span>1 entidad · Deuda: $10.715</span>
+                </div>
+                <span class="chip chip--warn">Con deuda</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================= CTA FINAL ================= -->
+    <section class="section section--cta" id="demo">
+      <div class="container">
+        <div class="cta-card reveal" style="text-align:center; padding: clamp(2.5rem, 6vw, 4rem)">
+          <span class="eyebrow" style="justify-content:center">
+            <span class="eyebrow__dot"></span>
+            Demo sin cargo
+          </span>
+          <h2 class="h2" style="max-width:640px; margin: 1rem auto .8rem">
+            ¿Querés ver esto <span class="text-cyan">en tu negocio</span>?
+          </h2>
+          <p class="muted" style="max-width:52ch; margin-inline:auto; margin-bottom:2rem">
+            Te mostramos cómo se vería todo esto aplicado a tu operación en una demo
+            guiada de 20 minutos. Sin instalar nada, sin compromiso.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center">
+            <a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">
+              Solicitar demo gratis
+              <svg class="i"><use href="#i-arrow"/></svg>
+            </a>
+            <a href="https://ademasistemas.com/gestion-creditos/"
+               target="_blank" rel="noopener" class="btn btn--wa">
+              <svg class="i"><use href="#i-wa"/></svg>
+              Hablar con Adema Sistemas
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--brand">
+          <div class="brand">
+            <img src="logo.png" class="brand__logo" alt="Logo Gestión de Créditos">
+            <span class="brand__text">
+              <span class="brand__title">GESTIÓN DE CRÉDITOS</span>
+              <span class="brand__sub">Adema Sistemas</span>
+            </span>
+          </div>
+          <p class="muted" style="margin-top:1rem; max-width:36ch">
+            Ordená tu cartera. Cobrá a tiempo. Profesionalizá tu operación.
+            Pensado para negocios que venden financiado.
+          </p>
+          <a href="https://ademasistemas.com/gestion-creditos/"
+             target="_blank" rel="noopener" class="btn btn--wa btn--sm" style="margin-top:1rem">
+            <svg class="i"><use href="#i-wa"/></svg>
+            Hablar con Adema Sistemas
+          </a>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col__title">Navegación</h4>
+          <ul class="footer-list">
+            <li><a href="index.html#inicio">Inicio</a></li>
+            <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+            <li><a href="funcionalidades.html">Funcionalidades</a></li>
+            <li><a href="https://ademasistemas.com/gestion-creditos/">Solicitar demo</a></li>
+            <li><a href="index.html#faq">Preguntas frecuentes</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col__title">Recursos</h4>
+          <ul class="footer-list">
+            <li><a href="tutoriales.html">Tutoriales</a></li>
+            <li><a href="articulos.html">Artículos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col__title">Contacto</h4>
+          <ul class="footer-list">
+            <li><a href="https://ademasistemas.com/gestion-creditos/" target="_blank" rel="noopener">Solicitar demo</a></li>
+            <li><a href="mailto:hola@ademasistemas.com">hola@ademasistemas.com</a></li>
+            <li><span class="muted">Lun a Vie · 9 a 18 hs</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-brand">
+          <span class="footline"></span>
+          <span>© <span id="year"></span> Adema Sistemas</span>
+          <span class="sep">·</span>
+          <span class="text-cyan">Gestión de Créditos</span>
+          <span class="footline"></span>
+          <span class="footdot"></span>
+        </div>
+        <small>Más orden. Más control. Mejor gestión.</small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= BOTÓN FLOTANTE WHATSAPP ================= -->
+  <a href="https://ademasistemas.com/gestion-creditos/"
+     target="_blank" rel="noopener" class="wa-fab" aria-label="Hablar con Adema Sistemas">
+    <span class="wa-fab__bubble">¿Hablamos?</span>
+    <span class="wa-fab__btn">
+      <svg class="i"><use href="#i-wa"/></svg>
+    </span>
+  </a>
+
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="funcionalidades.js"></script>
+</body>
+</html>

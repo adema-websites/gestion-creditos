@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gestión de Créditos de Adema Sistemas: sistema para ordenar clientes, créditos, cuotas, cobranzas, mora, deudores y seguimiento en negocios que venden en cuotas." />
+  <title>Gestión de Créditos · Sistema para negocios que venden en cuotas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-logo" viewBox="0 0 64 64"><path d="M32 3 L57 12 V32 C57 47 46 56 32 61 C18 56 7 47 7 32 V12 Z" fill="#031322" stroke="#2BD4E6" stroke-width="2"/><rect x="20" y="34" width="5" height="10" rx="1" fill="#2BD4E6"/><rect x="28" y="28" width="5" height="16" rx="1" fill="#2BD4E6"/><rect x="36" y="22" width="5" height="22" rx="1" fill="#2BD4E6"/><path d="M19 22 L26 29 L44 14" fill="none" stroke="#2BD4E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><path d="M12 12 L20 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17 4h3v3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-shop" viewBox="0 0 24 24"><path d="M4 9 L5 5 H19 L20 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 9V20H19V9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 20V14H14V20" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M3 6V3H6 M18 3H21V6 M21 18V21H18 M6 21H3V18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 12C7 8 9.5 7 12 7s5 1 7 5c-2 4-4.5 5-7 5s-5-1-7-5Z" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+      <symbol id="i-toolbox" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8V5h6v3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 13h18" stroke="currentColor" stroke-width="1.6"/><rect x="10.5" y="11.5" width="3" height="3" fill="currentColor" opacity=".7"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.5l3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 L4 14h6l-1 8 9-12h-6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 20h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="6" y="12" width="3" height="6" fill="currentColor"/><rect x="11" y="8" width="3" height="10" fill="currentColor"/><rect x="16" y="4" width="3" height="14" fill="currentColor"/></symbol>
+      <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-1.4 3.2A8 8 0 0 1 20 12Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 9.5c.2 1.5 1 3 2.2 4.2C12.4 14.9 14 15.7 15.5 16l1-1.5-2-1-1 .8c-.8-.4-1.5-1-2-1.8l.8-1-1-2-1.5 1Z" fill="currentColor"/></symbol>
+      <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="11" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 16.5c.6-1.6 2-2.5 3.5-2.5s2.9.9 3.5 2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14.5 9.5h4M14.5 12h4M14.5 14.5h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v4h4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 12h6M9 15h6M9 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="7" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><path d="M14 14h3v3M20 14v3M14 20h3M20 17v4h-3" stroke="currentColor" stroke-width="1.4"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="5" cy="5" r="1.4"/><circle cx="12" cy="5" r="1.4"/><circle cx="19" cy="5" r="1.4"/><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/><circle cx="5" cy="19" r="1.4"/><circle cx="12" cy="19" r="1.4"/><circle cx="19" cy="19" r="1.4"/></g></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3 L22 20 H2 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 10v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17.5" r="1" fill="currentColor"/></symbol>
+      <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="12" r=".9" fill="currentColor"/><circle cx="18" cy="12" r=".9" fill="currentColor"/></symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24"><path d="M14 4l6 6-12 12H2v-6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 5l6 6" stroke="currentColor" stroke-width="1.6"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2H4.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 21h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 8.5v7l6-3.5z" fill="currentColor" stroke="none"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="bg-deco" aria-hidden="true">
+    <div class="bg-glow bg-glow--1"></div>
+    <div class="bg-glow bg-glow--2"></div>
+    <div class="bg-dots bg-dots--right"></div>
+    <div class="bg-dots bg-dots--left"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#inicio" class="brand">
+        <img src="logo.png" class="brand__logo" alt="Logo Gestión de Créditos">
+        <span class="brand__text"><span class="brand__title">GESTIÓN DE CRÉDITOS</span><span class="brand__sub">Adema Sistemas</span></span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#demo">Demo</a>
+        <a href="#recursos">Recursos</a>
+        <a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary btn--sm">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero__grid">
+        <div class="hero__copy reveal">
+          <span class="eyebrow"><span class="eyebrow__dot"></span>Software de gestión de créditos</span>
+          <h1 class="display">Sistema de gestión para negocios que venden en cuotas</h1>
+          <p class="lead">Ordená clientes, créditos, cuotas, cobranzas, mora y seguimiento en un solo lugar.</p>
+          <p class="hero__support">Pensado para comercios, financieras chicas y negocios que hoy siguen su cartera con Excel, cuaderno o WhatsApp.</p>
+          <div class="hero__ctas">
+            <a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a>
+            <a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--ghost"><svg class="i"><use href="#i-wa"/></svg>Hablar con Adema Sistemas</a>
+          </div>
+        </div>
+
+        <aside class="hero__mock reveal" aria-hidden="true">
+          <div class="page-badge"><span class="page-badge__num">01</span><svg class="i"><use href="#i-grid"/></svg></div>
+          <div class="mock-card">
+            <header class="mock-card__head"><div class="dot dot--cyan"></div><span>panel · cartera de hoy</span></header>
+            <div class="mock-row"><div class="mock-row__icon"><svg class="i"><use href="#i-check"/></svg></div><div class="mock-row__body"><strong>Mueblería San José</strong><span>Cuota 3 / 12 · $48.500</span></div><span class="chip chip--ok">cobrado</span></div>
+            <div class="mock-row"><div class="mock-row__icon"><svg class="i"><use href="#i-bolt"/></svg></div><div class="mock-row__body"><strong>Electro Norte</strong><span>Vence hoy · $32.000</span></div><span class="chip chip--warn">alerta</span></div>
+            <div class="mock-row"><div class="mock-row__icon"><svg class="i"><use href="#i-eye"/></svg></div><div class="mock-row__body"><strong>Casa Celulares</strong><span>Deuda con mora · seguimiento</span></div><span class="chip chip--info">ver</span></div>
+            <footer class="mock-card__foot"><div class="bar"><span style="--w:78%"></span></div><small>78% de cobranza mensual</small></footer>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="problemas">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="stage"><span class="stage__icon"><svg class="i"><use href="#i-warn"/></svg></span><span class="stage__txt">Problemas reales</span></span>
+          <h2 class="h2">Cuando el crédito crece, <span class="text-cyan">el desorden también</span></h2>
+          <p class="muted">Vender en cuotas puede funcionar muy bien. El problema aparece cuando el seguimiento queda repartido en herramientas y personas.</p>
+        </header>
+        <div class="grid grid--3">
+          <article class="card card--pain reveal"><div class="card__icon"><svg class="i"><use href="#i-chart"/></svg></div><h3 class="h3">Excel y planillas difíciles de mantener</h3><p>Las fórmulas se rompen, hay versiones distintas y nadie sabe cuál está realmente actualizada.</p></article>
+          <article class="card card--pain reveal"><div class="card__icon"><svg class="i"><use href="#i-wa"/></svg></div><h3 class="h3">WhatsApp con información perdida</h3><p>Promesas de pago, comprobantes y reclamos quedan mezclados entre cientos de mensajes.</p></article>
+          <article class="card card--pain reveal"><div class="card__icon"><svg class="i"><use href="#i-doc"/></svg></div><h3 class="h3">Cuadernos o registros manuales</h3><p>Funcionan al principio, pero se vuelven lentos y difíciles de controlar cuando la cartera crece.</p></article>
+          <article class="card card--pain reveal"><div class="card__icon"><svg class="i"><use href="#i-warn"/></svg></div><h3 class="h3">Mora calculada a mano</h3><p>Se pierde tiempo y aparecen discusiones por montos, fechas o intereses mal aplicados.</p></article>
+          <article class="card card--pain reveal"><div class="card__icon"><svg class="i"><use href="#i-eye"/></svg></div><h3 class="h3">Deudores difíciles de seguir</h3><p>Cuesta ver quién debe, cuánto debe, desde cuándo y cuál fue el último contacto.</p></article>
+          <article class="card card--pain reveal"><div class="card__icon"><svg class="i"><use href="#i-id"/></svg></div><h3 class="h3">Cobranza que depende de una sola persona</h3><p>Si quien conoce la cartera falta, el negocio queda sin claridad para seguir cobrando.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="solucion">
+      <div class="container">
+        <div class="solution-panel reveal">
+          <div><span class="stage"><span class="stage__icon"><svg class="i"><use href="#i-check"/></svg></span><span class="stage__txt">La solución</span></span><h2 class="h2">Todo centralizado en <span class="text-cyan">un solo sistema</span></h2></div>
+          <div class="solution-panel__copy">
+            <p class="lead">Gestión de Créditos reúne la información clave de tu cartera para que puedas ver clientes, cuotas, vencimientos, cobros, mora y deudores con más claridad.</p>
+            <p class="quote-line quote-line--compact">Menos desorden. Más control. Más claridad para cobrar.</p>
+            <a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Quiero ordenar mi cartera <svg class="i"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="funcionalidades">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="stage"><span class="stage__icon"><svg class="i"><use href="#i-toolbox"/></svg></span><span class="stage__txt">Funcionalidades principales</span></span>
+          <h2 class="h2">Las piezas clave para gestionar créditos <span class="text-cyan">sin perder el hilo</span></h2>
+          <p class="muted">Tocá una funcionalidad para ver qué hace, qué problema resuelve y un ejemplo concreto.</p>
+        </header>
+        <div class="feature-grid">
+          <button class="feature-card reveal" type="button" data-modal="clientes"><span class="feature-card__icon"><svg class="i"><use href="#i-id"/></svg></span><span class="feature-card__title">Clientes</span><span class="feature-card__desc">Ficha única con datos, historial y estado de cuenta.</span><span class="feature-card__link">Ver más <svg class="i"><use href="#i-arrow"/></svg></span></button>
+          <button class="feature-card reveal" type="button" data-modal="creditos"><span class="feature-card__icon"><svg class="i"><use href="#i-doc"/></svg></span><span class="feature-card__title">Créditos</span><span class="feature-card__desc">Carga de operaciones, condiciones y plan de pago.</span><span class="feature-card__link">Ver más <svg class="i"><use href="#i-arrow"/></svg></span></button>
+          <button class="feature-card reveal" type="button" data-modal="cuotas"><span class="feature-card__icon"><svg class="i"><use href="#i-cal"/></svg></span><span class="feature-card__title">Cuotas</span><span class="feature-card__desc">Cronograma claro de vencimientos, pagos y saldos.</span><span class="feature-card__link">Ver más <svg class="i"><use href="#i-arrow"/></svg></span></button>
+          <button class="feature-card reveal" type="button" data-modal="cobros"><span class="feature-card__icon"><svg class="i"><use href="#i-cash"/></svg></span><span class="feature-card__title">Cobros</span><span class="feature-card__desc">Registro de pagos, medios y comprobantes.</span><span class="feature-card__link">Ver más <svg class="i"><use href="#i-arrow"/></svg></span></button>
+          <button class="feature-card reveal" type="button" data-modal="deudores"><span class="feature-card__icon"><svg class="i"><use href="#i-eye"/></svg></span><span class="feature-card__title">Deudores</span><span class="feature-card__desc">Listado actualizado de clientes con pagos pendientes.</span><span class="feature-card__link">Ver más <svg class="i"><use href="#i-arrow"/></svg></span></button>
+          <button class="feature-card reveal" type="button" data-modal="mora"><span class="feature-card__icon"><svg class="i"><use href="#i-warn"/></svg></span><span class="feature-card__title">Mora</span><span class="feature-card__desc">Cálculo más claro de intereses por atraso.</span><span class="feature-card__link">Ver más <svg class="i"><use href="#i-arrow"/></svg></span></button>
+          <button class="feature-card reveal" type="button" data-modal="alertas"><span class="feature-card__icon"><svg class="i"><use href="#i-bell"/></svg></span><span class="feature-card__title">Alertas</span><span class="feature-card__desc">Vencimientos y tareas de seguimiento a la vista.</span><span class="feature-card__link">Ver más <svg class="i"><use href="#i-arrow"/></svg></span></button>
+          <button class="feature-card reveal" type="button" data-modal="firma"><span class="feature-card__icon"><svg class="i"><use href="#i-pen"/></svg></span><span class="feature-card__title">Firma digital</span><span class="feature-card__desc">Contratos firmados y guardados con respaldo.</span><span class="feature-card__link">Ver más <svg class="i"><use href="#i-arrow"/></svg></span></button>
+          <button class="feature-card reveal" type="button" data-modal="portal"><span class="feature-card__icon"><svg class="i"><use href="#i-qr"/></svg></span><span class="feature-card__title">Portal cliente</span><span class="feature-card__desc">Consulta online de contratos, cuotas y estado.</span><span class="feature-card__link">Ver más <svg class="i"><use href="#i-arrow"/></svg></span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="demo">
+      <div class="container demo-grid">
+        <div class="demo-copy reveal"><span class="stage"><span class="stage__icon"><svg class="i"><use href="#i-play"/></svg></span><span class="stage__txt">Demo visible</span></span><h2 class="h2">Mirá cómo funciona</h2><p class="lead">En pocos minutos podés ver cómo se ordenan clientes, créditos, cuotas, vencimientos y cobros.</p><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo personalizada <svg class="i"><use href="#i-arrow"/></svg></a></div>
+        <div class="video-shell reveal" aria-label="Video de cómo funciona Gestión de Créditos"><div class="video-shell__screen"><iframe src="https://www.youtube.com/embed/k-abcvgloNw?rel=0&modestbranding=1&color=white" title="Cómo funciona Gestión de Créditos" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><p>Video de cómo funciona Gestión de Créditos.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="recursos">
+      <div class="container">
+        <header class="section__head reveal"><span class="stage"><span class="stage__icon"><svg class="i"><use href="#i-doc"/></svg></span><span class="stage__txt">Respaldo</span></span><h2 class="h2">Recursos para conocer mejor <span class="text-cyan">el sistema</span></h2><p class="muted">Contenido corto para entender funcionalidades, ver ejemplos y resolver dudas sin distraer del objetivo principal.</p></header>
+        <div class="resources-grid">
+          <a class="resource-card reveal" href="tutoriales.html"><span class="resource-card__icon"><svg class="i"><use href="#i-play"/></svg></span><strong>Tutoriales</strong><span>Guías prácticas para operar el sistema paso a paso.</span></a>
+          <a class="resource-card reveal" href="funcionalidades.html"><span class="resource-card__icon"><svg class="i"><use href="#i-toolbox"/></svg></span><strong>Funcionalidades</strong><span>Detalle de módulos y herramientas disponibles.</span></a>
+          <a class="resource-card reveal" href="firma-demo.html"><span class="resource-card__icon"><svg class="i"><use href="#i-pen"/></svg></span><strong>Firma digital</strong><span>Ejemplo de firma de contratos desde el celular.</span></a>
+          <a class="resource-card reveal" href="articulos.html"><span class="resource-card__icon"><svg class="i"><use href="#i-doc"/></svg></span><strong>Artículos</strong><span>Contenido sobre cobranzas, mora y gestión de cartera.</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--cta" id="contacto">
+      <div class="container"><div class="final-cta reveal"><span class="eyebrow"><span class="eyebrow__dot"></span>Próximo paso</span><h2 class="h2">¿Querés ordenar la cartera de tu negocio?</h2><p class="lead">Si hoy vendés en cuotas y el seguimiento depende de Excel, WhatsApp o una persona, Gestión de Créditos puede ayudarte a trabajar con más control.</p><div class="hero__ctas final-cta__buttons"><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--ghost"><svg class="i"><use href="#i-wa"/></svg>Hablar con Adema Sistemas</a></div></div></div>
+    </section>
+  </main>
+
+  <div class="modal-layer" data-modal-layer hidden>
+    <div class="modal-backdrop" data-modal-close></div>
+    <article class="feature-modal" id="modal-clientes" role="dialog" aria-modal="true" aria-labelledby="modal-clientes-title" hidden><button class="modal-close" type="button" data-modal-close aria-label="Cerrar modal"><svg class="i"><use href="#i-x"/></svg></button><div class="modal-head"><span class="card__icon"><svg class="i"><use href="#i-id"/></svg></span><h2 class="h2" id="modal-clientes-title">Clientes</h2></div><p>Centralizá datos personales, contacto, historial de créditos, pagos y estado de cuenta en una ficha clara.</p><h3>Qué problema resuelve</h3><p>Evita tener información repartida entre planillas, mensajes y anotaciones manuales.</p><h3>Ejemplo práctico</h3><p>Buscás un cliente y ves al instante qué créditos tiene activos, qué cuotas pagó y qué falta cobrar.</p><div class="modal-demo-placeholder"><svg class="i"><use href="#i-play"/></svg><span>Espacio para video corto o mini demo</span></div><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a></article>
+    <article class="feature-modal" id="modal-creditos" role="dialog" aria-modal="true" aria-labelledby="modal-creditos-title" hidden><button class="modal-close" type="button" data-modal-close aria-label="Cerrar modal"><svg class="i"><use href="#i-x"/></svg></button><div class="modal-head"><span class="card__icon"><svg class="i"><use href="#i-doc"/></svg></span><h2 class="h2" id="modal-creditos-title">Créditos</h2></div><p>Cargá operaciones, montos, condiciones, intereses y forma de pago para dejar cada crédito documentado.</p><h3>Qué problema resuelve</h3><p>Reduce errores al armar planes de pago y evita depender de cálculos sueltos o acuerdos informales.</p><h3>Ejemplo práctico</h3><p>Vendés una moto financiada: cargás el crédito, definís cuotas y el sistema deja el cronograma listo.</p><div class="modal-demo-placeholder"><svg class="i"><use href="#i-play"/></svg><span>Espacio para video corto o mini demo</span></div><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a></article>
+    <article class="feature-modal" id="modal-cuotas" role="dialog" aria-modal="true" aria-labelledby="modal-cuotas-title" hidden><button class="modal-close" type="button" data-modal-close aria-label="Cerrar modal"><svg class="i"><use href="#i-x"/></svg></button><div class="modal-head"><span class="card__icon"><svg class="i"><use href="#i-cal"/></svg></span><h2 class="h2" id="modal-cuotas-title">Cuotas</h2></div><p>Visualizá vencimientos, pagos pendientes, cuotas abonadas y saldo de cada operación en una misma vista.</p><h3>Qué problema resuelve</h3><p>Evita revisar fila por fila en una planilla para saber qué vence, qué se pagó y qué sigue pendiente.</p><h3>Ejemplo práctico</h3><p>Un cliente consulta cuánto le queda: abrís su crédito y ves cuotas pagadas, próximas fechas y saldo.</p><div class="modal-demo-placeholder"><svg class="i"><use href="#i-play"/></svg><span>Espacio para video corto o mini demo</span></div><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a></article>
+    <article class="feature-modal" id="modal-cobros" role="dialog" aria-modal="true" aria-labelledby="modal-cobros-title" hidden><button class="modal-close" type="button" data-modal-close aria-label="Cerrar modal"><svg class="i"><use href="#i-x"/></svg></button><div class="modal-head"><span class="card__icon"><svg class="i"><use href="#i-cash"/></svg></span><h2 class="h2" id="modal-cobros-title">Cobros</h2></div><p>Registrá pagos de cuotas, medios de pago y comprobantes en un solo lugar. El sistema te ayuda a dejar historial claro de lo cobrado y reducir errores de seguimiento.</p><h3>Qué problema resuelve</h3><p>Evita tener cobros repartidos entre mensajes, planillas o anotaciones manuales.</p><h3>Ejemplo práctico</h3><p>Un cliente paga una cuota: la registrás, queda marcada como pagada y podés continuar el seguimiento desde el sistema.</p><div class="modal-demo-placeholder"><svg class="i"><use href="#i-play"/></svg><span>Espacio para video corto o mini demo</span></div><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a></article>
+    <article class="feature-modal" id="modal-deudores" role="dialog" aria-modal="true" aria-labelledby="modal-deudores-title" hidden><button class="modal-close" type="button" data-modal-close aria-label="Cerrar modal"><svg class="i"><use href="#i-x"/></svg></button><div class="modal-head"><span class="card__icon"><svg class="i"><use href="#i-eye"/></svg></span><h2 class="h2" id="modal-deudores-title">Deudores</h2></div><p>Consultá clientes con deuda, importes pendientes, días de atraso y datos útiles para retomar el contacto.</p><h3>Qué problema resuelve</h3><p>Deja de depender de memoria, chats o revisiones manuales para saber a quién reclamar.</p><h3>Ejemplo práctico</h3><p>Antes de salir a cobrar, filtrás deudores vencidos y priorizás los casos más importantes del día.</p><div class="modal-demo-placeholder"><svg class="i"><use href="#i-play"/></svg><span>Espacio para video corto o mini demo</span></div><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a></article>
+    <article class="feature-modal" id="modal-mora" role="dialog" aria-modal="true" aria-labelledby="modal-mora-title" hidden><button class="modal-close" type="button" data-modal-close aria-label="Cerrar modal"><svg class="i"><use href="#i-x"/></svg></button><div class="modal-head"><span class="card__icon"><svg class="i"><use href="#i-warn"/></svg></span><h2 class="h2" id="modal-mora-title">Mora</h2></div><p>Configurá criterios de mora para que los atrasos se calculen de forma más clara y consistente.</p><h3>Qué problema resuelve</h3><p>Reduce discusiones por intereses mal calculados y evita hacer cuentas distintas en cada caso.</p><h3>Ejemplo práctico</h3><p>Una cuota vencida hace varios días muestra el importe actualizado y deja visible qué parte corresponde a mora.</p><div class="modal-demo-placeholder"><svg class="i"><use href="#i-play"/></svg><span>Espacio para video corto o mini demo</span></div><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a></article>
+    <article class="feature-modal" id="modal-alertas" role="dialog" aria-modal="true" aria-labelledby="modal-alertas-title" hidden><button class="modal-close" type="button" data-modal-close aria-label="Cerrar modal"><svg class="i"><use href="#i-x"/></svg></button><div class="modal-head"><span class="card__icon"><svg class="i"><use href="#i-bell"/></svg></span><h2 class="h2" id="modal-alertas-title">Alertas</h2></div><p>Mantené a la vista vencimientos, cuotas próximas y tareas de seguimiento para no reaccionar tarde.</p><h3>Qué problema resuelve</h3><p>Evita que la cobranza dependa de que alguien recuerde revisar una planilla o mandar un mensaje.</p><h3>Ejemplo práctico</h3><p>Al abrir el sistema, ves qué vence hoy y qué clientes necesitan contacto antes de que la mora crezca.</p><div class="modal-demo-placeholder"><svg class="i"><use href="#i-play"/></svg><span>Espacio para video corto o mini demo</span></div><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a></article>
+    <article class="feature-modal" id="modal-firma" role="dialog" aria-modal="true" aria-labelledby="modal-firma-title" hidden><button class="modal-close" type="button" data-modal-close aria-label="Cerrar modal"><svg class="i"><use href="#i-x"/></svg></button><div class="modal-head"><span class="card__icon"><svg class="i"><use href="#i-pen"/></svg></span><h2 class="h2" id="modal-firma-title">Firma digital</h2></div><p>Permití que el cliente firme contratos desde el celular y conservá el documento asociado al crédito.</p><h3>Qué problema resuelve</h3><p>Ordena el respaldo documental y reduce papeles sueltos, fotos de contratos o archivos difíciles de encontrar.</p><h3>Ejemplo práctico</h3><p>Al aprobar una financiación, enviás el contrato para firma y luego queda guardado junto a la operación.</p><div class="modal-demo-placeholder"><svg class="i"><use href="#i-play"/></svg><span>Espacio para video corto o mini demo</span></div><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a></article>
+    <article class="feature-modal" id="modal-portal" role="dialog" aria-modal="true" aria-labelledby="modal-portal-title" hidden><button class="modal-close" type="button" data-modal-close aria-label="Cerrar modal"><svg class="i"><use href="#i-x"/></svg></button><div class="modal-head"><span class="card__icon"><svg class="i"><use href="#i-qr"/></svg></span><h2 class="h2" id="modal-portal-title">Portal cliente</h2></div><p>Dale al cliente un espacio de consulta para revisar información de su contrato, cuotas y estado cuando lo necesite.</p><h3>Qué problema resuelve</h3><p>Reduce consultas repetidas y ayuda a que el cliente tenga más claridad sobre su financiación.</p><h3>Ejemplo práctico</h3><p>Un cliente escanea un acceso y revisa su plan de cuotas sin pedir capturas ni esperar una respuesta manual.</p><div class="modal-demo-placeholder"><svg class="i"><use href="#i-play"/></svg><span>Espacio para video corto o mini demo</span></div><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a></article>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--brand"><div class="brand"><img src="logo.png" class="brand__logo" alt="Logo Gestión de Créditos"><span class="brand__text"><span class="brand__title">GESTIÓN DE CRÉDITOS</span><span class="brand__sub">Adema Sistemas</span></span></div><p class="muted" style="margin-top:1rem; max-width:36ch">Ordená clientes, créditos, cuotas, cobros y deudores en un solo lugar.</p><a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary btn--sm" style="margin-top:1rem">Solicitar demo <svg class="i"><use href="#i-arrow"/></svg></a></div>
+        <div class="footer-col"><h4 class="footer-col__title">Navegación</h4><ul class="footer-list"><li><a href="#inicio">Inicio</a></li><li><a href="#funcionalidades">Funcionalidades</a></li><li><a href="#demo">Demo</a></li><li><a href="#recursos">Recursos</a></li></ul></div>
+        <div class="footer-col"><h4 class="footer-col__title">Recursos</h4><ul class="footer-list"><li><a href="tutoriales.html">Tutoriales</a></li><li><a href="funcionalidades.html">Funcionalidades</a></li><li><a href="firma-demo.html">Firma digital</a></li><li><a href="articulos.html">Artículos</a></li></ul></div>
+        <div class="footer-col"><h4 class="footer-col__title">Adema Sistemas</h4><ul class="footer-list"><li><a href="https://ademasistemas.com/gestion-creditos/">Solicitar demo</a></li><li><a href="mailto:hola@ademasistemas.com">hola@ademasistemas.com</a></li><li><span class="muted">Lun a Vie · 9 a 18 hs</span></li></ul></div>
+      </div>
+      <div class="footer-bottom"><div class="footer-brand"><span class="footline"></span><span>© <span id="year"></span> Adema Sistemas</span><span class="sep">·</span><span class="text-cyan">Gestión de Créditos</span><span class="footline"></span><span class="footdot"></span></div><small>Menos desorden. Más control. Más claridad para cobrar.</small></div>
+    </div>
+  </footer>
+
+  <a href="https://ademasistemas.com/gestion-creditos/" class="wa-fab" aria-label="Solicitar demo"><span class="wa-fab__bubble">Solicitar demo</span><span class="wa-fab__btn"><svg class="i"><use href="#i-arrow"/></svg></span></a>
+  <script src="script.js"></script>
+</body>
+</html>

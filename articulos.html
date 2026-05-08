@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Artículos sobre gestión de créditos, cobranzas, mora, firma digital y organización de carteras. Para prestamistas, financieras y comerciantes que venden en cuotas." />
+  <title>Artículos · Gestión de Créditos — Adema Sistemas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ── Extras de artículos ── */
+
+    .page-hero {
+      padding: clamp(3rem, 7vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+      text-align: center;
+    }
+
+    .breadcrumb {
+      display: flex; align-items: center; gap: .5rem; justify-content: center;
+      font-size: .8rem; color: var(--text-mute); margin-bottom: 1.6rem;
+    }
+    .breadcrumb a { color: var(--cyan); }
+    .breadcrumb span { opacity: .5; }
+
+    /* Filtros de categoría */
+    .art-filters {
+      display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;
+      margin-top: 2rem;
+    }
+    .art-filter {
+      font-size: .8rem; font-weight: 600; letter-spacing: .5px;
+      padding: .4rem .9rem; border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(43,212,230,.04);
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .art-filter:hover,
+    .art-filter.is-active {
+      border-color: var(--cyan); color: var(--cyan);
+      background: rgba(43,212,230,.12);
+    }
+
+    /* Artículo destacado */
+    .art-featured {
+      display: grid; gap: 2.5rem; align-items: center;
+      grid-template-columns: 1.1fr .9fr;
+      padding: 2.4rem;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 3rem;
+      position: relative; overflow: hidden;
+    }
+    .art-featured::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(120% 70% at 100% 0%, rgba(43,212,230,.1), transparent 55%);
+      pointer-events: none;
+    }
+    @media (max-width: 900px) { .art-featured { grid-template-columns: 1fr; } }
+
+    .art-featured__badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .72rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--cyan);
+      padding: .3rem .75rem; border-radius: 999px;
+      border: 1px solid rgba(43,212,230,.35);
+      background: rgba(43,212,230,.08);
+      margin-bottom: .8rem;
+    }
+    .art-featured__cat {
+      font-size: .75rem; font-weight: 600; color: var(--cyan);
+      text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: .4rem;
+    }
+    .art-featured__title {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 2.8vw, 2rem);
+      font-weight: 700; text-transform: uppercase; line-height: 1.1;
+      margin: 0 0 .8rem;
+    }
+    .art-featured__excerpt {
+      color: var(--text-dim); font-size: .97rem; line-height: 1.7; margin: 0 0 1.4rem;
+    }
+    .art-featured__meta {
+      font-size: .78rem; color: var(--text-mute);
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+
+    /* Visual ilustrativo del artículo destacado */
+    .art-featured__visual {
+      border-radius: var(--radius);
+      background: var(--bg-card-strong);
+      border: 1px solid var(--line-soft);
+      padding: 1.6rem;
+      display: flex; flex-direction: column; gap: .8rem;
+    }
+    .art-vis__title {
+      font-size: .72rem; text-transform: uppercase;
+      letter-spacing: 1.8px; color: var(--text-mute); margin-bottom: .2rem;
+    }
+    .art-vis__row {
+      display: flex; align-items: center; gap: .7rem;
+      padding: .55rem .8rem; border-radius: 9px;
+      background: rgba(43,212,230,.04); border: 1px solid var(--line-soft);
+      font-size: .85rem;
+    }
+    .art-vis__row strong { flex: 1; }
+    .art-vis__row span { color: var(--text-mute); font-size: .78rem; }
+
+    /* Grid principal de artículos */
+    .art-grid {
+      display: grid; gap: 1.3rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 980px) { .art-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .art-grid { grid-template-columns: 1fr; } }
+
+    /* Card de artículo */
+    .art-card {
+      display: flex; flex-direction: column;
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--line-soft);
+      overflow: hidden;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+    }
+    .art-card:hover {
+      border-color: var(--line);
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px -18px rgba(43,212,230,.3);
+    }
+    .art-card.is-hidden { display: none; }
+
+    .art-card__header {
+      padding: 1.3rem 1.4rem .9rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .art-card__icon {
+      width: 46px; height: 46px; flex-shrink: 0; border-radius: 50%;
+      display: grid; place-items: center;
+      background: radial-gradient(circle, rgba(43,212,230,.25), transparent 70%);
+      border: 1px solid var(--line); color: var(--cyan);
+      box-shadow: var(--cyan-glow);
+    }
+    .art-card__icon .i { width: 20px; height: 20px; }
+    .art-card__meta { flex: 1; }
+    .art-card__cat {
+      font-size: .7rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--cyan);
+    }
+    .art-card__read {
+      font-size: .7rem; color: var(--text-mute); margin-top: .15rem;
+    }
+
+    .art-card__body {
+      padding: 0 1.4rem 1.4rem;
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .art-card__title {
+      font-family: var(--font-display); font-size: 1.08rem; font-weight: 700;
+      text-transform: uppercase; line-height: 1.2;
+      margin: 0 0 .55rem;
+    }
+    .art-card__excerpt {
+      color: var(--text-dim); font-size: .88rem; line-height: 1.6;
+      margin: 0 0 1.1rem; flex: 1;
+    }
+    .art-card__tags {
+      display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1rem;
+    }
+    .art-card__tag {
+      font-size: .68rem; font-weight: 600; letter-spacing: .5px;
+      padding: .2rem .55rem; border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(43,212,230,.05); color: var(--text-dim);
+    }
+    .art-card__footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: .9rem; border-top: 1px solid var(--line-soft);
+    }
+    .art-card__date { font-size: .75rem; color: var(--text-mute); }
+    .art-card__link {
+      font-size: .8rem; font-weight: 600; color: var(--cyan);
+      display: inline-flex; align-items: center; gap: .35rem;
+      transition: gap .15s;
+    }
+    .art-card__link:hover { gap: .55rem; }
+    .art-card__link .i { width: 14px; height: 14px; }
+
+    /* Artículo tipo "largo" (2 columnas) */
+    .art-card--wide {
+      grid-column: span 2;
+      flex-direction: row;
+    }
+    .art-card--wide .art-card__header {
+      flex-direction: column; padding: 1.4rem 0 0 1.6rem;
+      min-width: 180px;
+    }
+    .art-card--wide .art-card__icon { width: 52px; height: 52px; }
+    .art-card--wide .art-card__icon .i { width: 24px; height: 24px; }
+    .art-card--wide .art-card__body { padding: 1.4rem 1.6rem; }
+    .art-card--wide .art-card__title { font-size: 1.25rem; }
+    @media (max-width: 980px) { .art-card--wide { grid-column: span 1; flex-direction: column; } }
+    @media (max-width: 980px) { .art-card--wide .art-card__header { padding: 1.3rem 1.4rem .5rem; flex-direction: row; } }
+
+    /* Estado vacío filtros */
+    .art-empty {
+      grid-column: 1 / -1; text-align: center;
+      padding: 3rem 1rem; color: var(--text-mute);
+      display: none;
+    }
+    .art-empty.is-visible { display: block; }
+
+    /* Newsletter / CTA lateral */
+    .art-sidebar-cta {
+      padding: 1.6rem;
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .art-sidebar-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(100% 80% at 50% 0%, rgba(43,212,230,.1), transparent 60%);
+      pointer-events: none;
+    }
+    .art-sidebar-cta h3 { font-size: 1.05rem; margin: .7rem 0 .5rem; }
+    .art-sidebar-cta p { font-size: .88rem; color: var(--text-dim); margin: 0 0 1.1rem; }
+
+    /* WhatsApp button */
+    .btn--wa {
+      color: #fff;
+      background: linear-gradient(180deg, #25D366, #1aad55);
+      box-shadow: 0 10px 28px -10px rgba(37,211,102,.5);
+    }
+    .btn--wa:hover { transform: translateY(-1px); box-shadow: 0 14px 36px -10px rgba(37,211,102,.6); }
+
+    .wa-fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .wa-fab__bubble {
+      background: var(--bg-card-strong); border: 1px solid var(--line);
+      padding: .45rem .85rem; border-radius: 999px;
+      font-size: .82rem; font-weight: 600; color: var(--text);
+      opacity: 0; transform: translateX(6px);
+      transition: opacity .25s, transform .25s;
+      pointer-events: none; white-space: nowrap;
+    }
+    .wa-fab:hover .wa-fab__bubble { opacity: 1; transform: translateX(0); }
+    .wa-fab__btn {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: linear-gradient(180deg, #25D366, #1aad55);
+      color: #fff;
+      box-shadow: 0 8px 28px -8px rgba(37,211,102,.6);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wa-fab__btn .i { width: 24px; height: 24px; }
+    .wa-fab:hover .wa-fab__btn { transform: scale(1.08); }
+  </style>
+</head>
+<body>
+
+  <!-- ================= SVG SPRITE ================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-logo" viewBox="0 0 64 64">
+        <defs>
+          <linearGradient id="lgShield" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0a2236"/>
+            <stop offset="1" stop-color="#031322"/>
+          </linearGradient>
+        </defs>
+        <path d="M32 3 L57 12 V32 C57 47 46 56 32 61 C18 56 7 47 7 32 V12 Z" fill="url(#lgShield)" stroke="#2BD4E6" stroke-width="2"/>
+        <rect x="20" y="34" width="5" height="10" rx="1" fill="#2BD4E6"/>
+        <rect x="28" y="28" width="5" height="16" rx="1" fill="#2BD4E6"/>
+        <rect x="36" y="22" width="5" height="22" rx="1" fill="#2BD4E6"/>
+        <path d="M19 22 L26 29 L44 14" fill="none" stroke="#2BD4E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-1.4 3.2A8 8 0 0 1 20 12Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 9.5c.2 1.5 1 3 2.2 4.2C12.4 14.9 14 15.7 15.5 16l1-1.5-2-1-1 .8c-.8-.4-1.5-1-2-1.8l.8-1-1-2-1.5 1Z" fill="currentColor"/></symbol>
+      <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v4h4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 12h6M9 15h6M9 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3 L22 20 H2 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 10v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17.5" r="1" fill="currentColor"/></symbol>
+      <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="12" r=".9" fill="currentColor"/><circle cx="18" cy="12" r=".9" fill="currentColor"/></symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24"><path d="M14 4l6 6-12 12H2v-6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 5l6 6" stroke="currentColor" stroke-width="1.6"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2H4.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 21h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10 L12 4 L21 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8" stroke="currentColor" stroke-width="1.6"/><path d="M3 20h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="19" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V14M12 14l-5 3M12 14l5 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M18 3v4h-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M20 12a8 8 0 0 1-14 5.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6 21v-4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 20h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="6" y="12" width="3" height="6" fill="currentColor"/><rect x="11" y="8" width="3" height="10" fill="currentColor"/><rect x="16" y="4" width="3" height="14" fill="currentColor"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.5l3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 L20 5v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M3 6V3H6 M18 3H21V6 M21 18V21H18 M6 21H3V18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 12C7 8 9.5 7 12 7s5 1 7 5c-2 4-4.5 5-7 5s-5-1-7-5Z" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 L4 14h6l-1 8 9-12h-6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- ================= FONDO DECORATIVO ================= -->
+  <div class="bg-deco" aria-hidden="true">
+    <div class="bg-glow bg-glow--1"></div>
+    <div class="bg-glow bg-glow--2"></div>
+    <div class="bg-dots bg-dots--right"></div>
+    <div class="bg-dots bg-dots--left"></div>
+  </div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="logo.png" class="brand__logo" alt="Logo Gestión de Créditos">
+        <span class="brand__text">
+          <span class="brand__title">GESTIÓN DE CRÉDITOS</span>
+          <span class="brand__sub">Adema Sistemas</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html#inicio">Inicio</a>
+        <a href="index.html#como-funciona">Cómo funciona</a>
+        <a href="funcionalidades.html">Funcionalidades</a>
+        <a href="tutoriales.html">Tutoriales</a>
+        <a href="articulos.html" style="color: var(--cyan)">Artículos</a>
+        <a href="https://ademasistemas.com/gestion-creditos/">Demo</a>
+        <a href="index.html#contacto">Contacto</a>
+        <a style="color: white;" href="https://ademasistemas.com/gestion-creditos/"
+           target="_blank" rel="noopener" class="btn btn--wa btn--sm">
+          <svg class="i"><use href="#i-wa"/></svg>
+          WhatsApp
+        </a>
+        <a style="color: white;" href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary btn--sm">
+          Solicitar demo
+          <svg class="i"><use href="#i-arrow"/></svg>
+        </a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="i"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= HERO ================= -->
+    <section class="page-hero section">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Migas de pan">
+          <a href="index.html">Inicio</a>
+          <span>›</span>
+          <span>Artículos</span>
+        </nav>
+
+        <span class="eyebrow reveal">
+          <span class="eyebrow__dot"></span>
+          Guías y análisis
+        </span>
+
+        <h1 class="display reveal" style="max-width: 820px; margin-inline: auto; margin-top: .8rem;">
+          TODO LO QUE NECESITÁS<br/>
+          SABER PARA <span class="text-cyan">GESTIONAR</span><br/>
+          TU CARTERA.
+        </h1>
+        <p class="lead reveal" style="margin-inline: auto; max-width: 60ch; text-align: center;">
+          Guías prácticas, análisis y conceptos clave para prestamistas, financieras y
+          comerciantes que venden en cuotas. Sin tecnicismos, sin vueltas.
+        </p>
+
+        <!-- Filtros de categoría -->
+        <div class="art-filters reveal" role="tablist">
+          <button class="art-filter is-active" data-cat="all">Todos</button>
+          <button class="art-filter" data-cat="mora">Mora e intereses</button>
+          <button class="art-filter" data-cat="operacion">Operación</button>
+          <button class="art-filter" data-cat="legal">Contratos y legal</button>
+          <button class="art-filter" data-cat="tecnologia">Tecnología</button>
+          <button class="art-filter" data-cat="cobranza">Cobranza</button>
+          <button class="art-filter" data-cat="gestion">Gestión y escala</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ARTÍCULO DESTACADO ================= -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+
+        <div class="art-featured reveal" data-cat="operacion">
+          <div class="art-featured__copy">
+            <div class="art-featured__badge">
+              <svg style="width:14px;height:14px;fill:none;stroke:currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" stroke-width="1.6"/></svg>
+              Artículo destacado
+            </div>
+            <p class="art-featured__cat">Operación</p>
+            <h2 class="art-featured__title">Por qué el Excel te está haciendo <span class="text-cyan">perder plata</span> en tus créditos</h2>
+            <p class="art-featured__excerpt">
+              La planilla que "funciona bien" tiene cinco problemas que no se ven hasta que ya
+              costaron: mora sin calcular, vencimientos olvidados, errores de fórmula que nadie
+              detecta y datos que solo entiende una persona. Cada uno de esos problemas tiene
+              un costo concreto. En este artículo los desmenuzamos uno por uno.
+            </p>
+            <div class="art-featured__meta">
+              <span>📅 Abril 2026</span>
+              <span>⏱ 6 min de lectura</span>
+              <span>👤 Para prestamistas y financieras</span>
+            </div>
+            <a href="articles/01-por-que-el-excel-rompe-tu-cartera-de-creditos.html" class="btn btn--primary" style="margin-top: 1.4rem; align-self: flex-start;">
+              Leer artículo
+              <svg class="i"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+
+          <div class="art-featured__visual">
+            <p class="art-vis__title">Costo oculto del Excel</p>
+            <div class="art-vis__row">
+              <span style="color: var(--warn)">⚠</span>
+              <strong>Mora no calculada</strong>
+              <span>Pierde $X por cuota</span>
+            </div>
+            <div class="art-vis__row">
+              <span style="color: var(--warn)">⚠</span>
+              <strong>Vencimientos olvidados</strong>
+              <span>Mora que no cobrás</span>
+            </div>
+            <div class="art-vis__row">
+              <span style="color: var(--warn)">⚠</span>
+              <strong>Dependencia de una persona</strong>
+              <span>Riesgo operativo total</span>
+            </div>
+            <div class="art-vis__row">
+              <span style="color: var(--warn)">⚠</span>
+              <strong>Sin contrato firmado</strong>
+              <span>Deuda inreclamable</span>
+            </div>
+            <div class="art-vis__row" style="border-color: rgba(43,230,164,.3)">
+              <span style="color: var(--ok)">✓</span>
+              <strong>Con sistema centralizado</strong>
+              <span>Todo resuelto</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= GRID DE ARTÍCULOS ================= -->
+        <div class="art-grid" id="artGrid">
+
+          <!-- Artículo 1 -->
+          <article class="art-card reveal" data-cat="mora">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-cash"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Mora e intereses</p>
+                <p class="art-card__read">⏱ 5 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">Cómo calcular el interés por mora sin equivocarte</h3>
+              <p class="art-card__excerpt">
+                Interés simple, interés compuesto, días de atraso, período de gracia.
+                Los cuatro conceptos que todo prestamista necesita dominar para no cobrar
+                de más ni de menos cuando una cuota se atrasa.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">Interés diario</span>
+                <span class="art-card__tag">Cálculo</span>
+                <span class="art-card__tag">Período de gracia</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Marzo 2026</span>
+                <a href="articles/02-calculo-mora-interes-sin-equivocarte.html" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 2 -->
+          <article class="art-card reveal" data-cat="legal">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-pen"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Contratos y legal</p>
+                <p class="art-card__read">⏱ 7 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">Firma digital en contratos de préstamo: qué valor legal tiene</h3>
+              <p class="art-card__excerpt">
+                ¿Una firma digital vale legalmente en Argentina? ¿Qué datos hay que registrar
+                para que un contrato firmado digitalmente sirva como prueba judicial?
+                Respondemos con precisión y sin rodeos.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">Ley 25.506</span>
+                <span class="art-card__tag">Valor probatorio</span>
+                <span class="art-card__tag">IP y hash</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Marzo 2026</span>
+                <a href="articles/03-firma-digital-contratos-prestamo-valor-legal.html" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 3 -->
+          <article class="art-card reveal" data-cat="cobranza">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-wa"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Cobranza</p>
+                <p class="art-card__read">⏱ 4 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">WhatsApp como herramienta de cobranza: cómo usarlo sin perder clientes</h3>
+              <p class="art-card__excerpt">
+                Mandar un mensaje de cobro por WhatsApp puede ser tu mejor recurso o
+                tu peor error, según cómo lo hagas. El tono, el momento y el contenido
+                hacen la diferencia entre cobrar y quedar mal con el cliente.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">Recordatorios</span>
+                <span class="art-card__tag">Tono y timing</span>
+                <span class="art-card__tag">Comprobantes</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Febrero 2026</span>
+                <a href="articles/04-whatsapp-cobranza-sin-perder-clientes.html" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 4 — wide -->
+          <article class="art-card art-card--wide reveal" data-cat="operacion">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-warn"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Operación</p>
+                <p class="art-card__read">⏱ 6 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">5 señales de que tu cartera de créditos está fuera de control</h3>
+              <p class="art-card__excerpt">
+                No necesitás un auditor para saber si tu operación tiene problemas. Hay cinco
+                señales que cualquier prestamista puede detectar hoy mismo: cuándo fue la última
+                vez que supiste exactamente cuánto tenías en la calle, si algún cliente te pagó
+                dos veces la misma cuota sin que te enteraras, si la mora te la calculas con
+                una calculadora, si todo depende de que una persona esté disponible, y si los
+                contratos están firmados. Checkeá cada una y encontrá los agujeros de tu operación.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">Diagnóstico</span>
+                <span class="art-card__tag">Organización</span>
+                <span class="art-card__tag">Riesgo operativo</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Febrero 2026</span>
+                <a href="articles/05-cinco-senales-cartera-creditos-fuera-de-control.html" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 5 -->
+          <article class="art-card reveal" data-cat="tecnologia">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-bank"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Tecnología</p>
+                <p class="art-card__read">⏱ 5 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">Qué es la Central de Deudores del BCRA y cómo consultarla antes de aprobar un crédito</h3>
+              <p class="art-card__excerpt">
+                La Central de Deudores del Banco Central es pública y gratuita. Cualquier
+                prestamista puede consultarla antes de aprobar un crédito. Explicamos qué
+                información da, cómo interpretarla y por qué no consultarla es un error que
+                puede costar caro.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">BCRA</span>
+                <span class="art-card__tag">Evaluación</span>
+                <span class="art-card__tag">Riesgo crediticio</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Enero 2026</span>
+                <a href="articles/06-central-de-deudores-bcra-consultarla-antes-de-aprobar-credito.html" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 6 -->
+          <article class="art-card reveal" data-cat="mora">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-chart"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Mora e intereses</p>
+                <p class="art-card__read">⏱ 4 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">Por qué perdonar la mora le cuesta más de lo que pensás</h3>
+              <p class="art-card__excerpt">
+                Muchos prestamistas perdonan la mora "para no pelear con el cliente".
+                Es una decisión válida cuando es consciente. Pero cuando es habitual
+                y sin registro, el efecto en la rentabilidad de la cartera es silencioso
+                y devastador. Los números que no se ven.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">Rentabilidad</span>
+                <span class="art-card__tag">Política de mora</span>
+                <span class="art-card__tag">Toma de decisiones</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Enero 2026</span>
+                <a href="#" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 7 -->
+          <article class="art-card reveal" data-cat="tecnologia">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-refresh"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Tecnología</p>
+                <p class="art-card__read">⏱ 6 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">Del cuaderno de fiados al sistema digital: cómo hacer la migración sin perder nada</h3>
+              <p class="art-card__excerpt">
+                Migrar la cartera existente a un sistema nuevo es el mayor miedo de quien
+                trabaja con cuadernos o Excel de años. En este artículo explicamos el
+                proceso paso a paso para que la transición no interrumpa la operación
+                diaria ni genere pérdida de información.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">Migración</span>
+                <span class="art-card__tag">Excel a sistema</span>
+                <span class="art-card__tag">Sin downtime</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Diciembre 2025</span>
+                <a href="#" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 8 -->
+          <article class="art-card reveal" data-cat="gestion">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-branch"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Gestión y escala</p>
+                <p class="art-card__read">⏱ 7 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">Cómo gestionar varias sucursales de una financiera sin perder el control</h3>
+              <p class="art-card__excerpt">
+                Abrir una segunda sucursal parece un logro. Pero sin sistemas, cada
+                sucursal nueva suma caos en vez de escala. Permisos de usuarios,
+                visibilidad de datos y flujo de aprobaciones: las tres claves para
+                crecer sin que el negocio dependa de que vos estés presente.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">Multi-sucursal</span>
+                <span class="art-card__tag">Delegación</span>
+                <span class="art-card__tag">Permisos</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Diciembre 2025</span>
+                <a href="#" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 9 -->
+          <article class="art-card reveal" data-cat="legal">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-doc"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Contratos y legal</p>
+                <p class="art-card__read">⏱ 5 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">Pagaré sin protesto: qué es, cuándo usarlo y qué cláusulas no pueden faltar</h3>
+              <p class="art-card__excerpt">
+                El pagaré es una de las herramientas de cobro más simples y efectivas
+                en Argentina. Sin protesto, sin notario. Pero para que funcione como
+                título ejecutivo, tiene que estar bien redactado. Los campos que no
+                pueden faltar bajo ningún concepto.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">Pagaré</span>
+                <span class="art-card__tag">Título ejecutivo</span>
+                <span class="art-card__tag">Cobro judicial</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Noviembre 2025</span>
+                <a href="#" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 10 — wide -->
+          <article class="art-card art-card--wide reveal" data-cat="cobranza">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-bell"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Cobranza</p>
+                <p class="art-card__read">⏱ 5 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">Alertas de vencimiento: por qué avisarle al cliente antes de que venza es mejor negocio que cobrarle mora después</h3>
+              <p class="art-card__excerpt">
+                Un recordatorio amable el día antes del vencimiento reduce la mora entre
+                un 30 y un 60% según el rubro, mantiene la relación con el cliente y
+                elimina la necesidad de cobrar intereses que después nadie quiere pagar.
+                Los números que justifican cambiar la estrategia de reactiva a preventiva.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">Preventiva</span>
+                <span class="art-card__tag">Recordatorios</span>
+                <span class="art-card__tag">Retención de clientes</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Noviembre 2025</span>
+                <a href="#" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 11 -->
+          <article class="art-card reveal" data-cat="gestion">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-eye"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Gestión y escala</p>
+                <p class="art-card__read">⏱ 4 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">Las 3 métricas que todo prestamista debería revisar cada semana</h3>
+              <p class="art-card__excerpt">
+                Cuánto tenés en la calle, cuál es tu índice de mora real y cuánto cobró
+                tu operación esta semana. Solo esas tres. Si no las sabés de memoria,
+                probablemente no tenés control de tu negocio aunque creas que sí.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">KPIs</span>
+                <span class="art-card__tag">Dashboard</span>
+                <span class="art-card__tag">Reporting</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Octubre 2025</span>
+                <a href="#" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 12 -->
+          <article class="art-card reveal" data-cat="operacion">
+            <div class="art-card__header">
+              <div class="art-card__icon"><svg class="i"><use href="#i-shield"/></svg></div>
+              <div class="art-card__meta">
+                <p class="art-card__cat">Operación</p>
+                <p class="art-card__read">⏱ 5 min</p>
+              </div>
+            </div>
+            <div class="art-card__body">
+              <h3 class="art-card__title">Cómo proteger tu cartera ante un empleado que se va o que roba</h3>
+              <p class="art-card__excerpt">
+                Si la información de tus clientes vive en el cuaderno de una sola persona
+                o en una planilla que todos pueden copiar, tenés un problema de seguridad
+                serio. Los pasos concretos para que el negocio no dependa de nadie y que
+                los datos sean inaccesibles para quien no corresponde.
+              </p>
+              <div class="art-card__tags">
+                <span class="art-card__tag">Seguridad operativa</span>
+                <span class="art-card__tag">Permisos</span>
+                <span class="art-card__tag">Fraude interno</span>
+              </div>
+              <div class="art-card__footer">
+                <span class="art-card__date">Octubre 2025</span>
+                <a href="#" class="art-card__link">
+                  Leer <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Estado vacío -->
+          <div class="art-empty" id="artEmpty">
+            <p style="font-size:1.1rem; margin-bottom:.4rem">No hay artículos en esta categoría todavía.</p>
+            <p class="muted" style="font-size:.9rem">Seleccioná otra categoría o volvé a "Todos".</p>
+          </div>
+
+        </div><!-- /art-grid -->
+
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="section section--cta">
+      <div class="container">
+        <div class="cta-card reveal" style="text-align:center; padding: clamp(2.5rem, 6vw, 4rem)">
+          <span class="eyebrow" style="justify-content:center">
+            <span class="eyebrow__dot"></span>
+            Siguiente paso
+          </span>
+          <h2 class="h2" style="max-width:600px; margin: 1rem auto .8rem">
+            Sabés lo que necesitás.<br/>
+            <span class="text-cyan">Ahora andá a verlo en vivo.</span>
+          </h2>
+          <p class="muted" style="max-width:50ch; margin-inline:auto; margin-bottom:2rem">
+            Una demo de 20 minutos aplicada a tu operación te dice más que diez artículos.
+            Sin compromiso, sin tecnicismos.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center">
+            <a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">
+              Pedir demo gratuita
+              <svg class="i"><use href="#i-arrow"/></svg>
+            </a>
+            <a href="https://ademasistemas.com/gestion-creditos/"
+               target="_blank" rel="noopener" class="btn btn--wa">
+              <svg class="i"><use href="#i-wa"/></svg>
+              Hablar con Adema Sistemas
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--brand">
+          <div class="brand">
+            <img src="logo.png" class="brand__logo" alt="Logo Gestión de Créditos">
+            <span class="brand__text">
+              <span class="brand__title">GESTIÓN DE CRÉDITOS</span>
+              <span class="brand__sub">Adema Sistemas</span>
+            </span>
+          </div>
+          <p class="muted" style="margin-top:1rem; max-width:36ch">
+            Ordená tu cartera. Cobrá a tiempo. Profesionalizá tu operación.
+            Pensado para negocios que venden financiado.
+          </p>
+          <a href="https://ademasistemas.com/gestion-creditos/"
+             target="_blank" rel="noopener" class="btn btn--wa btn--sm" style="margin-top:1rem">
+            <svg class="i"><use href="#i-wa"/></svg>
+            Hablar con Adema Sistemas
+          </a>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col__title">Navegación</h4>
+          <ul class="footer-list">
+            <li><a href="index.html#inicio">Inicio</a></li>
+            <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+            <li><a href="funcionalidades.html">Funcionalidades</a></li>
+            <li><a href="https://ademasistemas.com/gestion-creditos/">Solicitar demo</a></li>
+            <li><a href="index.html#faq">Preguntas frecuentes</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col__title">Recursos</h4>
+          <ul class="footer-list">
+            <li><a href="tutoriales.html">Tutoriales</a></li>
+            <li><a href="articulos.html">Artículos</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col__title">Contacto</h4>
+          <ul class="footer-list">
+            <li><a href="https://ademasistemas.com/gestion-creditos/" target="_blank" rel="noopener">Solicitar demo</a></li>
+            <li><a href="mailto:hola@ademasistemas.com">hola@ademasistemas.com</a></li>
+            <li><span class="muted">Lun a Vie · 9 a 18 hs</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-brand">
+          <span class="footline"></span>
+          <span>© <span id="year"></span> Adema Sistemas</span>
+          <span class="sep">·</span>
+          <span class="text-cyan">Gestión de Créditos</span>
+          <span class="footline"></span>
+          <span class="footdot"></span>
+        </div>
+        <small>Más orden. Más control. Mejor gestión.</small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= BOTÓN FLOTANTE WHATSAPP ================= -->
+  <a href="https://ademasistemas.com/gestion-creditos/"
+     target="_blank" rel="noopener" class="wa-fab" aria-label="Hablar con Adema Sistemas">
+    <span class="wa-fab__bubble">¿Hablamos?</span>
+    <span class="wa-fab__btn">
+      <svg class="i"><use href="#i-wa"/></svg>
+    </span>
+  </a>
+
+  <script src="script.js"></script>
+  <script>
+    // ── Filtros de categoría ──
+    const filters  = document.querySelectorAll('.art-filter');
+    const cards    = document.querySelectorAll('.art-card');
+    const featured = document.querySelector('.art-featured');
+    const empty    = document.getElementById('artEmpty');
+
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filters.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        const cat = btn.dataset.cat;
+        let visible = 0;
+
+        // El destacado solo se muestra en "todos" o en su categoría
+        if (featured) {
+          const featCat = featured.dataset.cat;
+          featured.style.display = (cat === 'all' || cat === featCat) ? '' : 'none';
+        }
+
+        cards.forEach(card => {
+          const match = cat === 'all' || card.dataset.cat === cat;
+          card.classList.toggle('is-hidden', !match);
+          if (match) visible++;
+        });
+
+        empty.classList.toggle('is-visible', visible === 0);
+      });
+    });
+  </script>
+</body>
+</html>

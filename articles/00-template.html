@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══════════════════════════════════════
+       TEMPLATE DE ARTÍCULO — editar por artículo
+  ════════════════════════════════════════ -->
+  <meta name="description" content="[DESCRIPCIÓN DEL ARTÍCULO — máx. 155 caracteres]" />
+  <title>[TÍTULO DEL ARTÍCULO] · Gestión de Créditos — Adema Sistemas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- La hoja de estilos vive un nivel arriba -->
+  <link rel="stylesheet" href="../styles.css" />
+
+  <style>
+    /* ══════════════════════════════════════════
+       ESTILOS ESPECÍFICOS DE LA PÁGINA ARTÍCULO
+    ══════════════════════════════════════════ */
+
+    /* ── Layout principal ── */
+    .art-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 1040px) { .art-layout { grid-template-columns: 1fr; } }
+
+    /* ── Encabezado del artículo ── */
+    .art-header { padding: clamp(5rem, 9vw, 7.5rem) 0 2.5rem; }
+    .art-header .eyebrow { margin-bottom: 1.2rem; }
+    .art-header .display { margin-bottom: .8rem; }
+    .art-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.4rem;
+      font-size: .83rem; color: var(--text-mute);
+      padding: 1rem 0;
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      margin-bottom: 0;
+    }
+    .art-meta__chip {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-size: .72rem; font-weight: 700; letter-spacing: 1.4px;
+      text-transform: uppercase; color: var(--cyan);
+      padding: .25rem .7rem; border-radius: 999px;
+      background: rgba(43,212,230,.08); border: 1px solid var(--line-soft);
+    }
+
+    /* ── Cuerpo del artículo ── */
+    .art-body {
+      padding-top: 2.2rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-dim);
+    }
+    .art-body h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+      font-weight: 700; text-transform: uppercase;
+      color: var(--text);
+      margin: 2.8rem 0 .9rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line-soft);
+    }
+    .art-body h2:first-child { margin-top: 0; padding-top: 0; border: 0; }
+    .art-body h3 {
+      font-family: var(--font-body);
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--text); margin: 1.8rem 0 .5rem;
+    }
+    .art-body p { margin: 0 0 1.2rem; }
+    .art-body strong { color: var(--text); font-weight: 600; }
+    .art-body a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+    .art-body a:hover { color: var(--cyan-soft); }
+    .art-body ul, .art-body ol {
+      margin: 0 0 1.2rem; padding-left: 1.5rem; display: grid; gap: .4rem;
+    }
+    .art-body li { color: var(--text-dim); }
+    .art-body li::marker { color: var(--cyan); }
+
+    /* Blockquote / destacado */
+    .art-body blockquote {
+      margin: 2rem 0;
+      padding: 1.2rem 1.6rem;
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 12px 12px 0;
+      background: rgba(43,212,230,.06);
+      color: var(--text);
+      font-size: 1.05rem;
+      font-style: italic;
+    }
+    .art-body blockquote p { margin: 0; }
+
+    /* Callout / recuadro informativo */
+    .callout {
+      margin: 2rem 0;
+      padding: 1.3rem 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(43,212,230,.05);
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .callout--warn {
+      border-color: rgba(255,200,87,.3);
+      background: rgba(255,200,87,.05);
+    }
+    .callout--ok {
+      border-color: rgba(43,230,164,.3);
+      background: rgba(43,230,164,.05);
+    }
+    .callout__icon { width: 22px; height: 22px; flex: 0 0 auto; color: var(--cyan); margin-top: 2px; }
+    .callout--warn .callout__icon { color: var(--warn); }
+    .callout--ok   .callout__icon { color: var(--ok); }
+    .callout__body { font-size: .95rem; color: var(--text-dim); }
+    .callout__body strong { display: block; color: var(--text); margin-bottom: .25rem; }
+    .callout__body p { margin: 0; }
+
+    /* Tabla comparativa */
+    .art-table-wrap {
+      overflow-x: auto; margin: 2rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--line-soft);
+    }
+    .art-table {
+      width: 100%; border-collapse: collapse; font-size: .92rem;
+    }
+    .art-table th {
+      text-align: left; padding: .85rem 1rem;
+      font-size: .75rem; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--cyan); font-weight: 700;
+      background: rgba(43,212,230,.06);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .art-table td {
+      padding: .8rem 1rem; color: var(--text-dim);
+      border-bottom: 1px solid rgba(43,212,230,.06);
+    }
+    .art-table tr:last-child td { border-bottom: 0; }
+    .art-table tr:hover td { background: rgba(43,212,230,.03); }
+    .art-table .ok  { color: var(--ok); font-weight: 600; }
+    .art-table .bad { color: #FF8FA0; font-weight: 600; }
+    .art-table .dim { color: var(--text-mute); }
+
+    /* ── BLOQUE DE VÍDEO ── */
+    .video-block {
+      margin: 2.5rem 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+      box-shadow: var(--shadow), 0 0 40px -20px rgba(43,212,230,.4);
+    }
+    .video-block__ratio {
+      position: relative; padding-top: 56.25%; /* 16:9 */
+      width: 100%; background: #000;
+    }
+    .video-block__ratio iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      border: 0;
+    }
+    .video-block__caption {
+      padding: .9rem 1.2rem;
+      font-size: .82rem; color: var(--text-mute);
+      background: var(--bg-card-strong);
+      border-top: 1px solid var(--line-soft);
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .video-block__caption .i { width: 16px; height: 16px; color: var(--cyan); flex: 0 0 auto; }
+
+    /* ── BLOQUE DE AUDIO / NOTEBOOKLM ── */
+    .audio-block {
+      margin: 2.5rem 0;
+      padding: 1.5rem 1.6rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--bg-card-strong);
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .audio-block__header {
+      display: flex; align-items: center; gap: .8rem;
+    }
+    .audio-block__icon {
+      width: 44px; height: 44px; border-radius: 50%; flex: 0 0 auto;
+      display: grid; place-items: center;
+      background: radial-gradient(circle, rgba(43,212,230,.22), transparent 70%);
+      border: 1px solid var(--line); color: var(--cyan);
+    }
+    .audio-block__icon .i { width: 20px; height: 20px; }
+    .audio-block__meta { flex: 1; }
+    .audio-block__meta strong { display: block; font-size: .95rem; color: var(--text); margin-bottom: .15rem; }
+    .audio-block__meta span { font-size: .78rem; color: var(--text-mute); }
+    /* El <audio> nativo queda envuelto en este wrapper */
+    .audio-block__player audio {
+      width: 100%; accent-color: var(--cyan);
+      border-radius: 6px;
+    }
+    /* También soporta iframe de NotebookLM */
+    .audio-block__player iframe {
+      width: 100%; height: 200px; border: 0; border-radius: 10px;
+    }
+
+    /* ── Tabla de contenidos (sidebar o inline) ── */
+    .toc {
+      padding: 1.4rem 1.5rem;
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--line-soft);
+      font-size: .88rem;
+      position: sticky; top: 90px;
+    }
+    .toc__title {
+      font-size: .72rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--cyan);
+      margin: 0 0 1rem; padding-bottom: .7rem;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .toc__list { display: grid; gap: .4rem; }
+    .toc__list a {
+      color: var(--text-dim); padding: .3rem .5rem; border-radius: 8px;
+      display: block; transition: color .15s, background .15s;
+    }
+    .toc__list a:hover { color: var(--cyan); background: rgba(43,212,230,.06); }
+    .toc__list a.is-active { color: var(--cyan); }
+    .toc__list li.sub { padding-left: .8rem; }
+    .toc__cta {
+      margin-top: 1.4rem; padding-top: 1.2rem;
+      border-top: 1px solid var(--line-soft);
+      display: flex; flex-direction: column; gap: .7rem;
+    }
+    .toc__cta p { font-size: .82rem; color: var(--text-mute); margin: 0 0 .3rem; }
+
+    /* ── Separador visual ── */
+    .art-divider {
+      width: 100%; height: 1px; margin: 2.5rem 0;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+    }
+
+    /* ── Autor ── */
+    .art-author-bar {
+      display: flex; align-items: center; gap: 1.1rem;
+      padding: 1.4rem;
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--line-soft);
+      margin: 2.5rem 0;
+    }
+    .art-author-bar__avatar {
+      width: 56px; height: 56px; border-radius: 50%; flex: 0 0 auto;
+      display: grid; place-items: center;
+      background: radial-gradient(circle, rgba(43,212,230,.22), transparent 70%);
+      border: 1px solid var(--line);
+      font-family: var(--font-display); font-size: 1.4rem;
+      font-weight: 700; color: var(--cyan);
+    }
+    .art-author-bar__info { flex: 1; }
+    .art-author-bar__info strong { display: block; font-size: .95rem; color: var(--text); }
+    .art-author-bar__info span { font-size: .82rem; color: var(--text-mute); }
+
+    /* ── Artículos relacionados ── */
+    .related-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 900px) { .related-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 580px) { .related-grid { grid-template-columns: 1fr; } }
+
+    .related-card {
+      padding: 1.2rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--line-soft);
+      background: var(--bg-card);
+      display: flex; flex-direction: column; gap: .5rem;
+      transition: .25s;
+    }
+    .related-card:hover { border-color: var(--line); transform: translateY(-2px); }
+    .related-card__cat { font-size: .7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cyan); }
+    .related-card__title { font-family: var(--font-display); font-size: .95rem; font-weight: 700; text-transform: uppercase; color: var(--text); line-height: 1.2; }
+    .related-card__link { font-size: .82rem; font-weight: 600; color: var(--cyan); margin-top: auto; display: inline-flex; align-items: center; gap: .3rem; }
+    .related-card__link .i { width: 13px; height: 13px; }
+
+    /* ── WhatsApp FAB ── */
+    .btn--wa {
+      color: #fff; background: linear-gradient(180deg, #25D366, #1aad55);
+      box-shadow: 0 10px 28px -10px rgba(37,211,102,.5);
+    }
+    .btn--wa:hover { transform: translateY(-1px); box-shadow: 0 14px 36px -10px rgba(37,211,102,.6); }
+    .wa-fab { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200; display: flex; align-items: center; gap: .6rem; }
+    .wa-fab__bubble { background: var(--bg-card-strong); border: 1px solid var(--line); padding: .45rem .85rem; border-radius: 999px; font-size: .82rem; font-weight: 600; color: var(--text); opacity: 0; transform: translateX(6px); transition: opacity .25s, transform .25s; pointer-events: none; white-space: nowrap; }
+    .wa-fab:hover .wa-fab__bubble { opacity: 1; transform: translateX(0); }
+    .wa-fab__btn { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(180deg, #25D366, #1aad55); color: #fff; box-shadow: 0 8px 28px -8px rgba(37,211,102,.6); transition: transform .2s, box-shadow .2s; }
+    .wa-fab__btn .i { width: 24px; height: 24px; }
+    .wa-fab:hover .wa-fab__btn { transform: scale(1.08); }
+  </style>
+</head>
+<body>
+
+  <!-- ================= SVG SPRITE ================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-logo" viewBox="0 0 64 64">
+        <defs>
+          <linearGradient id="lgShield" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0a2236"/>
+            <stop offset="1" stop-color="#031322"/>
+          </linearGradient>
+        </defs>
+        <path d="M32 3 L57 12 V32 C57 47 46 56 32 61 C18 56 7 47 7 32 V12 Z" fill="url(#lgShield)" stroke="#2BD4E6" stroke-width="2"/>
+        <rect x="20" y="34" width="5" height="10" rx="1" fill="#2BD4E6"/>
+        <rect x="28" y="28" width="5" height="16" rx="1" fill="#2BD4E6"/>
+        <rect x="36" y="22" width="5" height="22" rx="1" fill="#2BD4E6"/>
+        <path d="M19 22 L26 29 L44 14" fill="none" stroke="#2BD4E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-arrow"   viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-menu"    viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-wa"      viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-1.4 3.2A8 8 0 0 1 20 12Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 9.5c.2 1.5 1 3 2.2 4.2C12.4 14.9 14 15.7 15.5 16l1-1.5-2-1-1 .8c-.8-.4-1.5-1-2-1.8l.8-1-1-2-1.5 1Z" fill="currentColor"/></symbol>
+      <symbol id="i-doc"     viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v4h4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 12h6M9 15h6M9 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-warn"    viewBox="0 0 24 24"><path d="M12 3 L22 20 H2 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 10v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17.5" r="1" fill="currentColor"/></symbol>
+      <symbol id="i-check"   viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.5l3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-bolt"    viewBox="0 0 24 24"><path d="M13 2 L4 14h6l-1 8 9-12h-6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+      <symbol id="i-play"    viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 8.5l6 3.5-6 3.5z" fill="currentColor"/></symbol>
+      <symbol id="i-mic"     viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 11a7 7 0 0 0 14 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 18v4M9 22h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-book"    viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 7h6M9 10h6M9 13h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-share"   viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="6"  cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-link"    viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.6l2-2a5 5 0 0 0-7-7l-1.1 1.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14 11a5 5 0 0 0-7.5-.6l-2 2a5 5 0 0 0 7 7l1.1-1.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- ================= FONDO DECORATIVO ================= -->
+  <div class="bg-deco" aria-hidden="true">
+    <div class="bg-glow bg-glow--1"></div>
+    <div class="bg-glow bg-glow--2"></div>
+    <div class="bg-dots bg-dots--right"></div>
+    <div class="bg-dots bg-dots--left"></div>
+  </div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand">
+        <img src="../logo.png" class="brand__logo" alt="Logo Gestión de Créditos">
+        <span class="brand__text">
+          <span class="brand__title">GESTIÓN DE CRÉDITOS</span>
+          <span class="brand__sub">Adema Sistemas</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="../index.html#inicio">Inicio</a>
+        <a href="../funcionalidades.html">Funcionalidades</a>
+        <a href="../tutoriales.html">Tutoriales</a>
+        <a href="../articulos.html" style="color: var(--cyan)">Artículos</a>
+        <a href="https://ademasistemas.com/gestion-creditos/">Demo</a>
+        <a style="color:white" href="https://ademasistemas.com/gestion-creditos/"
+           target="_blank" rel="noopener" class="btn btn--wa btn--sm">
+          <svg class="i"><use href="#i-wa"/></svg> WhatsApp
+        </a>
+        <a style="color:white" href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary btn--sm">
+          Solicitar demo <svg class="i"><use href="#i-arrow"/></svg>
+        </a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="i"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         CABECERA DEL ARTÍCULO
+         Editar: eyebrow, título, lead, meta datos
+    ════════════════════════════════════════════════════════════ -->
+    <section class="art-header">
+      <div class="container" style="max-width: 900px">
+
+        <!-- Breadcrumb -->
+        <nav style="font-size:.8rem; color: var(--text-mute); margin-bottom:1.4rem; display:flex; align-items:center; gap:.4rem">
+          <a href="../index.html" style="color:var(--cyan)">Inicio</a>
+          <span>›</span>
+          <a href="../articulos.html" style="color:var(--cyan)">Artículos</a>
+          <span>›</span>
+          <span>[Categoría]</span>
+        </nav>
+
+        <!-- Eyebrow — categoría del artículo -->
+        <span class="eyebrow reveal">
+          <span class="eyebrow__dot"></span>
+          [Categoría del artículo]
+        </span>
+
+        <!-- Título principal -->
+        <h1 class="display reveal" style="max-width: 820px; margin-top: .9rem;">
+          [TÍTULO DEL ARTÍCULO EN<br/>
+          <span class="text-cyan">MAYÚSCULAS Y NEGRITA]</span>
+        </h1>
+
+        <!-- Bajada -->
+        <p class="lead reveal" style="max-width: 64ch; margin-bottom: 1.6rem;">
+          [Bajada del artículo: 1-2 oraciones que explican de qué trata y por qué vale la pena leerlo.]
+        </p>
+
+        <!-- Meta: categoría · fecha · tiempo de lectura -->
+        <div class="art-meta reveal">
+          <span class="art-meta__chip">
+            <svg style="width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+            [Categoría]
+          </span>
+          <span>📅 [Mes Año]</span>
+          <span>⏱ [N] min de lectura</span>
+          <span>👤 Para [público objetivo]</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         LAYOUT: CUERPO + SIDEBAR
+    ════════════════════════════════════════════════════════════ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container" style="max-width: 1100px;">
+        <div class="art-layout">
+
+          <!-- ────────────────────────────────────────
+               CUERPO DEL ARTÍCULO
+          ──────────────────────────────────────── -->
+          <article class="art-body">
+
+            <!-- ══════════════════════
+                 INTRODUCCIÓN
+            ══════════════════════ -->
+            <p>
+              [Párrafo de introducción. Establecer el problema o la pregunta central del artículo.
+              Conectar con el dolor del lector. Máximo 3-4 oraciones.]
+            </p>
+
+            <p>
+              [Párrafo 2 de la intro. Anticipar qué va a aprender el lector al terminar de leer.]
+            </p>
+
+            <!-- ══════════════════════
+                 BLOQUE DE VÍDEO — OPCIÓN A: YouTube
+                 Reemplazar VIDEO_ID por el ID del video de YouTube
+                 Ej: https://www.youtube.com/watch?v=dQw4w9WgXcQ → VIDEO_ID = dQw4w9WgXcQ
+            ══════════════════════ -->
+            <div class="video-block reveal">
+              <div class="video-block__ratio">
+                <iframe
+                  src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1&color=white"
+                  title="[Título descriptivo del video para accesibilidad]"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+              <div class="video-block__caption">
+                <svg class="i"><use href="#i-play"/></svg>
+                <span>[Descripción breve del video · YouTube]</span>
+              </div>
+            </div>
+
+            <!-- ══════════════════════
+                 BLOQUE DE AUDIO — OPCIÓN B: NotebookLM / podcast generado por IA
+                 Opción 1: audio HTML nativo (MP3/OGG subido al servidor)
+                 Opción 2: iframe de NotebookLM (reemplazar la URL por la del podcast compartido)
+            ══════════════════════ -->
+            <div class="audio-block reveal">
+              <div class="audio-block__header">
+                <div class="audio-block__icon">
+                  <svg class="i"><use href="#i-mic"/></svg>
+                </div>
+                <div class="audio-block__meta">
+                  <strong>Escuchá este artículo</strong>
+                  <span>Generado con NotebookLM · ~[N] min</span>
+                </div>
+              </div>
+
+              <!-- OPCIÓN A — audio nativo (subí el MP3 a la misma carpeta articles/) -->
+              <!--
+              <div class="audio-block__player">
+                <audio controls preload="metadata">
+                  <source src="audio-01-nombre-del-articulo.mp3" type="audio/mpeg" />
+                  Tu navegador no soporta audio HTML5.
+                </audio>
+              </div>
+              -->
+
+              <!-- OPCIÓN B — NotebookLM iframe (copiá la URL del podcast compartido) -->
+              <div class="audio-block__player">
+                <iframe
+                  src="https://notebooklm.google.com/notebook/NOTEBOOK_ID/audio"
+                  title="Podcast: [Título del artículo]"
+                  loading="lazy"
+                  allow="autoplay">
+                </iframe>
+              </div>
+
+            </div>
+
+            <!-- ══════════════════════
+                 SECCIÓN 1
+            ══════════════════════ -->
+            <h2 id="s1">[Título de la sección 1]</h2>
+
+            <p>[Primer párrafo de desarrollo. Explicar el primer concepto o problema.]</p>
+
+            <p>[Segundo párrafo. Profundizar con un ejemplo concreto, una cifra o una anécdota del rubro.]</p>
+
+            <!-- Callout informativo -->
+            <div class="callout reveal">
+              <svg class="callout__icon i"><use href="#i-bolt"/></svg>
+              <div class="callout__body">
+                <strong>Dato clave</strong>
+                <p>[Un dato, estadística o insight puntual que vale la pena destacar visualmente.]</p>
+              </div>
+            </div>
+
+            <!-- ══════════════════════
+                 SECCIÓN 2
+            ══════════════════════ -->
+            <h2 id="s2">[Título de la sección 2]</h2>
+
+            <p>[Párrafo de la sección 2.]</p>
+
+            <!-- Lista de bullets -->
+            <ul>
+              <li>[Punto 1 de la lista]</li>
+              <li>[Punto 2 de la lista]</li>
+              <li>[Punto 3 de la lista]</li>
+              <li>[Punto 4 de la lista]</li>
+            </ul>
+
+            <!-- Blockquote / frase destacada -->
+            <blockquote>
+              <p>"[Frase o conclusión que merece ser destacada visualmente dentro del cuerpo del artículo.]"</p>
+            </blockquote>
+
+            <!-- ══════════════════════
+                 SECCIÓN 3 — con tabla comparativa
+            ══════════════════════ -->
+            <h2 id="s3">[Título de la sección 3]</h2>
+
+            <p>[Párrafo introductorio antes de la tabla.]</p>
+
+            <div class="art-table-wrap reveal">
+              <table class="art-table">
+                <thead>
+                  <tr>
+                    <th>[Columna 1]</th>
+                    <th>[Columna 2]</th>
+                    <th>[Columna 3]</th>
+                    <th>[Columna 4]</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>[Fila 1, col 1]</td>
+                    <td class="bad">✗ [col 2]</td>
+                    <td class="dim">[col 3]</td>
+                    <td class="ok">✓ [col 4]</td>
+                  </tr>
+                  <tr>
+                    <td>[Fila 2, col 1]</td>
+                    <td class="bad">✗ [col 2]</td>
+                    <td class="bad">✗ [col 3]</td>
+                    <td class="ok">✓ [col 4]</td>
+                  </tr>
+                  <tr>
+                    <td>[Fila 3, col 1]</td>
+                    <td class="bad">✗ [col 2]</td>
+                    <td class="dim">[col 3]</td>
+                    <td class="ok">✓ [col 4]</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Callout de advertencia -->
+            <div class="callout callout--warn reveal">
+              <svg class="callout__icon i"><use href="#i-warn"/></svg>
+              <div class="callout__body">
+                <strong>[Título de advertencia]</strong>
+                <p>[Texto de la advertencia o aclaración importante.]</p>
+              </div>
+            </div>
+
+            <!-- ══════════════════════
+                 SECCIÓN 4
+            ══════════════════════ -->
+            <h2 id="s4">[Título de la sección 4]</h2>
+
+            <p>[Párrafo de la sección 4.]</p>
+
+            <h3>[Subtítulo dentro de la sección]</h3>
+            <p>[Párrafo después del subtítulo.]</p>
+
+            <!-- Callout positivo / resultado -->
+            <div class="callout callout--ok reveal">
+              <svg class="callout__icon i"><use href="#i-check"/></svg>
+              <div class="callout__body">
+                <strong>[Resultado o takeaway positivo]</strong>
+                <p>[Texto del callout.]</p>
+              </div>
+            </div>
+
+            <!-- ══════════════════════
+                 CONCLUSIÓN
+            ══════════════════════ -->
+            <h2 id="conclusion">Conclusión</h2>
+
+            <p>[Párrafo de cierre. Resumir los puntos principales del artículo.]</p>
+
+            <p>[Párrafo final con CTA suave: invitar al lector a dar el siguiente paso sin presionar.]</p>
+
+            <div class="art-divider"></div>
+
+            <!-- ── Barra del autor ── -->
+            <div class="art-author-bar reveal">
+              <div class="art-author-bar__avatar">A</div>
+              <div class="art-author-bar__info">
+                <strong>Equipo Adema Sistemas</strong>
+                <span>Desarrolladores de Gestión de Créditos · Especialistas en financieras y carteras de crédito</span>
+              </div>
+            </div>
+
+            <!-- ── Compartir ── -->
+            <div style="display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; margin-top:1.8rem">
+              <span style="font-size:.82rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:1.5px; font-weight:600">Compartir:</span>
+              <a href="https://wa.me/?text=[Título]%20[URL]" target="_blank" rel="noopener"
+                 class="btn btn--wa btn--sm">
+                <svg class="i"><use href="#i-wa"/></svg> WhatsApp
+              </a>
+              <button onclick="navigator.clipboard.writeText(location.href).then(()=>alert('Link copiado'))"
+                      class="btn btn--ghost btn--sm">
+                <svg class="i"><use href="#i-link"/></svg> Copiar link
+              </button>
+            </div>
+
+          </article>
+
+          <!-- ────────────────────────────────────────
+               SIDEBAR — tabla de contenidos + CTA
+          ──────────────────────────────────────── -->
+          <aside>
+            <div class="toc reveal">
+              <p class="toc__title">En este artículo</p>
+              <ul class="toc__list">
+                <li><a href="#s1">[Sección 1]</a></li>
+                <li><a href="#s2">[Sección 2]</a></li>
+                <li class="sub"><a href="#s3">[Sección 3]</a></li>
+                <li class="sub"><a href="#s4">[Sección 4]</a></li>
+                <li><a href="#conclusion">Conclusión</a></li>
+              </ul>
+
+              <div class="toc__cta">
+                <p>¿Querés ver el sistema en acción?</p>
+                <a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary btn--sm btn--block">
+                  Pedir demo gratis
+                  <svg class="i"><use href="#i-arrow"/></svg>
+                </a>
+                <a href="https://ademasistemas.com/gestion-creditos/"
+                   target="_blank" rel="noopener"
+                   class="btn btn--wa btn--sm btn--block">
+                  <svg class="i"><use href="#i-wa"/></svg>
+                  Escribinos por WhatsApp
+                </a>
+              </div>
+            </div>
+          </aside>
+
+        </div><!-- /art-layout -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         ARTÍCULOS RELACIONADOS
+         Editar: agregar tarjetas con links a otros artículos de articles/
+    ════════════════════════════════════════════════════════════ -->
+    <section class="section section--soft">
+      <div class="container">
+        <span class="eyebrow reveal">
+          <span class="eyebrow__dot"></span>
+          Seguí leyendo
+        </span>
+        <h2 class="h2 reveal" style="margin-top:.8rem; margin-bottom:1.5rem">
+          Artículos relacionados
+        </h2>
+
+        <div class="related-grid">
+
+          <a href="[ARCHIVO-ARTICULO].html" class="related-card reveal">
+            <span class="related-card__cat">[Categoría]</span>
+            <span class="related-card__title">[Título del artículo relacionado 1]</span>
+            <span class="related-card__link">Leer <svg class="i"><use href="#i-arrow"/></svg></span>
+          </a>
+
+          <a href="[ARCHIVO-ARTICULO].html" class="related-card reveal">
+            <span class="related-card__cat">[Categoría]</span>
+            <span class="related-card__title">[Título del artículo relacionado 2]</span>
+            <span class="related-card__link">Leer <svg class="i"><use href="#i-arrow"/></svg></span>
+          </a>
+
+          <a href="[ARCHIVO-ARTICULO].html" class="related-card reveal">
+            <span class="related-card__cat">[Categoría]</span>
+            <span class="related-card__title">[Título del artículo relacionado 3]</span>
+            <span class="related-card__link">Leer <svg class="i"><use href="#i-arrow"/></svg></span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         CTA FINAL
+    ════════════════════════════════════════════════════════════ -->
+    <section class="section section--cta">
+      <div class="container">
+        <div class="cta-card reveal" style="text-align:center; padding: clamp(2.5rem, 6vw, 4rem)">
+          <span class="eyebrow" style="justify-content:center">
+            <span class="eyebrow__dot"></span>
+            Siguiente paso
+          </span>
+          <h2 class="h2" style="max-width:600px; margin: 1rem auto .8rem">
+            Basta de leer.<br/>
+            <span class="text-cyan">Andá a verlo en vivo.</span>
+          </h2>
+          <p class="muted" style="max-width:50ch; margin-inline:auto; margin-bottom:2rem">
+            Una demo de 20 minutos aplicada a tu operación real te dice más que diez artículos.
+            Sin compromiso ni tecnicismos.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center">
+            <a href="https://ademasistemas.com/gestion-creditos/" class="btn btn--primary">
+              Pedir demo gratuita
+              <svg class="i"><use href="#i-arrow"/></svg>
+            </a>
+            <a href="https://ademasistemas.com/gestion-creditos/"
+               target="_blank" rel="noopener" class="btn btn--wa">
+              <svg class="i"><use href="#i-wa"/></svg>
+              Hablar con Adema Sistemas
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--brand">
+          <div class="brand">
+            <img src="../logo.png" class="brand__logo" alt="Logo Gestión de Créditos">
+            <span class="brand__text">
+              <span class="brand__title">GESTIÓN DE CRÉDITOS</span>
+              <span class="brand__sub">Adema Sistemas</span>
+            </span>
+          </div>
+          <p class="muted" style="margin-top:1rem; max-width:36ch">
+            Ordená tu cartera. Cobrá a tiempo. Profesionalizá tu operación.
+          </p>
+          <a href="https://ademasistemas.com/gestion-creditos/" target="_blank" rel="noopener"
+             class="btn btn--wa btn--sm" style="margin-top:1rem">
+            <svg class="i"><use href="#i-wa"/></svg> Hablar con Adema Sistemas
+          </a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col__title">Navegación</h4>
+          <ul class="footer-list">
+            <li><a href="../index.html#inicio">Inicio</a></li>
+            <li><a href="../funcionalidades.html">Funcionalidades</a></li>
+            <li><a href="https://ademasistemas.com/gestion-creditos/">Solicitar demo</a></li>
+            <li><a href="../index.html#faq">Preguntas frecuentes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col__title">Recursos</h4>
+          <ul class="footer-list">
+            <li><a href="../tutoriales.html">Tutoriales</a></li>
+            <li><a href="../articulos.html">Artículos</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col__title">Contacto</h4>
+          <ul class="footer-list">
+            <li><a href="https://ademasistemas.com/gestion-creditos/" target="_blank" rel="noopener">Solicitar demo</a></li>
+            <li><a href="mailto:hola@ademasistemas.com">hola@ademasistemas.com</a></li>
+            <li><span class="muted">Lun a Vie · 9 a 18 hs</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-brand">
+          <span class="footline"></span>
+          <span>© <span id="year"></span> Adema Sistemas</span>
+          <span class="sep">·</span>
+          <span class="text-cyan">Gestión de Créditos</span>
+          <span class="footline"></span>
+          <span class="footdot"></span>
+        </div>
+        <small>Más orden. Más control. Mejor gestión.</small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= BOTÓN FLOTANTE WHATSAPP ================= -->
+  <a href="https://ademasistemas.com/gestion-creditos/"
+     target="_blank" rel="noopener" class="wa-fab" aria-label="Hablar con Adema Sistemas">
+    <span class="wa-fab__bubble">¿Hablamos?</span>
+    <span class="wa-fab__btn">
+      <svg class="i"><use href="#i-wa"/></svg>
+    </span>
+  </a>
+
+  <script src="../script.js"></script>
+
+  <!-- TOC activo por scroll -->
+  <script>
+    const tocLinks = document.querySelectorAll('.toc__list a');
+    const sections = [...tocLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(a => a.classList.remove('is-active'));
+          const active = document.querySelector(`.toc__list a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
