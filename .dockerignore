@@ -1,0 +1,10 @@
+node_modules
+.output
+dist
+.wrangler
+.git
+.gitignore
+*.md
+*.log
+.env*
+.DS_Store
