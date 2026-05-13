@@ -9,14 +9,74 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SoftwareGestionCreditosArgentinaRouteImport } from './routes/software-gestion-creditos-argentina'
+import { Route as SistemaParaVenderEnCuotasRouteImport } from './routes/sistema-para-vender-en-cuotas'
+import { Route as SistemaParaReemplazarExcelCreditosRouteImport } from './routes/sistema-para-reemplazar-excel-creditos'
+import { Route as SistemaParaMuebleriasRouteImport } from './routes/sistema-para-mueblerias'
+import { Route as SistemaParaFinancierasRouteImport } from './routes/sistema-para-financieras'
+import { Route as SistemaParaControlDeMoraRouteImport } from './routes/sistema-para-control-de-mora'
+import { Route as SistemaParaCobranzaDeCuotasRouteImport } from './routes/sistema-para-cobranza-de-cuotas'
 import { Route as RevistaRouteImport } from './routes/revista'
+import { Route as PortalClienteCreditosRouteImport } from './routes/portal-cliente-creditos'
+import { Route as ContratosCreditosFirmaElectronicaRouteImport } from './routes/contratos-creditos-firma-electronica'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SoftwareGestionCreditosArgentinaRoute =
+  SoftwareGestionCreditosArgentinaRouteImport.update({
+    id: '/software-gestion-creditos-argentina',
+    path: '/software-gestion-creditos-argentina',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SistemaParaVenderEnCuotasRoute =
+  SistemaParaVenderEnCuotasRouteImport.update({
+    id: '/sistema-para-vender-en-cuotas',
+    path: '/sistema-para-vender-en-cuotas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SistemaParaReemplazarExcelCreditosRoute =
+  SistemaParaReemplazarExcelCreditosRouteImport.update({
+    id: '/sistema-para-reemplazar-excel-creditos',
+    path: '/sistema-para-reemplazar-excel-creditos',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SistemaParaMuebleriasRoute = SistemaParaMuebleriasRouteImport.update({
+  id: '/sistema-para-mueblerias',
+  path: '/sistema-para-mueblerias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SistemaParaFinancierasRoute = SistemaParaFinancierasRouteImport.update({
+  id: '/sistema-para-financieras',
+  path: '/sistema-para-financieras',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SistemaParaControlDeMoraRoute =
+  SistemaParaControlDeMoraRouteImport.update({
+    id: '/sistema-para-control-de-mora',
+    path: '/sistema-para-control-de-mora',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SistemaParaCobranzaDeCuotasRoute =
+  SistemaParaCobranzaDeCuotasRouteImport.update({
+    id: '/sistema-para-cobranza-de-cuotas',
+    path: '/sistema-para-cobranza-de-cuotas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const RevistaRoute = RevistaRouteImport.update({
   id: '/revista',
   path: '/revista',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalClienteCreditosRoute = PortalClienteCreditosRouteImport.update({
+  id: '/portal-cliente-creditos',
+  path: '/portal-cliente-creditos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContratosCreditosFirmaElectronicaRoute =
+  ContratosCreditosFirmaElectronicaRouteImport.update({
+    id: '/contratos-creditos-firma-electronica',
+    path: '/contratos-creditos-firma-electronica',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,37 +85,170 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contratos-creditos-firma-electronica': typeof ContratosCreditosFirmaElectronicaRoute
+  '/portal-cliente-creditos': typeof PortalClienteCreditosRoute
   '/revista': typeof RevistaRoute
+  '/sistema-para-cobranza-de-cuotas': typeof SistemaParaCobranzaDeCuotasRoute
+  '/sistema-para-control-de-mora': typeof SistemaParaControlDeMoraRoute
+  '/sistema-para-financieras': typeof SistemaParaFinancierasRoute
+  '/sistema-para-mueblerias': typeof SistemaParaMuebleriasRoute
+  '/sistema-para-reemplazar-excel-creditos': typeof SistemaParaReemplazarExcelCreditosRoute
+  '/sistema-para-vender-en-cuotas': typeof SistemaParaVenderEnCuotasRoute
+  '/software-gestion-creditos-argentina': typeof SoftwareGestionCreditosArgentinaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contratos-creditos-firma-electronica': typeof ContratosCreditosFirmaElectronicaRoute
+  '/portal-cliente-creditos': typeof PortalClienteCreditosRoute
   '/revista': typeof RevistaRoute
+  '/sistema-para-cobranza-de-cuotas': typeof SistemaParaCobranzaDeCuotasRoute
+  '/sistema-para-control-de-mora': typeof SistemaParaControlDeMoraRoute
+  '/sistema-para-financieras': typeof SistemaParaFinancierasRoute
+  '/sistema-para-mueblerias': typeof SistemaParaMuebleriasRoute
+  '/sistema-para-reemplazar-excel-creditos': typeof SistemaParaReemplazarExcelCreditosRoute
+  '/sistema-para-vender-en-cuotas': typeof SistemaParaVenderEnCuotasRoute
+  '/software-gestion-creditos-argentina': typeof SoftwareGestionCreditosArgentinaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contratos-creditos-firma-electronica': typeof ContratosCreditosFirmaElectronicaRoute
+  '/portal-cliente-creditos': typeof PortalClienteCreditosRoute
   '/revista': typeof RevistaRoute
+  '/sistema-para-cobranza-de-cuotas': typeof SistemaParaCobranzaDeCuotasRoute
+  '/sistema-para-control-de-mora': typeof SistemaParaControlDeMoraRoute
+  '/sistema-para-financieras': typeof SistemaParaFinancierasRoute
+  '/sistema-para-mueblerias': typeof SistemaParaMuebleriasRoute
+  '/sistema-para-reemplazar-excel-creditos': typeof SistemaParaReemplazarExcelCreditosRoute
+  '/sistema-para-vender-en-cuotas': typeof SistemaParaVenderEnCuotasRoute
+  '/software-gestion-creditos-argentina': typeof SoftwareGestionCreditosArgentinaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/revista'
+  fullPaths:
+    | '/'
+    | '/contratos-creditos-firma-electronica'
+    | '/portal-cliente-creditos'
+    | '/revista'
+    | '/sistema-para-cobranza-de-cuotas'
+    | '/sistema-para-control-de-mora'
+    | '/sistema-para-financieras'
+    | '/sistema-para-mueblerias'
+    | '/sistema-para-reemplazar-excel-creditos'
+    | '/sistema-para-vender-en-cuotas'
+    | '/software-gestion-creditos-argentina'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/revista'
-  id: '__root__' | '/' | '/revista'
+  to:
+    | '/'
+    | '/contratos-creditos-firma-electronica'
+    | '/portal-cliente-creditos'
+    | '/revista'
+    | '/sistema-para-cobranza-de-cuotas'
+    | '/sistema-para-control-de-mora'
+    | '/sistema-para-financieras'
+    | '/sistema-para-mueblerias'
+    | '/sistema-para-reemplazar-excel-creditos'
+    | '/sistema-para-vender-en-cuotas'
+    | '/software-gestion-creditos-argentina'
+  id:
+    | '__root__'
+    | '/'
+    | '/contratos-creditos-firma-electronica'
+    | '/portal-cliente-creditos'
+    | '/revista'
+    | '/sistema-para-cobranza-de-cuotas'
+    | '/sistema-para-control-de-mora'
+    | '/sistema-para-financieras'
+    | '/sistema-para-mueblerias'
+    | '/sistema-para-reemplazar-excel-creditos'
+    | '/sistema-para-vender-en-cuotas'
+    | '/software-gestion-creditos-argentina'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContratosCreditosFirmaElectronicaRoute: typeof ContratosCreditosFirmaElectronicaRoute
+  PortalClienteCreditosRoute: typeof PortalClienteCreditosRoute
   RevistaRoute: typeof RevistaRoute
+  SistemaParaCobranzaDeCuotasRoute: typeof SistemaParaCobranzaDeCuotasRoute
+  SistemaParaControlDeMoraRoute: typeof SistemaParaControlDeMoraRoute
+  SistemaParaFinancierasRoute: typeof SistemaParaFinancierasRoute
+  SistemaParaMuebleriasRoute: typeof SistemaParaMuebleriasRoute
+  SistemaParaReemplazarExcelCreditosRoute: typeof SistemaParaReemplazarExcelCreditosRoute
+  SistemaParaVenderEnCuotasRoute: typeof SistemaParaVenderEnCuotasRoute
+  SoftwareGestionCreditosArgentinaRoute: typeof SoftwareGestionCreditosArgentinaRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/software-gestion-creditos-argentina': {
+      id: '/software-gestion-creditos-argentina'
+      path: '/software-gestion-creditos-argentina'
+      fullPath: '/software-gestion-creditos-argentina'
+      preLoaderRoute: typeof SoftwareGestionCreditosArgentinaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-vender-en-cuotas': {
+      id: '/sistema-para-vender-en-cuotas'
+      path: '/sistema-para-vender-en-cuotas'
+      fullPath: '/sistema-para-vender-en-cuotas'
+      preLoaderRoute: typeof SistemaParaVenderEnCuotasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-reemplazar-excel-creditos': {
+      id: '/sistema-para-reemplazar-excel-creditos'
+      path: '/sistema-para-reemplazar-excel-creditos'
+      fullPath: '/sistema-para-reemplazar-excel-creditos'
+      preLoaderRoute: typeof SistemaParaReemplazarExcelCreditosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-mueblerias': {
+      id: '/sistema-para-mueblerias'
+      path: '/sistema-para-mueblerias'
+      fullPath: '/sistema-para-mueblerias'
+      preLoaderRoute: typeof SistemaParaMuebleriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-financieras': {
+      id: '/sistema-para-financieras'
+      path: '/sistema-para-financieras'
+      fullPath: '/sistema-para-financieras'
+      preLoaderRoute: typeof SistemaParaFinancierasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-control-de-mora': {
+      id: '/sistema-para-control-de-mora'
+      path: '/sistema-para-control-de-mora'
+      fullPath: '/sistema-para-control-de-mora'
+      preLoaderRoute: typeof SistemaParaControlDeMoraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-cobranza-de-cuotas': {
+      id: '/sistema-para-cobranza-de-cuotas'
+      path: '/sistema-para-cobranza-de-cuotas'
+      fullPath: '/sistema-para-cobranza-de-cuotas'
+      preLoaderRoute: typeof SistemaParaCobranzaDeCuotasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/revista': {
       id: '/revista'
       path: '/revista'
       fullPath: '/revista'
       preLoaderRoute: typeof RevistaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal-cliente-creditos': {
+      id: '/portal-cliente-creditos'
+      path: '/portal-cliente-creditos'
+      fullPath: '/portal-cliente-creditos'
+      preLoaderRoute: typeof PortalClienteCreditosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contratos-creditos-firma-electronica': {
+      id: '/contratos-creditos-firma-electronica'
+      path: '/contratos-creditos-firma-electronica'
+      fullPath: '/contratos-creditos-firma-electronica'
+      preLoaderRoute: typeof ContratosCreditosFirmaElectronicaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +263,18 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContratosCreditosFirmaElectronicaRoute:
+    ContratosCreditosFirmaElectronicaRoute,
+  PortalClienteCreditosRoute: PortalClienteCreditosRoute,
   RevistaRoute: RevistaRoute,
+  SistemaParaCobranzaDeCuotasRoute: SistemaParaCobranzaDeCuotasRoute,
+  SistemaParaControlDeMoraRoute: SistemaParaControlDeMoraRoute,
+  SistemaParaFinancierasRoute: SistemaParaFinancierasRoute,
+  SistemaParaMuebleriasRoute: SistemaParaMuebleriasRoute,
+  SistemaParaReemplazarExcelCreditosRoute:
+    SistemaParaReemplazarExcelCreditosRoute,
+  SistemaParaVenderEnCuotasRoute: SistemaParaVenderEnCuotasRoute,
+  SoftwareGestionCreditosArgentinaRoute: SoftwareGestionCreditosArgentinaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

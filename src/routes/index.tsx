@@ -4,16 +4,17 @@ import { LandingPage } from "@/components/LandingPage";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Gestión de Créditos · Sistema para controlar carteras y cuotas" },
+      { title: "Software de gestión de créditos y cobranzas | Gestión de Créditos" },
       {
         name: "description",
         content:
-          "Software para ordenar clientes, créditos, cuotas, cobranzas, mora y deudores en comercios, financieras y negocios que venden en cuotas.",
+          "Sistema para vender en cuotas sin perder control. Ordená clientes, créditos, cuotas, cobros, mora, deudores, contratos y portal del cliente en una sola plataforma.",
       },
-      { property: "og:title", content: "Gestión de Créditos · Adema Sistemas" },
+      { property: "og:title", content: "Software de gestión de créditos y cobranzas" },
       {
         property: "og:description",
-        content: "Controlá tu cartera de clientes, créditos, cuotas y cobranzas desde una sola aplicación.",
+        content:
+          "Dejá de depender de Excel, cuadernos y WhatsApp para controlar cartera, cuotas vencidas, mora y cobranzas.",
       },
     ],
   }),

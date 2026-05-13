@@ -62,7 +62,7 @@ export function MagazineViewer() {
       setPage(next);
       transformRef.current?.resetTransform();
     },
-    [total]
+    [total],
   );
 
   const next = useCallback(() => goTo(page + 1), [goTo, page]);
@@ -123,8 +123,7 @@ export function MagazineViewer() {
   // Swipe navigation (only when zoom is at base)
   const onTouchStart = (e: React.TouchEvent) => {
     const scale =
-      (transformRef.current as unknown as { state?: { scale: number } } | null)
-        ?.state?.scale ?? 1;
+      (transformRef.current as unknown as { state?: { scale: number } } | null)?.state?.scale ?? 1;
     if (scale > 1.05) {
       touchStartX.current = null;
       return;
@@ -174,9 +173,7 @@ export function MagazineViewer() {
             <LayoutGrid className="h-5 w-5" />
           </Button>
           <div className="min-w-0">
-            <h1 className="truncate text-sm font-semibold sm:text-base">
-              {headerTitle}
-            </h1>
+            <h1 className="truncate text-sm font-semibold sm:text-base">{headerTitle}</h1>
             {manifest?.edition && (
               <p className="hidden truncate text-xs text-muted-foreground sm:block">
                 {manifest.edition}
@@ -200,11 +197,7 @@ export function MagazineViewer() {
             onClick={toggleFullscreen}
             aria-label="Pantalla completa"
           >
-            {isFullscreen ? (
-              <Minimize2 className="h-5 w-5" />
-            ) : (
-              <Maximize2 className="h-5 w-5" />
-            )}
+            {isFullscreen ? <Minimize2 className="h-5 w-5" /> : <Maximize2 className="h-5 w-5" />}
           </Button>
         </div>
       </header>
@@ -407,11 +400,7 @@ function NavButton({
         side === "left" ? "left-3" : "right-3",
       ].join(" ")}
     >
-      {side === "left" ? (
-        <ChevronLeft className="h-6 w-6" />
-      ) : (
-        <ChevronRight className="h-6 w-6" />
-      )}
+      {side === "left" ? <ChevronLeft className="h-6 w-6" /> : <ChevronRight className="h-6 w-6" />}
     </button>
   );
 }

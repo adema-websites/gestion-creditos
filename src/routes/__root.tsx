@@ -76,13 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Sistema para gestionar clientes, créditos, cuotas, cobranzas, mora y deudores.",
+          "Software de gestión de créditos y cobranzas para ordenar cartera, cuotas, mora, contratos, deudores y ventas en cuotas.",
       },
       { name: "author", content: "Adema Sistemas" },
       { property: "og:title", content: "Gestión de Créditos · Adema Sistemas" },
       {
         property: "og:description",
-        content: "Software para ordenar carteras de créditos y ventas en cuotas.",
+        content:
+          "Sistema para dejar de depender de Excel, cuadernos y WhatsApp en la cobranza de cuotas.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
