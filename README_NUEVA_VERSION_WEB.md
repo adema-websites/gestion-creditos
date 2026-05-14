@@ -34,7 +34,7 @@ Hoy la landing tiene estas secciones:
 6. Demo visible.
 7. Firma y contratos.
 8. Revista del sistema.
-9. Contenido de apoyo.
+9. Revista del sistema y material para evaluar la demo.
 10. CTA final.
 11. Footer.
 
@@ -478,7 +478,7 @@ CTAs:
 
 #### Valor buscado
 
-La revista no debería ser solo contenido de apoyo. Debe convertirse en una herramienta de generación de contactos interesados, especialmente para usuarios que todavía no están listos para pedir una demo.
+La revista no debería sonar a material interno o de apoyo genérico. Debe presentarse como una herramienta clara para que el cliente evalúe pantallas, alcance funcional y próximos pasos antes de pedir una demo.
 
 ## 12. Preguntas frecuentes
 

@@ -542,8 +542,8 @@ export function LandingPage() {
         <section id="revista" className="border-b border-white/10 bg-[#070d19] py-16 sm:py-20">
           <SectionIntro
             eyebrow="Revista del sistema"
-            title="Revisá la guía visual antes de la demo"
-            text="La revista resume pantallas, funcionalidades y casos de uso para entender el sistema con tu equipo antes de avanzar."
+            title="Conocé el sistema antes de coordinar una demo"
+            text="Revisá pantallas reales, funcionalidades y ejemplos de uso para evaluar con tu equipo si Gestión de Créditos encaja con tu forma de vender en cuotas."
           />
           <div className="mx-auto mt-10 grid w-full max-w-7xl gap-5 px-4 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8">
             <Link
@@ -561,7 +561,8 @@ export function LandingPage() {
                   Ver revista online
                 </span>
                 <span className="mt-3 block text-sm leading-7 text-slate-400">
-                  Navegá página a página y compartí el material con tu equipo antes de coordinar.
+                  Abrí el folleto interactivo y revisá clientes, créditos, cuotas, cobros, mora,
+                  portal y firma en contexto.
                 </span>
               </span>
               <span className="inline-flex items-center gap-2 text-sm font-extrabold text-cyan-200">
@@ -572,11 +573,11 @@ export function LandingPage() {
             <article className="rounded-lg border border-emerald-300/18 bg-emerald-300/[0.05] p-8">
               <CreditCard className="h-8 w-8 text-emerald-300" />
               <h3 className="mt-5 text-2xl font-black uppercase text-white">
-                Pedir la guía por WhatsApp
+                Recibir la guía por WhatsApp
               </h3>
               <p className="mt-4 text-sm leading-7 text-slate-300">
-                Dejanos tu nombre, negocio y WhatsApp en el contacto de demo y te enviamos la guía
-                para revisar el sistema con asesoramiento.
+                Compartinos tus datos desde el contacto de demo y te enviamos el material junto con
+                una orientación inicial sobre implementación.
               </p>
               <a
                 href={DEMO_URL}
