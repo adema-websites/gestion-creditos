@@ -182,19 +182,19 @@ export function LandingPage() {
                 Software de gestión de créditos y cobranzas
               </span>
               <h1 className="mt-6 max-w-4xl text-3xl font-black uppercase leading-[1.04] text-white sm:text-5xl lg:text-7xl">
-                Dejá de perder plata por créditos mal controlados
+                Dejá de perder plata por créditos difíciles de seguir
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-xl sm:leading-8">
                 Gestión de Créditos te ayuda a saber quién debe, cuánto debe, desde cuándo y qué
-                hacer para cobrar. Centralizá clientes, cuotas, mora, contratos y cobranzas en un
-                solo sistema.
+                hacer para cobrar. Centralizá clientes, cuotas, mora, contratos, comprobantes y
+                seguimiento en un solo sistema.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href={DEMO_URL}
                   className="inline-flex items-center gap-2 rounded-md bg-cyan-300 px-5 py-3 text-sm font-extrabold text-slate-950 shadow-[0_16px_40px_-18px_rgba(45,212,230,0.9)] transition hover:bg-cyan-200"
                 >
-                  Quiero ordenar mi cartera <ArrowRight className="h-4 w-4" />
+                  Quiero controlar mi cartera <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
                   href="#demo"
@@ -245,7 +245,7 @@ export function LandingPage() {
           <SectionIntro
             eyebrow="Problemas reales"
             title="Cuando la cartera crece, el desorden también"
-            text="La venta en cuotas funciona cuando el seguimiento es claro. El problema aparece cuando cada dato vive en una herramienta distinta."
+            text="La venta en cuotas funciona cuando el seguimiento es claro. El problema aparece cuando cada dato queda en una planilla, un chat o una persona distinta."
           />
           <div className="mx-auto mt-10 grid w-full max-w-7xl gap-4 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
             {painPoints.map((item) => {
@@ -267,8 +267,8 @@ export function LandingPage() {
         <section id="antes" className="bg-[#050914] py-16 sm:py-20">
           <SectionIntro
             eyebrow="Antes vs después"
-            title="Del seguimiento disperso a una cartera que se puede cobrar"
-            text="El valor no está en tener más pantallas. Está en pasar de datos sueltos a un circuito claro para vender, cobrar y decidir."
+            title="Del seguimiento disperso a una cartera cobrable"
+            text="El valor no está en sumar pantallas. Está en pasar de datos sueltos a una operación clara para vender, cobrar y decidir cada día."
           />
           <div className="mx-auto mt-10 grid w-full max-w-7xl gap-5 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
             <ComparisonPanel title="Antes" tone="amber" items={beforeAfter.before} />
@@ -287,8 +287,8 @@ export function LandingPage() {
               </h2>
               <p className="mt-5 text-base leading-7 text-slate-300">
                 El sistema acompaña un proceso natural: cargar el cliente, registrar la operación,
-                seguir cuotas, cobrar, controlar mora y revisar reportes sin saltar entre planillas
-                y chats.
+                seguir cuotas, registrar cobros, controlar mora y revisar reportes sin saltar entre
+                planillas y chats.
               </p>
               <a
                 href={DEMO_URL}
@@ -317,7 +317,7 @@ export function LandingPage() {
           <SectionIntro
             eyebrow="Funcionalidades principales"
             title="Las piezas clave para cobrar con más claridad"
-            text="Cada módulo responde a una parte concreta de la operación: cliente, crédito, cuota, cobro, deuda, documentación y seguimiento."
+            text="Cada módulo responde a una parte concreta de la operación: cliente, crédito, cuota, cobro, deuda, documentación y seguimiento diario."
           />
           <div className="mx-auto mt-10 grid w-full max-w-7xl gap-4 px-4 sm:px-6 md:grid-cols-2 xl:grid-cols-3 lg:px-8">
             {features.map((feature) => {
@@ -355,7 +355,7 @@ export function LandingPage() {
           <SectionIntro
             eyebrow="Rubros ideales"
             title="Pensado para negocios que venden en cuotas"
-            text="No todos los negocios venden igual, pero todos tienen el mismo problema cuando la cartera crece: saber quién debe, cuánto debe, desde cuándo y qué se hizo para cobrar."
+            text="No todos los negocios financian igual, pero todos necesitan la misma claridad cuando la cartera crece: deuda, vencimientos, mora y próximos pasos de cobranza."
           />
           <div className="mx-auto mt-10 grid w-full max-w-7xl gap-3 px-4 sm:px-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
             {industries.map((industry) => (
@@ -387,8 +387,8 @@ export function LandingPage() {
         >
           <SectionIntro
             eyebrow="Implementación acompañada"
-            title="No te damos solo el sistema: te ayudamos a ordenar tu cartera"
-            text="La diferencia no es entregar una app vacía. Es dejar funcionando un circuito completo de créditos y cobranzas, con capacitación inicial y soporte para operar mejor."
+            title="Sistema, configuración y acompañamiento para empezar bien"
+            text="La diferencia está en dejar funcionando un circuito de créditos y cobranzas, con capacitación inicial, reglas claras y soporte para operar mejor."
           />
           <div className="mx-auto mt-10 grid w-full max-w-7xl gap-4 px-4 sm:px-6 md:grid-cols-2 xl:grid-cols-3 lg:px-8">
             {implementationServices.map((service) => (
@@ -401,7 +401,7 @@ export function LandingPage() {
                 <p className="mt-3 text-sm leading-6 text-slate-400">{service.text}</p>
                 {service.extra && (
                   <p className="mt-4 rounded-md border border-amber-300/25 bg-amber-300/8 p-3 text-xs font-semibold leading-5 text-amber-50">
-                    Servicio cotizado aparte según volumen y calidad de datos.
+                    Se cotiza aparte según volumen y calidad de los datos.
                   </p>
                 )}
               </article>
@@ -419,9 +419,9 @@ export function LandingPage() {
                 $99.999 + IVA por mes
               </h2>
               <p className="mt-5 text-base leading-7 text-slate-300">
-                Un paquete integral para operar mejor tu cartera: sistema, capacitación inicial,
-                dominio propio, backups diarios, panel de tickets y hasta 5 horas mensuales de
-                ajustes incluidos.
+                Un paquete integral para trabajar la cartera con más control: sistema, capacitación
+                inicial, dominio propio, backups diarios, panel de tickets y hasta 5 horas mensuales
+                de ajustes incluidos.
               </p>
               <a
                 href={DEMO_URL}
@@ -456,8 +456,8 @@ export function LandingPage() {
               </h2>
               <p className="mt-5 text-base leading-7 text-slate-300">
                 Tus clientes pueden consultar cuotas, vencimientos, contrato, pagos y estado de
-                cuenta desde el celular. Eso mejora la transparencia y libera tiempo del equipo de
-                cobranza.
+                cuenta desde el celular. Eso mejora la transparencia y reduce consultas manuales
+                para el equipo de cobranza.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -510,21 +510,21 @@ export function LandingPage() {
           <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
             <div>
               <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.22em] text-cyan-200">
-                <PlayCircle className="h-5 w-5" /> Demo visible
+                <PlayCircle className="h-5 w-5" /> Demo del sistema
               </span>
               <h2 className="mt-4 text-3xl font-black uppercase leading-tight text-white sm:text-5xl">
                 Mirá cómo se ordena una cartera de créditos
               </h2>
               <p className="mt-5 text-base leading-7 text-slate-300">
                 En pocos minutos vas a ver cómo se cargan clientes, créditos, cuotas, cobros y
-                deudores. La demo sirve para entender si el sistema encaja con tu forma de vender en
-                cuotas.
+                deudores. La demo sirve para revisar si el sistema encaja con tu forma de vender en
+                cuotas y cobrar.
               </p>
               <a
                 href={DEMO_URL}
                 className="mt-7 inline-flex items-center gap-2 rounded-md border border-cyan-300/30 bg-cyan-300/10 px-5 py-3 text-sm font-extrabold text-cyan-100 transition hover:bg-cyan-300/16"
               >
-                Solicitar demo con asesoramiento <ExternalLink className="h-4 w-4" />
+                Solicitar demo asesorada <ExternalLink className="h-4 w-4" />
               </a>
             </div>
             <div className="rounded-lg border border-white/10 bg-[#091523] p-2">
@@ -541,9 +541,9 @@ export function LandingPage() {
 
         <section id="revista" className="border-b border-white/10 bg-[#070d19] py-16 sm:py-20">
           <SectionIntro
-            eyebrow="Lead magnet"
-            title="Descargá la revista del sistema"
-            text="La revista resume pantallas, funcionalidades y beneficios. También sirve como guía visual para entender cómo ordenar una cartera de créditos antes de pedir una demo."
+            eyebrow="Revista del sistema"
+            title="Revisá la guía visual antes de la demo"
+            text="La revista resume pantallas, funcionalidades y casos de uso para entender el sistema con tu equipo antes de avanzar."
           />
           <div className="mx-auto mt-10 grid w-full max-w-7xl gap-5 px-4 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8">
             <Link
@@ -555,13 +555,13 @@ export function LandingPage() {
               </span>
               <span>
                 <span className="block text-xs font-bold uppercase tracking-[0.22em] text-cyan-200">
-                  Folleto interactivo
+                  Revista interactiva
                 </span>
                 <span className="mt-2 block text-2xl font-black text-white sm:text-3xl">
                   Ver revista online
                 </span>
                 <span className="mt-3 block text-sm leading-7 text-slate-400">
-                  Navegá página a página y compartí el material con tu equipo antes de la demo.
+                  Navegá página a página y compartí el material con tu equipo antes de coordinar.
                 </span>
               </span>
               <span className="inline-flex items-center gap-2 text-sm font-extrabold text-cyan-200">
@@ -572,11 +572,11 @@ export function LandingPage() {
             <article className="rounded-lg border border-emerald-300/18 bg-emerald-300/[0.05] p-8">
               <CreditCard className="h-8 w-8 text-emerald-300" />
               <h3 className="mt-5 text-2xl font-black uppercase text-white">
-                Solicitar guía con asesoramiento
+                Pedir la guía por WhatsApp
               </h3>
               <p className="mt-4 text-sm leading-7 text-slate-300">
                 Dejanos tu nombre, negocio y WhatsApp en el contacto de demo y te enviamos la guía
-                completa para ordenar una cartera de créditos.
+                para revisar el sistema con asesoramiento.
               </p>
               <a
                 href={DEMO_URL}
@@ -592,7 +592,7 @@ export function LandingPage() {
           <SectionIntro
             eyebrow="Preguntas frecuentes"
             title="Respuestas directas para decidir mejor"
-            text="Estas respuestas ayudan a entender alcance, rubros, migración, mora, portal, firma y servicios incluidos antes de coordinar una demo."
+            text="Aclará alcance, rubros, migración, mora, portal, firma y servicios incluidos antes de coordinar una demo."
           />
           <div className="mx-auto mt-10 grid w-full max-w-7xl gap-4 px-4 sm:px-6 md:grid-cols-2 lg:px-8">
             {faqs.map((faq) => (
@@ -618,14 +618,14 @@ export function LandingPage() {
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300">
               Si la respuesta depende de revisar un Excel, un cuaderno o varios chats de WhatsApp,
-              es momento de ordenar tu cartera.
+              es momento de profesionalizar el seguimiento.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a
                 href={DEMO_URL}
                 className="inline-flex items-center gap-2 rounded-md bg-cyan-300 px-5 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-cyan-200"
               >
-                Quiero ordenar mi cartera <ArrowRight className="h-4 w-4" />
+                Quiero controlar mi cartera <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href={DEMO_URL}
@@ -660,7 +660,7 @@ export function LandingPage() {
         href={DEMO_URL}
         className="fixed bottom-4 right-4 z-40 hidden items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300 px-4 py-3 text-sm font-extrabold text-slate-950 shadow-[0_18px_40px_-18px_rgba(45,212,230,0.9)] transition hover:bg-cyan-200 lg:inline-flex"
       >
-        Demo <ArrowRight className="h-4 w-4" />
+        Ver demo <ArrowRight className="h-4 w-4" />
       </a>
 
       {activeFeature && (
@@ -852,7 +852,7 @@ function FeatureModal({ feature, onClose }: { feature: Feature; onClose: () => v
           href={DEMO_URL}
           className="mt-7 inline-flex items-center gap-2 rounded-md bg-cyan-300 px-5 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-cyan-200"
         >
-          Solicitar demo <ArrowRight className="h-4 w-4" />
+          Consultar demo <ArrowRight className="h-4 w-4" />
         </a>
       </article>
     </div>

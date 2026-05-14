@@ -55,7 +55,7 @@ export function SeoLandingPage({ page }: { page: SeoPageContent }) {
                   href="/#demo"
                   className="inline-flex items-center gap-2 rounded-md border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/40 hover:bg-cyan-300/10"
                 >
-                  Ver demo
+                  Ver cómo funciona
                 </a>
               </div>
             </div>
@@ -131,9 +131,8 @@ export function SeoLandingPage({ page }: { page: SeoPageContent }) {
                 Implementación acompañada
               </h2>
               <p className="mt-4 text-sm leading-7 text-slate-300">
-                ADEMA Sistemas no entrega una herramienta vacía: ayuda a dejar funcionando un
-                circuito de créditos y cobranzas con capacitación inicial, configuración y soporte
-                mensual.
+                ADEMA Sistemas ayuda a dejar funcionando un circuito de créditos y cobranzas con
+                capacitación inicial, configuración y soporte mensual.
               </p>
               <a
                 href="/#plan"
@@ -175,11 +174,11 @@ export function SeoLandingPage({ page }: { page: SeoPageContent }) {
               Próximo paso
             </span>
             <h2 className="mt-4 text-3xl font-black uppercase leading-tight text-white sm:text-5xl">
-              Ordená tu cartera antes de que la mora decida por vos
+              Controlá tu cartera antes de que la mora decida por vos
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300">
               Si hoy necesitás revisar una planilla o varios chats para saber qué cobrar, es momento
-              de ordenar el circuito completo.
+              de profesionalizar el seguimiento.
             </p>
             <a
               href={DEMO_URL}

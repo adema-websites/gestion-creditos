@@ -8,7 +8,7 @@ export const Route = createFileRoute("/revista")({
       {
         name: "description",
         content:
-          "Folleto interactivo del sistema: pantallas, funcionalidades y casos de uso para entender Gestión de Créditos en pocos minutos.",
+          "Revista interactiva del sistema: pantallas, funcionalidades y casos de uso para entender Gestión de Créditos antes de la demo.",
       },
     ],
   }),

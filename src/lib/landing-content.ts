@@ -32,52 +32,52 @@ export type SeoPageContent = {
 export const painPoints = [
   {
     title: "Excel deja de alcanzar",
-    text: "Cuando la cartera crece aparecen versiones distintas, fórmulas tocadas y saldos que nadie termina de confiar.",
+    text: "Cuando la cartera crece aparecen archivos duplicados, fórmulas tocadas y saldos que nadie puede defender con seguridad.",
     icon: "chart",
   },
   {
     title: "WhatsApp mezcla todo",
-    text: "Promesas de pago, comprobantes y reclamos quedan perdidos entre chats personales, grupos y mensajes sin seguimiento.",
+    text: "Sirve para hablar, pero no para auditar promesas de pago, comprobantes, reclamos y próximos pasos de cobranza.",
     icon: "message",
   },
   {
     title: "La mora se discute",
-    text: "Si los atrasos se calculan a mano, cada cuenta puede terminar en errores, reclamos y pérdida de autoridad frente al deudor.",
+    text: "Cada cálculo manual abre espacio para errores, reclamos y criterios distintos frente al mismo atraso.",
     icon: "alert",
   },
   {
-    title: "La cobranza depende de memoria",
-    text: "Si una persona falta, cuesta saber quién debe, cuánto debe, desde cuándo y cuál fue el último contacto.",
+    title: "La cobranza queda en la cabeza",
+    text: "Si una persona falta, cuesta saber quién debe, cuánto debe, desde cuándo y qué se prometió cobrar.",
     icon: "eye",
   },
 ];
 
 export const beforeAfter = {
   before: [
-    "Clientes en Excel o cuadernos",
-    "Cuotas calculadas a mano",
-    "Mora discutida caso por caso",
-    "Contratos y comprobantes sueltos",
-    "WhatsApp lleno de mensajes perdidos",
-    "Deudores difíciles de priorizar",
+    "Clientes repartidos entre planillas y cuadernos",
+    "Cuotas calculadas o corregidas a mano",
+    "Mora explicada caso por caso",
+    "Contratos y comprobantes difíciles de encontrar",
+    "Promesas de pago perdidas en WhatsApp",
+    "Deudores sin prioridad clara",
   ],
   after: [
-    "Cartera centralizada",
-    "Cuotas y vencimientos visibles",
-    "Mora con criterio claro",
-    "Contratos guardados junto al crédito",
-    "Portal del cliente para consultar saldos",
-    "Reportes diarios para cobrar mejor",
+    "Cartera centralizada por cliente y operación",
+    "Cuotas, vencimientos y saldos visibles",
+    "Mora calculada con reglas consistentes",
+    "Documentación asociada a cada crédito",
+    "Portal para que el cliente consulte su estado",
+    "Reportes para priorizar la cobranza diaria",
   ],
 };
 
 export const flowSteps = [
   "Cargás el cliente",
   "Registrás el crédito",
-  "Armás el plan de cuotas",
+  "Definís el plan de cuotas",
   "Cargás cobros y comprobantes",
-  "Ves mora y deudores",
-  "Seguís la cobranza con reportes",
+  "Revisás mora y deudores",
+  "Priorizás la cobranza con reportes",
 ];
 
 export const features: Feature[] = [
@@ -86,10 +86,11 @@ export const features: Feature[] = [
     title: "Clientes",
     eyebrow: "Ficha única",
     description:
-      "Datos, contacto, historial de créditos, pagos y estado de cuenta ordenados en una sola vista.",
-    solves: "Evita buscar información en planillas, chats, anotaciones y archivos sueltos.",
+      "Datos de contacto, créditos activos, pagos, saldos y estado de cuenta reunidos en una sola vista.",
+    solves:
+      "Evita reconstruir la historia del cliente entre planillas, chats, anotaciones y archivos sueltos.",
     example:
-      "Buscás un cliente y ves al instante qué créditos tiene activos, qué cuotas pagó y qué falta cobrar.",
+      "Buscás un cliente y ves al instante qué operaciones tiene activas, qué pagó y qué falta cobrar.",
     icon: "users",
     tags: ["Historial", "Estado de cuenta", "Contacto"],
   },
@@ -98,10 +99,10 @@ export const features: Feature[] = [
     title: "Créditos",
     eyebrow: "Operación clara",
     description:
-      "Carga de monto, condiciones, intereses, cuotas y respaldo documental para cada financiación.",
-    solves: "Reduce errores al armar planes de pago y evita depender de acuerdos informales.",
+      "Monto, condiciones, intereses, cuotas y respaldo documental registrados para cada venta financiada.",
+    solves: "Reduce errores al armar planes de pago y baja la dependencia de acuerdos informales.",
     example:
-      "Vendés una moto financiada, cargás el crédito y el sistema deja el cronograma listo para seguirlo.",
+      "Vendés financiado, cargás la operación y el cronograma queda listo para cobrarlo y auditarlo.",
     icon: "file",
     tags: ["Alta rápida", "Condiciones", "Contratos"],
   },
@@ -110,10 +111,10 @@ export const features: Feature[] = [
     title: "Cuotas",
     eyebrow: "Calendario cobrable",
     description:
-      "Vencimientos, cuotas pagadas, saldos pendientes y próximos cobros visibles sin revisar fila por fila.",
-    solves: "Ordena qué vence hoy, qué está atrasado y qué sigue pendiente en cada operación.",
+      "Vencimientos, pagos, saldos pendientes y próximos cobros visibles sin revisar fila por fila.",
+    solves: "Muestra qué vence hoy, qué está atrasado y qué sigue pendiente en cada operación.",
     example:
-      "Un cliente consulta cuánto le queda y respondés con cuotas pagadas, próxima fecha y saldo real.",
+      "Un cliente consulta cuánto le queda y respondés con cuotas pagadas, próxima fecha y saldo actualizado.",
     icon: "calendar",
     tags: ["Vencimientos", "Saldos", "Cronograma"],
   },
@@ -122,10 +123,11 @@ export const features: Feature[] = [
     title: "Cobros",
     eyebrow: "Registro confiable",
     description:
-      "Pagos, medios, comprobantes y observaciones quedan asociados a la cuota y al cliente correcto.",
-    solves: "Evita cobros duplicados, comprobantes perdidos y seguimiento disperso.",
+      "Pagos, medios, comprobantes y observaciones asociados a la cuota, el crédito y el cliente correcto.",
+    solves:
+      "Evita pagos duplicados, comprobantes perdidos y dudas sobre qué cuota quedó cancelada.",
     example:
-      "Registrás una transferencia, la cuota queda pagada y el historial se actualiza para todo el equipo.",
+      "Registrás una transferencia, la cuota queda cancelada y el historial se actualiza para todo el equipo.",
     icon: "wallet",
     tags: ["Pagos", "Comprobantes", "Historial"],
   },
@@ -134,10 +136,11 @@ export const features: Feature[] = [
     title: "Deudores",
     eyebrow: "Prioridad diaria",
     description:
-      "Listado actualizado de clientes con deuda, importes pendientes, días de atraso y datos útiles para contactar.",
-    solves: "Ayuda a decidir a quién llamar primero y evita que los atrasos queden invisibles.",
+      "Listado actualizado de clientes con deuda, importes pendientes, días de atraso y datos para contactar.",
+    solves:
+      "Ayuda a decidir a quién llamar primero y evita que los atrasos chicos se vuelvan grandes.",
     example:
-      "Antes de salir a cobrar, filtrás vencidos y priorizás los casos con mayor mora o mayor saldo.",
+      "Antes de gestionar, filtrás vencidos y priorizás los casos con mayor mora, saldo o antigüedad.",
     icon: "search",
     tags: ["Mora", "Filtros", "Seguimiento"],
   },
@@ -146,9 +149,9 @@ export const features: Feature[] = [
     title: "Mora",
     eyebrow: "Criterios consistentes",
     description:
-      "Configuración de intereses por atraso para trabajar con importes más claros y repetibles.",
+      "Reglas de intereses por atraso para trabajar con importes claros, repetibles y fáciles de explicar.",
     solves:
-      "Reduce discusiones por cuentas hechas a mano y evita aplicar criterios distintos en cada caso.",
+      "Reduce discusiones por cuentas hechas a mano y evita aplicar criterios distintos según quién cobre.",
     example:
       "Una cuota vencida muestra el importe actualizado y deja visible qué parte corresponde al atraso.",
     icon: "alert",
@@ -159,11 +162,11 @@ export const features: Feature[] = [
     title: "Alertas",
     eyebrow: "Nada queda suelto",
     description:
-      "Vencimientos, tareas y recordatorios para actuar antes de que la mora se acumule.",
+      "Vencimientos, tareas y recordatorios para actuar antes de que el atraso se acumule.",
     solves:
-      "La cobranza deja de depender de acordarse de revisar una planilla o mandar un mensaje.",
+      "La cobranza deja de depender de acordarse de revisar una planilla o mandar un mensaje a tiempo.",
     example:
-      "Al abrir el sistema ves qué vence hoy, qué se atrasó y qué clientes necesitan contacto.",
+      "Al abrir el sistema ves qué vence hoy, qué se atrasó y qué clientes necesitan seguimiento.",
     icon: "bell",
     tags: ["Vencimientos", "Tareas", "Recordatorios"],
   },
@@ -172,8 +175,8 @@ export const features: Feature[] = [
     title: "Firma electrónica operativa",
     eyebrow: "Respaldo documental",
     description:
-      "El cliente puede aceptar y firmar contratos desde el celular, con el documento guardado junto al crédito.",
-    solves: "Reduce papeles sueltos, fotos de contratos y archivos difíciles de encontrar.",
+      "El cliente puede aceptar o firmar contratos desde el celular, con el documento guardado junto al crédito.",
+    solves: "Reduce papeles sueltos, fotos de contratos y documentos difíciles de encontrar.",
     example:
       "Al aprobar una financiación, enviás el contrato y luego queda vinculado a la operación.",
     icon: "signature",
@@ -186,10 +189,10 @@ export const features: Feature[] = [
     title: "Portal del cliente",
     eyebrow: "Consulta simple",
     description:
-      "Acceso para que el cliente revise contrato, cuotas y estado sin pedir capturas ni esperar una respuesta manual.",
-    solves: "Reduce consultas repetidas y mejora la claridad sobre la financiación.",
+      "Acceso para que el cliente revise contrato, cuotas, pagos y saldo sin pedir capturas por WhatsApp.",
+    solves: "Reduce consultas repetidas y mejora la transparencia de la financiación.",
     example:
-      "El cliente entra desde el celular y consulta próximas cuotas, pagos y saldo pendiente.",
+      "El cliente entra desde el celular y consulta próximas cuotas, pagos registrados y saldo pendiente.",
     icon: "phone",
     tags: ["Autoservicio", "Cuotas", "Contrato"],
   },
@@ -209,20 +212,20 @@ export const industries = [
 export const implementationServices = [
   {
     title: "Migración desde Excel",
-    text: "Importamos clientes, créditos activos, cuotas pendientes y saldos iniciales para que no tengas que empezar de cero.",
+    text: "Podemos importar clientes, créditos activos, cuotas pendientes y saldos iniciales para que no empieces desde una pantalla vacía.",
     extra: true,
   },
   {
     title: "Configuración de reglas",
-    text: "Definimos planes, intereses, mora, días de gracia, sucursales, vendedores y cobradores según tu forma de trabajar.",
+    text: "Ajustamos planes, intereses, mora, días de gracia, sucursales, vendedores y cobradores según tu operatoria.",
   },
   {
     title: "Capacitación inicial",
-    text: "La capacitación inicial está incluida para que tu equipo pueda cargar créditos, cobrar cuotas y revisar deudores.",
+    text: "La capacitación inicial está incluida para que tu equipo aprenda a cargar créditos, registrar cobros y revisar deudores.",
   },
   {
     title: "Contratos y documentos",
-    text: "Preparamos plantillas PDF para contratos, recibos, estados de cuenta y comprobantes cuando el circuito lo requiere.",
+    text: "Podemos preparar plantillas para contratos, recibos, estados de cuenta y comprobantes cuando el circuito lo requiere.",
   },
   {
     title: "Portal del cliente",
@@ -230,13 +233,13 @@ export const implementationServices = [
   },
   {
     title: "Alertas y reportes",
-    text: "Tenés resúmenes de vencimientos, deudores, mora y cartera para decidir qué cobrar primero.",
+    text: "Tenés resúmenes de vencimientos, deudores, mora y cartera para decidir la agenda de cobranza.",
   },
 ];
 
 export const planIncludes = [
   "Uso mensual del sistema Gestión de Créditos",
-  "Capacitación inicial incluida",
+  "Capacitación inicial para el equipo",
   "Dominio propio el primer año, sujeto a disponibilidad",
   "Backups completos todos los días a las 3 AM",
   "Panel de autogestión para tickets de soporte, servicios y mejoras",
@@ -255,7 +258,7 @@ export const faqs = [
   {
     question: "¿Qué es Gestión de Créditos?",
     answer:
-      "Es un sistema de gestión de créditos y cobranzas para ordenar clientes, ventas financiadas, cuotas, cobros, mora, deudores, contratos y reportes en una sola plataforma.",
+      "Es un sistema de gestión de créditos y cobranzas para centralizar clientes, ventas financiadas, cuotas, cobros, mora, deudores, contratos y reportes.",
   },
   {
     question: "¿Para qué tipo de negocios sirve?",
@@ -265,12 +268,12 @@ export const faqs = [
   {
     question: "¿Reemplaza Excel?",
     answer:
-      "Sí. La idea es dejar de depender de planillas, cuadernos y chats para saber quién debe, cuánto debe, desde cuándo y qué se hizo para cobrar.",
+      "Sí. La idea es dejar de depender de planillas, cuadernos y chats para saber quién debe, cuánto debe, desde cuándo debe y qué se hizo para cobrar.",
   },
   {
     question: "¿Puedo cargar créditos ya existentes?",
     answer:
-      "Sí. Se pueden cargar créditos activos, cuotas pendientes y saldos iniciales. La importación o migración masiva de datos se cotiza aparte como servicio adicional.",
+      "Sí. Se pueden cargar créditos activos, cuotas pendientes y saldos iniciales. La importación o migración masiva se cotiza aparte como servicio adicional.",
   },
   {
     question: "¿El sistema calcula mora?",
@@ -290,7 +293,7 @@ export const faqs = [
   {
     question: "¿Qué incluye el plan mensual?",
     answer:
-      "Incluye el uso del sistema, capacitación inicial, dominio propio por el primer año, backups diarios a las 3 AM, panel de tickets y hasta 5 horas mensuales de ajustes incluidos, no acumulables.",
+      "Incluye uso del sistema, capacitación inicial, dominio propio por el primer año, backups diarios a las 3 AM, panel de tickets y hasta 5 horas mensuales de ajustes no acumulables.",
   },
   {
     question: "¿ADEMA migra mis datos actuales?",
@@ -305,9 +308,9 @@ export const seoPages: SeoPageContent[] = [
     eyebrow: "Mueblerías",
     title: "Sistema de créditos para mueblerías que venden en cuotas",
     description:
-      "Controlá clientes, cuotas, vencimientos, mora y contratos en una sola plataforma. Dejá de depender de Excel, cuadernos y mensajes perdidos de WhatsApp.",
+      "Controlá clientes, cuotas, vencimientos, mora y contratos sin depender de Excel, cuadernos ni comprobantes perdidos por WhatsApp.",
     painTitle:
-      "Cuando una mueblería financia, cada cuota mal seguida se transforma en plata difícil de recuperar.",
+      "Cuando una mueblería financia, cada cuota mal seguida se convierte en dinero difícil de recuperar.",
     pain: "Entre entregas, promesas de pago, cambios de fecha y comprobantes por WhatsApp, la cartera puede crecer más rápido que el control administrativo.",
     benefits: [
       "Ver cuotas vencidas y próximas",
@@ -336,12 +339,12 @@ export const seoPages: SeoPageContent[] = [
   {
     path: "/sistema-para-financieras",
     eyebrow: "Financieras chicas",
-    title: "Sistema para financieras chicas que necesitan ordenar cartera y cobranzas",
+    title: "Sistema para financieras chicas que necesitan controlar cartera y cobranzas",
     description:
-      "Gestioná créditos, cuotas, mora, deudores, cobradores y reportes diarios desde una plataforma preparada para operar con más claridad.",
+      "Gestioná créditos, cuotas, mora, deudores, cobradores y reportes diarios desde una plataforma simple de operar.",
     painTitle:
-      "Una financiera chica no puede depender de planillas sueltas para saber cuánto tiene prestado.",
-    pain: "Cuando la cartera crece, se vuelve clave tener saldos claros, reglas de mora consistentes y seguimiento diario de deudores.",
+      "Una financiera chica no puede depender de planillas sueltas para saber cuánto tiene prestado y cuánto venció.",
+    pain: "Cuando la cartera crece, necesitás saldos confiables, reglas de mora consistentes y seguimiento diario de deudores.",
     benefits: [
       "Cartera centralizada",
       "Mora con reglas claras",
@@ -361,7 +364,7 @@ export const seoPages: SeoPageContent[] = [
           "Sí. Podés ver atrasos, saldos pendientes y datos útiles para priorizar la cobranza.",
       },
     ],
-    cta: "Agendar demo para financiera",
+    cta: "Consultar demo para financiera",
     metaTitle: "Sistema para financieras chicas | Gestión de Créditos",
     metaDescription:
       "Software para financieras chicas: control de créditos, cuotas, mora, deudores, cobranzas y reportes diarios en una sola plataforma.",
@@ -371,10 +374,10 @@ export const seoPages: SeoPageContent[] = [
     eyebrow: "Cobranza de cuotas",
     title: "Sistema para cobranza de cuotas y seguimiento de vencimientos",
     description:
-      "Ordená vencimientos, pagos, comprobantes, atrasos y contactos para que la cobranza deje de depender de memoria o chats dispersos.",
+      "Ordená vencimientos, pagos, comprobantes, atrasos y contactos para que la cobranza no dependa de memoria o chats dispersos.",
     painTitle:
       "La cobranza se complica cuando no está claro qué vence hoy y qué ya quedó atrasado.",
-    pain: "Si cada cobro se confirma por un chat distinto, los comprobantes se pierden y los atrasos aparecen tarde.",
+    pain: "Si cada cobro se confirma por un chat distinto, los comprobantes se pierden y los atrasos aparecen cuando ya cuesta más cobrarlos.",
     benefits: [
       "Ver vencimientos del día",
       "Registrar pagos y medios de cobro",
@@ -403,7 +406,7 @@ export const seoPages: SeoPageContent[] = [
     eyebrow: "Control de mora",
     title: "Sistema para controlar mora, atrasos y deudores",
     description:
-      "Aplicá criterios claros de mora, visualizá cuotas vencidas y ordená el seguimiento de clientes con deuda.",
+      "Aplicá criterios claros de mora, visualizá cuotas vencidas y seguí a los clientes con deuda desde un mismo lugar.",
     painTitle: "La mora calculada a mano abre discusiones y puede hacerte perder plata.",
     pain: "Cada atraso necesita reglas claras para evitar errores, reclamos y criterios distintos entre vendedores o cobradores.",
     benefits: [
@@ -425,7 +428,7 @@ export const seoPages: SeoPageContent[] = [
           "Sí. El seguimiento muestra atrasos, cuotas pendientes e historial asociado al cliente.",
       },
     ],
-    cta: "Ordenar control de mora",
+    cta: "Controlar mora y deudores",
     metaTitle: "Sistema para control de mora | Gestión de Créditos",
     metaDescription:
       "Software para controlar mora, cuotas vencidas, intereses por atraso y deudores en negocios que venden en cuotas.",
@@ -435,7 +438,7 @@ export const seoPages: SeoPageContent[] = [
     eyebrow: "Venta en cuotas",
     title: "Sistema para vender en cuotas sin perder control",
     description:
-      "Centralizá clientes, créditos, planes de pago, cobros, mora y reportes para financiar ventas con más orden.",
+      "Centralizá clientes, créditos, planes de pago, cobros, mora y reportes para financiar ventas con seguimiento claro.",
     painTitle: "Vender en cuotas puede aumentar ventas, pero también puede desordenar la cobranza.",
     pain: "Si el seguimiento vive en Excel, cuadernos y WhatsApp, cada nueva operación suma riesgo operativo.",
     benefits: [
@@ -457,7 +460,7 @@ export const seoPages: SeoPageContent[] = [
           "Sí. Reemplaza la planilla como centro de control de clientes, cuotas, mora y cobranzas.",
       },
     ],
-    cta: "Quiero vender en cuotas con control",
+    cta: "Vender en cuotas con control",
     metaTitle: "Sistema para vender en cuotas | Gestión de Créditos",
     metaDescription:
       "Sistema para vender en cuotas y controlar clientes, créditos, vencimientos, cobros, mora y deudores desde una sola plataforma.",
@@ -467,9 +470,9 @@ export const seoPages: SeoPageContent[] = [
     eyebrow: "Reemplazar Excel",
     title: "Sistema para reemplazar Excel en la gestión de créditos",
     description:
-      "Dejá de depender de planillas para controlar cartera, cuotas, vencimientos, mora, cobros y deudores.",
+      "Dejá de depender de planillas para controlar cartera, cuotas, vencimientos, mora, cobros, comprobantes y deudores.",
     painTitle: "Excel sirve al principio, pero se vuelve frágil cuando la cartera crece.",
-    pain: "Una fórmula modificada, un archivo duplicado o una cuota mal marcada pueden afectar toda la cobranza.",
+    pain: "Una fórmula modificada, un archivo duplicado o una cuota mal marcada pueden cambiar saldos y afectar toda la cobranza.",
     benefits: [
       "Datos centralizados",
       "Menos errores manuales",
@@ -499,9 +502,9 @@ export const seoPages: SeoPageContent[] = [
     eyebrow: "Portal del cliente",
     title: "Portal del cliente para consultar créditos, cuotas y estado de cuenta",
     description:
-      "Tus clientes pueden revisar vencimientos, pagos, saldos y contratos desde el celular sin pedir capturas por WhatsApp.",
-    painTitle: "Cada consulta manual por WhatsApp le roba tiempo al equipo de cobranza.",
-    pain: "Cuando el cliente no puede ver su estado, pide capturas, pregunta por cuotas y retrasa respuestas simples.",
+      "Tus clientes pueden revisar vencimientos, pagos, saldos y contratos desde el celular, sin pedir capturas por WhatsApp.",
+    painTitle: "Cada consulta manual por WhatsApp le quita tiempo al equipo de cobranza.",
+    pain: "Cuando el cliente no puede ver su estado, pide capturas, pregunta por cuotas y obliga a responder consultas repetidas.",
     benefits: [
       "Consulta desde el celular",
       "Menos mensajes repetidos",
@@ -530,9 +533,9 @@ export const seoPages: SeoPageContent[] = [
     eyebrow: "Contratos y firma",
     title: "Contratos de créditos con firma electrónica operativa",
     description:
-      "Ordená contratos, aceptación del cliente y documentación asociada a cada crédito, con una aclaración legal responsable.",
+      "Ordená contratos, aceptación del cliente y documentación asociada a cada crédito, con alcance legal comunicado de forma responsable.",
     painTitle: "Los contratos sueltos pierden valor operativo cuando nadie sabe dónde quedaron.",
-    pain: "Fotos, papeles y PDFs dispersos complican el seguimiento del crédito y la respuesta ante reclamos.",
+    pain: "Fotos, papeles y PDFs dispersos complican el seguimiento del crédito y hacen más lenta la respuesta ante reclamos.",
     benefits: [
       "Contrato asociado al crédito",
       "Aceptación desde el celular",
@@ -562,7 +565,7 @@ export const seoPages: SeoPageContent[] = [
     eyebrow: "Argentina",
     title: "Software de gestión de créditos y cobranzas en Argentina",
     description:
-      "Plan mensual para negocios argentinos que venden en cuotas y necesitan ordenar cartera, cobros, mora, contratos y deudores.",
+      "Plan mensual para negocios argentinos que venden en cuotas y necesitan controlar cartera, cobros, mora, contratos y deudores.",
     painTitle:
       "En Argentina, vender financiado exige claridad diaria sobre cartera, vencimientos y deuda.",
     pain: "La inflación, los atrasos y la cobranza informal hacen que depender de planillas sea cada vez más riesgoso.",
